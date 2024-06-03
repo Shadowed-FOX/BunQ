@@ -1,2 +1,2 @@
-# KBUR
-Koło Bankowe Uniwersytetu Rzeszowskiego(do zmiany)
+# BunQ
+Projekt na 5 i tyle
