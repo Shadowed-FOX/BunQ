@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <!DOCTYPE hibernate-configuration PUBLIC    
 "-//Hibernate/Hibernate Configuration DTD 5.3//EN"    
 "http://www.hibernate.org/dtd/hibernate-configuration-5.3.dtd">    
@@ -11,5 +12,17 @@
    <property name="hibernate.connection.password">d09jLMyXA7SJQLnQ</property>
 
    <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+=======
+<!DOCTYPE hibernate-configuration PUBLIC 
+  "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+  "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+  <session-factory>
+   <property name="hibernate.connection.url">jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:6543/postgres</property>
+   <property name="hibernate.connection.username">postgres.hyfnkdnvlabeyqcympoe</property>
+   <property name="hibernate.connection.password">d09jLMyXA7SJQLnQ</property>
+   <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+>>>>>>> 3567ff2 (database connected)
   </session-factory>
 </hibernate-configuration>
