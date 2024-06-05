@@ -8,6 +8,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+import com.blackfox.bunq.database.Hibernate;
+
 public class Main extends Application {
 
     @Override
@@ -21,6 +23,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        Hibernate.close();
         launch();
     }
 }
