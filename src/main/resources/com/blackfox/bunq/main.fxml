@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane onMouseDragged="#menuDragEvent" onMousePressed="#menuPressedEvent" prefHeight="26.0" prefWidth="960.0" style="-fx-background-color: grey;">
+         <children>
+            <Button fx:id="closeBtn" layoutX="929.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
+            <Button layoutX="898.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="31.0" text="_" />
+         </children>
+      </AnchorPane>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="960.0">
+         <children>
+            <VBox prefHeight="600.0" prefWidth="235.0">
+               <children>
+                  <AnchorPane prefHeight="195.0" prefWidth="240.0">
+                     <children>
+                        <Text layoutX="87.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Witaj (imię)" wrappingWidth="61.13671875" />
+                        <Text layoutX="100.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo" wrappingWidth="34.13671875" />
+                        <Text layoutX="80.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(stan konta)" wrappingWidth="75.13671875" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="450.0" prefWidth="240.0">
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Podsumowanie" />
+                        <Button layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Nowa transakcja" />
+                        <Button layoutY="104.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Historia transakcji" />
+                        <Button layoutY="144.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Pożyczka" />
+                        <Button layoutY="208.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Zarządzanie kontem" />
+                        <Button layoutY="388.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Wyloguj" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <StackPane prefHeight="574.0" prefWidth="721.0">
+               <children>
+                  <AnchorPane prefHeight="589.0" prefWidth="721.0">
+                     <children>
+                        <AnchorPane prefHeight="291.0" prefWidth="720.0">
+                           <children>
+                              <Pane layoutX="609.0" layoutY="62.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: #66e37b;" />
+                              <Text layoutX="14.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Przychody)" />
+                              <Text layoutX="12.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ostatni miesiąc:" />
+                              <PieChart layoutX="294.0" layoutY="24.0" prefHeight="203.0" prefWidth="240.0" style="-fx-background-color: grey;" />
+                              <Text layoutX="14.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Wydatki)" />
+                              <Text layoutX="635.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Przychody" />
+                              <Pane layoutX="609.0" layoutY="92.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: #d14d4d;" />
+                              <Text layoutX="635.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wydatki" />
+                              <Line endX="360.0" layoutX="360.0" layoutY="291.0" startX="-360.0" />
+                           </children>
+                        </AnchorPane>
+                        <ScrollPane hbarPolicy="NEVER" layoutY="292.0" prefHeight="282.0" prefWidth="721.0">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="283.0" prefWidth="719.0" />
+                          </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </StackPane>
+         </children>
+      </HBox>
+   </children>
+</VBox>
