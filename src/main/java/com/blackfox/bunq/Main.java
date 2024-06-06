@@ -5,10 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
-
-import com.blackfox.bunq.database.Hibernate;
+import org.hibernate.Session;
+import com.blackfox.bunq.database.*;
 
 public class Main extends Application {
 
@@ -23,7 +22,19 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        Hibernate.close();
+        // przykładowe użycie bazy
+        // aby cokolwiek na niej zrobić należy otworzyć nową sesję
+        // dane pobiera się podając oczekiwaną Klasę.class oraz id
+        try (Session session = Database.getSessionFactory().openSession()) {
+            Client client = session.get(Client.class, 69999999);
+            if (client != null)
+                System.out.println("Fetched username: " + client.getUsername());
+            else
+                System.out.println("Couldn't fetch a user");
+            session.close();
+        }
+
         launch();
+        Database.close();
     }
 }
