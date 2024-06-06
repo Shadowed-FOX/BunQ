@@ -25,7 +25,7 @@ public class Main extends Application {
         // przykładowe użycie bazy
         // aby cokolwiek na niej zrobić należy otworzyć nową sesję
         // dane pobiera się podając oczekiwaną Klasę.class oraz id
-        try (Session session = Database.getSessionFactory().openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Client client = session.get(Client.class, 69999999);
             if (client != null)
                 System.out.println("Fetched username: " + client.getUsername());
@@ -35,6 +35,6 @@ public class Main extends Application {
         }
 
         launch();
-        Database.close();
+        HibernateUtil.close();
     }
 }
