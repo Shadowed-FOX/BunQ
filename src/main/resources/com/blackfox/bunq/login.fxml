@@ -14,9 +14,9 @@
 
 <VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.LoginController">
    <children>
-      <AnchorPane prefHeight="26.0" prefWidth="960.0" onMouseDragged="#menuDragEvent" onMousePressed="#menuPressedEvent">
+      <AnchorPane onMouseDragged="#menuDragEvent" onMousePressed="#menuPressedEvent" prefHeight="26.0" prefWidth="960.0">
          <children>
-            <Button fx:id="closeBtn" layoutX="929.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="31.0" text="x" onAction="#exitEvent" />
+            <Button fx:id="closeBtn" layoutX="929.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
             <Button layoutX="898.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="31.0" text="_" />
          </children>
       </AnchorPane>
@@ -45,6 +45,10 @@
                      <children>
                         <Label layoutX="149.0" layoutY="199.0" text="Nazwa użytkownika" AnchorPane.bottomAnchor="358.0" />
                         <TextField layoutX="149.0" layoutY="164.0" prefHeight="35.0" prefWidth="180.0" />
+                        <TextField layoutX="149.0" layoutY="222.0" prefHeight="35.0" prefWidth="180.0" />
+                        <TextField layoutX="149.0" layoutY="280.0" prefHeight="35.0" prefWidth="180.0" />
+                        <TextField layoutX="149.0" layoutY="342.0" prefHeight="35.0" prefWidth="180.0" AnchorPane.bottomAnchor="197.0" />
+                        <TextField layoutX="149.0" layoutY="406.0" prefHeight="35.0" prefWidth="180.0" />
                         <Label layoutX="150.0" layoutY="315.0" text="Nazwisko" AnchorPane.bottomAnchor="242.0" />
                         <Button layoutX="150.0" layoutY="478.0" mnemonicParsing="false" text="Rejestracja" />
                         <Button layoutX="254.0" layoutY="478.0" mnemonicParsing="false" onAction="#onLoginSwitchBtnClick" text="Mam konto" />
@@ -54,12 +58,8 @@
                            </image>
                         </ImageView>
                         <Text layoutX="211.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejestracja" />
-                        <TextField layoutX="149.0" layoutY="342.0" prefHeight="35.0" prefWidth="180.0" AnchorPane.bottomAnchor="197.0" />
                         <Label layoutX="149.0" layoutY="441.0" text="Powtórz hasło" />
                         <Label layoutX="149.0" layoutY="257.0" text="Imie" />
-                        <TextField layoutX="149.0" layoutY="280.0" prefHeight="35.0" prefWidth="180.0" />
-                        <TextField layoutX="149.0" layoutY="222.0" prefHeight="35.0" prefWidth="180.0" />
-                        <TextField layoutX="149.0" layoutY="406.0" prefHeight="35.0" prefWidth="180.0" />
                         <Label layoutX="149.0" layoutY="377.0" text="Hasło" />
                         <Text layoutX="130.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do wyświetlania błędów (później usunąć)" />
                      </children>
