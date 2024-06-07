@@ -6,12 +6,15 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 public class HibernateUtil {
+
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
         try {
             Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
             configuration.addAnnotatedClass(Client.class);
+            configuration.addAnnotatedClass(ClientAuth.class);
+            configuration.addAnnotatedClass(Transaction.class);
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
@@ -30,5 +33,4 @@ public class HibernateUtil {
     public static void close() {
         getSessionFactory().close();
     }
-
 }
