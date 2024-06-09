@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.Session;
 
@@ -37,7 +38,7 @@ public class HibernateUtil {
         getSessionFactory().close();
     }
 
-    public static ClientAuth getClientAuth(String username) {
+    public static ClientAuth getClientAuth(String username) throws ClientNotFoundException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             var query = session
                     .createQuery("WHERE username = :username",
@@ -45,7 +46,8 @@ public class HibernateUtil {
                     .setParameter("username", username);
 
             if (query.list().size() != 1) {
-                return null;
+                session.close();
+                throw new ClientNotFoundException(username);
             }
 
             ClientAuth client = query.list().getFirst();
@@ -54,10 +56,14 @@ public class HibernateUtil {
         }
     }
 
-    public static Client getClient(int id) {
+    public static Client getClient(int id) throws ClientNotFoundException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Client client = session.get(Client.class, id);
             session.close();
+
+            if (client == null) {
+                throw new ClientNotFoundException(id);
+            }
             return client;
         }
     }
@@ -69,12 +75,14 @@ public class HibernateUtil {
                             Transaction.class)
                     .setParameter("id", id);
 
-            if (query.list().size() == 0) {
+            List<Transaction> list = query.list();
+            session.close();
+
+            if (list.size() == 0) {
                 return null;
             }
 
-            session.close();
-            return query.list();
+            return list;
         }
     }
 }

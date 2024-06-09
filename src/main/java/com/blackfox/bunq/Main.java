@@ -23,13 +23,15 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         // Debug/Example
-        ClientAuth clientAuth = HibernateUtil.getClientAuth("noradenshi");
-        if (clientAuth != null) {
+        try {
+            ClientAuth clientAuth = HibernateUtil.getClientAuth("noradenshi");
             System.out.println("username: " + clientAuth.getUsername());
             System.out.println("password: " + clientAuth.getPassword());
 
             Client client = HibernateUtil.getClient(clientAuth.getId());
             System.out.println("firstname: " + client.getFirstname());
+        } catch (ClientNotFoundException ex) {
+            System.err.println(ex);
         }
 
         launch();
