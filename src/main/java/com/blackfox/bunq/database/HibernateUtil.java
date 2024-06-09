@@ -37,24 +37,8 @@ public class HibernateUtil {
         getSessionFactory().close();
     }
 
-    // ClientAuth clientAuth = session.load(ClientAuth.class, );
-    public static int getClientId(String username) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session.createQuery("SELECT id FROM ClientAuth WHERE username = :username", Integer.class)
-                    .setParameter("username", username);
-
-            if (query.list().size() == 0)
-                return -1;
-
-            int result = query.list().getFirst();
-            session.close();
-            return result;
-        }
-    }
-
     public static ClientAuth getClientAuth(String username) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            session.get(ClientAuth.class, 69999999);
             var query = session
                     .createQuery("WHERE username = :username",
                             ClientAuth.class)
@@ -70,18 +54,9 @@ public class HibernateUtil {
         }
     }
 
-    public static Client getClient(String username) {
+    public static Client getClient(int id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session
-                    .createQuery("WHERE username = :username",
-                            Client.class)
-                    .setParameter("username", username);
-
-            if (query.list().size() != 1) {
-                return null;
-            }
-
-            Client client = query.list().getFirst();
+            Client client = session.get(Client.class, id);
             session.close();
             return client;
         }

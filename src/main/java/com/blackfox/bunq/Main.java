@@ -27,9 +27,10 @@ public class Main extends Application {
         if (clientAuth != null) {
             System.out.println("username: " + clientAuth.getUsername());
             System.out.println("password: " + clientAuth.getPassword());
-        }
 
-        System.out.println("id: " + HibernateUtil.getClientId("noradenshi"));
+            Client client = HibernateUtil.getClient(clientAuth.getId());
+            System.out.println("firstname: " + client.getFirstname());
+        }
 
         launch();
         HibernateUtil.close();
