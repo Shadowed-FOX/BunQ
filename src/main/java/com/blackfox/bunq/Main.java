@@ -26,7 +26,8 @@ public class Main extends Application {
         try {
             ClientAuth clientAuth = HibernateUtil.getClientAuth("noradenshi");
             System.out.println("username: " + clientAuth.getUsername());
-            System.out.println("password: " + clientAuth.getPassword());
+            System.out.println("checkPassword: " + clientAuth.checkPassword("haslo123"));
+            //clientAuth.setPassword("haslo123");
 
             Client client = HibernateUtil.getClient(clientAuth.getId());
             System.out.println("firstname: " + client.getFirstname());

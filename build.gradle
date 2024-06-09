@@ -40,6 +40,7 @@ dependencies {
   implementation 'org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0'
   implementation 'org.postgresql:postgresql:42.7.3'
   implementation 'org.hibernate:hibernate-c3p0:6.5.2.Final'
+  implementation 'commons-codec:commons-codec:1.5'
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
