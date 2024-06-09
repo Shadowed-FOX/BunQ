@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
-import org.hibernate.Session;
+
 import com.blackfox.bunq.database.*;
 
 public class Main extends Application {
@@ -22,16 +22,11 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        // przykładowe użycie bazy
-        // aby cokolwiek na niej zrobić należy otworzyć nową sesję
-        // dane pobiera się podając oczekiwaną Klasę.class oraz id
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            ClientAuth client = session.get(ClientAuth.class, 69999999);
-            if (client != null)
-                System.out.println("Fetched username: " + client.getUsername());
-            else
-                System.out.println("Couldn't fetch a user");
-            session.close();
+        // Debug/Example
+        ClientAuth clientAuth = HibernateUtil.getCientAuth("noradenshi");
+        if (clientAuth != null) {
+            System.out.println("username: " + clientAuth.getUsername());
+            System.out.println("password: " + clientAuth.getPassword());
         }
 
         launch();
