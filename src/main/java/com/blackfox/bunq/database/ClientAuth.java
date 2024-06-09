@@ -17,6 +17,13 @@ public class ClientAuth implements Serializable {
     private String username;
     private String password;
 
+    public ClientAuth() {}
+    public ClientAuth(int id,String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = DigestUtils.sha256Hex(password);
+    }
+
     public int getId() {
         return id;
     }

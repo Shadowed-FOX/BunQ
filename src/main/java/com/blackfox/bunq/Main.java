@@ -21,17 +21,29 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        // Debug/Example
+    static void fetchingExample(String username, String password) {
         try {
-            ClientAuth clientAuth = HibernateUtil.getClientAuth("noradenshi");
+            ClientAuth clientAuth = HibernateUtil.getClientAuth(username);
             System.out.println("username: " + clientAuth.getUsername());
-            System.out.println("checkPassword: " + clientAuth.checkPassword("haslo123"));
-            //clientAuth.setPassword("haslo123");
+            System.out.println("checkPassword: " + clientAuth.checkPassword(password));
+            // clientAuth.setPassword("haslo123");
 
             Client client = HibernateUtil.getClient(clientAuth.getId());
             System.out.println("firstname: " + client.getFirstname());
         } catch (ClientNotFoundException ex) {
+            System.err.println(ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            int clientId = HibernateUtil.createClient("cebulla", "cebulion", "Andzej", "Grochowalski");
+            fetchingExample("cebulla", "cebulion");
+
+            Client client = HibernateUtil.getClient(clientId);
+            System.out.println("lastname: " + client.getLastname());
+            System.out.println("created_at: " + client.getCreatedAt());
+        } catch (Exception ex) {
             System.err.println(ex);
         }
 

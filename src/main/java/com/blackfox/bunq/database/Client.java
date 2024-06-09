@@ -2,6 +2,9 @@ package com.blackfox.bunq.database;
 
 import java.io.Serializable;
 import java.sql.Date;
+
+import org.hibernate.annotations.GeneratedColumn;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -13,8 +16,18 @@ public class Client implements Serializable {
     private String firstname;
     private String lastname;
     private float balance;
+    @GeneratedColumn("INSERT")
     private Date created_at;
     // private int colors_id;
+
+    public Client() {
+    }
+
+    public Client(int id, String firstname, String lastname) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
 
     public int getId() {
         return id;

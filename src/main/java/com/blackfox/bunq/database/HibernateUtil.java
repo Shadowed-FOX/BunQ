@@ -68,6 +68,46 @@ public class HibernateUtil {
         }
     }
 
+    public static int createClient(String username, String password, String firstname, String lastname)
+            throws ClientUsernameException, ClientIdException {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            var query = session
+                    .createQuery("SELECT COUNT(*) FROM ClientAuth WHERE username = :username",
+                            Long.class)
+                    .setParameter("username", username);
+
+            if (query.list().getFirst() != 0) {
+                throw new ClientUsernameException();
+            }
+
+            int id = -1;
+            int attempts = 0;
+            do {
+                id = (int) (Math.random() * 100000000);
+                ClientAuth temp_id = session.get(ClientAuth.class, id);
+                if (temp_id != null)
+                    id = -1;
+
+                attempts++;
+
+                if (attempts > 3)
+                    throw new ClientIdException();
+
+            } while (id == -1);
+
+            session.beginTransaction();
+            ClientAuth auth = new ClientAuth(id, username, password);
+            Client client = new Client(id, firstname, lastname);
+
+            session.persist(auth);
+            session.persist(client);
+            session.getTransaction().commit();
+            session.close();
+
+            return id;
+        }
+    }
+
     public static List<Transaction> getTransactionList(int id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             var query = session
