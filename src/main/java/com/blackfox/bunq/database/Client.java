@@ -2,9 +2,8 @@ package com.blackfox.bunq.database;
 
 import java.io.Serializable;
 import java.sql.Date;
-
+import org.hibernate.Session;
 import org.hibernate.annotations.GeneratedColumn;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -27,6 +26,14 @@ public class Client implements Serializable {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+    }
+
+    public void update() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.merge(this);
+        session.getTransaction().commit();
+        session.close();
     }
 
     public int getId() {

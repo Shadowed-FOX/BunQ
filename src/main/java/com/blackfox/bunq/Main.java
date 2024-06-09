@@ -27,6 +27,7 @@ public class Main extends Application {
             System.out.println("username: " + clientAuth.getUsername());
             System.out.println("checkPassword: " + clientAuth.checkPassword(password));
             // clientAuth.setPassword("haslo123");
+            // clientAuth.update();
 
             Client client = HibernateUtil.getClient(clientAuth.getId());
             System.out.println("firstname: " + client.getFirstname());
@@ -39,7 +40,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         try {
-            // int clientId = HibernateUtil.createClient("cebulla", "cebulion", "Andzej", "Grochowalski");
+            // int clientId = HibernateUtil.createClient("cebulla", "cebulion", "Andzej",
+            //         "Grochowalski");
             fetchingExample("cebulla", "cebulion");
         } catch (Exception ex) {
             System.err.println(ex);

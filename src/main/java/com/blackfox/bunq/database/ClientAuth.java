@@ -3,7 +3,6 @@ package com.blackfox.bunq.database;
 import java.io.Serializable;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.Session;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -17,11 +16,13 @@ public class ClientAuth implements Serializable {
     private String username;
     private String password;
 
-    public ClientAuth() {}
-    public ClientAuth(int id,String username, String password) {
+    public ClientAuth() {
+    }
+
+    public ClientAuth(int id, String username, String password) throws ClientUsernameException {
         this.id = id;
-        this.username = username;
-        this.password = DigestUtils.sha256Hex(password);
+        setUsername(username);
+        setPassword(password);
     }
 
     public int getId() {
@@ -32,7 +33,7 @@ public class ClientAuth implements Serializable {
         return username;
     }
 
-    private void update() {
+    public void update() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.merge(this);
@@ -40,14 +41,25 @@ public class ClientAuth implements Serializable {
         session.close();
     }
 
-    public void setUsername(String username) {
+    public void setUsername(String username) throws ClientUsernameException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var query = session
+                .createQuery("SELECT COUNT(*) FROM ClientAuth WHERE username = :username",
+                        Long.class)
+                .setParameter("username", username);
+
+        if (query.list().getFirst() != 0) {
+            session.close();
+            throw new ClientUsernameException();
+        }
+        session.close();
+
         if (password.length() < 4) {
             System.out.println("Invalid username!");
             return;
         }
         System.out.println("Updating username...");
         this.username = username;
-        update();
     }
 
     public boolean checkPassword(String password) {
@@ -61,6 +73,5 @@ public class ClientAuth implements Serializable {
         }
         System.out.println("Updating password...");
         this.password = DigestUtils.sha256Hex(password);
-        update();
     }
 }

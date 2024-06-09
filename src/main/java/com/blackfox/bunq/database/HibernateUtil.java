@@ -1,11 +1,9 @@
 package com.blackfox.bunq.database;
 
 import java.util.List;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.Session;
 
@@ -71,15 +69,6 @@ public class HibernateUtil {
     public static int createClient(String username, String password, String firstname, String lastname)
             throws ClientUsernameException, ClientIdException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session
-                    .createQuery("SELECT COUNT(*) FROM ClientAuth WHERE username = :username",
-                            Long.class)
-                    .setParameter("username", username);
-
-            if (query.list().getFirst() != 0) {
-                throw new ClientUsernameException();
-            }
-
             int id = -1;
             int attempts = 0;
             do {
