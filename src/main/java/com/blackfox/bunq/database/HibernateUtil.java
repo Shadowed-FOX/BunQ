@@ -37,8 +37,24 @@ public class HibernateUtil {
         getSessionFactory().close();
     }
 
-    public static ClientAuth getCientAuth(String username) {
+    // ClientAuth clientAuth = session.load(ClientAuth.class, );
+    public static int getClientId(String username) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            var query = session.createQuery("SELECT id FROM ClientAuth WHERE username = :username", Integer.class)
+                    .setParameter("username", username);
+
+            if (query.list().size() == 0)
+                return -1;
+
+            int result = query.list().getFirst();
+            session.close();
+            return result;
+        }
+    }
+
+    public static ClientAuth getClientAuth(String username) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.get(ClientAuth.class, 69999999);
             var query = session
                     .createQuery("WHERE username = :username",
                             ClientAuth.class)
@@ -54,7 +70,7 @@ public class HibernateUtil {
         }
     }
 
-    public static Client getCient(String username) {
+    public static Client getClient(String username) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             var query = session
                     .createQuery("WHERE username = :username",
@@ -71,12 +87,12 @@ public class HibernateUtil {
         }
     }
 
-    public static List<Transaction> getTransactionList(String username) {
+    public static List<Transaction> getTransactionList(int id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             var query = session
-                    .createQuery("WHERE sender = :username OR reveiver = :username",
+                    .createQuery("WHERE sender = :id OR reveiver = :id",
                             Transaction.class)
-                    .setParameter("username", username);
+                    .setParameter("id", id);
 
             if (query.list().size() == 0) {
                 return null;
