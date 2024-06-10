@@ -19,7 +19,7 @@ public class ClientAuth implements Serializable {
     public ClientAuth() {
     }
 
-    public ClientAuth(int id, String username, String password) throws ClientUsernameException {
+    public ClientAuth(int id, String username, String password) throws ClientCredentialsException {
         this.id = id;
         setUsername(username);
         setPassword(password);
@@ -41,7 +41,7 @@ public class ClientAuth implements Serializable {
         session.close();
     }
 
-    public void setUsername(String username) throws ClientUsernameException {
+    public void setUsername(String username) throws ClientCredentialsException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         var query = session
                 .createQuery("SELECT COUNT(*) FROM ClientAuth WHERE username = :username",
@@ -50,15 +50,13 @@ public class ClientAuth implements Serializable {
 
         if (query.list().getFirst() != 0) {
             session.close();
-            throw new ClientUsernameException();
+            throw new ClientCredentialsException("Username already in use.");
         }
         session.close();
 
-        if (password.length() < 4) {
-            System.out.println("Invalid username!");
-            return;
+        if (username.length() < 4) {
+            throw new ClientCredentialsException("Invalid username.");
         }
-        System.out.println("Updating username...");
         this.username = username;
     }
 
@@ -66,12 +64,10 @@ public class ClientAuth implements Serializable {
         return this.password.equals(DigestUtils.sha256Hex(password));
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws ClientCredentialsException {
         if (password.length() < 8) {
-            System.out.println("Weak password!");
-            return;
+            throw new ClientCredentialsException("Invalid password.");
         }
-        System.out.println("Updating password...");
         this.password = DigestUtils.sha256Hex(password);
     }
 }

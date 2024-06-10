@@ -67,7 +67,7 @@ public class HibernateUtil {
     }
 
     public static int createClient(String username, String password, String firstname, String lastname)
-            throws ClientUsernameException, ClientIdException {
+            throws ClientCredentialsException, ClientIdException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             int id = -1;
             int attempts = 0;
