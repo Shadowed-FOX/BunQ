@@ -100,7 +100,7 @@ public class HibernateUtil {
     public static List<Transaction> getTransactionList(int id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             var query = session
-                    .createQuery("WHERE sender = :id OR reveiver = :id",
+                    .createQuery("WHERE sender = :id OR receiver = :id",
                             Transaction.class)
                     .setParameter("id", id);
 

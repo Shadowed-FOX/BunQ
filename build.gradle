@@ -2,9 +2,8 @@ plugins {
   id 'java'
   id 'application'
   // id 'org.javamodularity.moduleplugin' version '1.8.15'
-  id 'org.openjfx.javafxplugin' version '0.1.0'
   id 'org.beryx.jlink' version '2.25.0'
-  id 'org.hibernate.orm' version '6.5.2.Final'
+  id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 group 'com.blackFOX'
@@ -39,6 +38,7 @@ dependencies {
   implementation 'org.controlsfx:controlsfx:11.1.2'
   implementation 'org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0'
   implementation 'org.postgresql:postgresql:42.7.3'
+  implementation 'org.hibernate:hibernate-core:6.5.2.Final'
   implementation 'org.hibernate:hibernate-c3p0:6.5.2.Final'
   implementation 'commons-codec:commons-codec:1.5'
 

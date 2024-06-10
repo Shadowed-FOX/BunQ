@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import java.io.IOException;
 
 import com.blackfox.bunq.database.*;
@@ -33,6 +34,16 @@ public class Main extends Application {
             System.out.println("firstname: " + client.getFirstname());
             System.out.println("lastname: " + client.getLastname());
             System.out.println("created_at: " + client.getCreatedAt());
+
+            var transactions = HibernateUtil.getTransactionList(client.getId());
+            for (var transaction : transactions) {
+                System.out.println("transaction:");
+                System.out.println(transaction.getTitle());
+                System.out.println(transaction.getAmount() + "zł");
+                System.out.println(transaction.getDate());
+                System.out.println((transaction.getSenderId() == client.getId()) ? "debit" : "credit");
+                System.out.println();
+            }
         } catch (ClientNotFoundException ex) {
             System.err.println(ex);
         }
@@ -41,7 +52,7 @@ public class Main extends Application {
     public static void main(String[] args) {
         try {
             // int clientId = HibernateUtil.createClient("cebulla", "cebulion", "Andzej",
-            //         "Grochowalski");
+            // "Grochowalski");
             fetchingExample("cebulla", "cebulion");
         } catch (Exception ex) {
             System.err.println(ex);
