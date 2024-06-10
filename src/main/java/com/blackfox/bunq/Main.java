@@ -50,6 +50,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        /*
         try {
             // int clientId = HibernateUtil.createClient("cebulla", "cebulion", "Andzej",
             // "Grochowalski");
@@ -57,7 +58,7 @@ public class Main extends Application {
         } catch (Exception ex) {
             System.err.println(ex);
         }
-
+        */
         launch();
         HibernateUtil.close();
     }
