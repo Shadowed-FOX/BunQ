@@ -61,13 +61,13 @@ public class ClientAuth implements Serializable {
     }
 
     public boolean checkPassword(String password) {
-        return this.password.equals(DigestUtils.sha256Hex(password));
+        return this.password.equals(DigestUtils.sha256Hex(password + id));
     }
 
     public void setPassword(String password) throws ClientCredentialsException {
         if (password.length() < 8) {
             throw new ClientCredentialsException("Invalid password.");
         }
-        this.password = DigestUtils.sha256Hex(password);
+        this.password = DigestUtils.sha256Hex(password + id);
     }
 }

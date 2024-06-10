@@ -51,14 +51,23 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         /*
-        try {
-            // int clientId = HibernateUtil.createClient("cebulla", "cebulion", "Andzej",
-            // "Grochowalski");
-            fetchingExample("cebulla", "cebulion");
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
-        */
+         * try {
+         * // int clientId = HibernateUtil.createClient("cebulla", "cebulion", "Andzej",
+         * // "Grochowalski");
+         * fetchingExample("cebulla", "cebulion");
+         * } catch (Exception ex) {
+         * System.err.println(ex);
+         * }
+         */
+
+        // try {
+        //     ClientAuth cAuth = HibernateUtil.getClientAuth("johnik");
+        //     cAuth.setPassword("1234qwer");
+        //     cAuth.update();
+        // } catch (Exception ex) {
+        //     System.err.println(ex);
+        // }
+        
         launch();
         HibernateUtil.close();
     }
