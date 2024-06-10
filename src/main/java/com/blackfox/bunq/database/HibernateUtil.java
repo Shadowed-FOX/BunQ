@@ -77,9 +77,7 @@ public class HibernateUtil {
                 if (temp_id != null)
                     id = -1;
 
-                attempts++;
-
-                if (attempts > 3)
+                if (attempts++ > 3)
                     throw new ClientIdException();
 
             } while (id == -1);

@@ -36,6 +36,23 @@ public class Client implements Serializable {
         session.close();
     }
 
+    public void transferMoney(float amount, Client receiver, String title) throws Exception {
+        if (this.balance < amount) {
+            throw new Exception("Not enough money.");
+        }
+        Transaction transaction = new Transaction(id, receiver.getId(), title, amount);
+        this.balance -= amount;
+        receiver.balance += amount;
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.persist(transaction);
+        session.merge(this);
+        session.merge(receiver);
+        session.getTransaction().commit();
+        session.close();
+    }
+
     public int getId() {
         return id;
     }

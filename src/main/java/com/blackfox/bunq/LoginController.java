@@ -1,7 +1,6 @@
 package com.blackfox.bunq;
 
 import com.blackfox.bunq.database.*;
-import com.blackfox.bunq.maintenance.PasswordsDontMatchException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
@@ -10,9 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
-import com.blackfox.bunq.maintenance.AuthenticationService;
 import javafx.scene.input.MouseEvent;
-
 
 public class LoginController {
     @FXML
@@ -39,7 +36,7 @@ public class LoginController {
     private TextField NewPassword2;
     @FXML
     private Label AuthMessage;
-    
+
     private double screenX = 0;
     private double screenY = 0;
 
@@ -57,12 +54,12 @@ public class LoginController {
 
         try {
             ClientAuth clA = HibernateUtil.getClientAuth(username.getText());
-            if(!clA.checkPassword(password.getText()))
+            if (!clA.checkPassword(password.getText()))
                 AuthMessage.setText(AuthPasswordErr);
             else
                 AuthMessage.setText(AuthSucc);
 
-        } catch (ClientNotFoundException ex){
+        } catch (ClientNotFoundException ex) {
             AuthMessage.setText(AuthUserNameErr);
         }
 
@@ -75,21 +72,30 @@ public class LoginController {
     }
 
     @FXML
-    protected void onRegisterAttemptBtnClick(ActionEvent event) throws ClientIdException {
+    protected void onRegisterAttemptBtnClick(ActionEvent event) {
         String newUsername = NewUsername.getText();
         String newPassword1 = NewPassword1.getText();
         String newPassword2 = NewPassword2.getText();
         String firstName = FirstName.getText();
         String lastName = SecondName.getText();
-        System.out.println(newPassword1);
-        try {
-            AuthenticationService.Register(newUsername, firstName, lastName, newPassword1, newPassword2);
-        } catch (ClientUsernameException ex1) {
-            System.err.println(ex1);
-        } catch (PasswordsDontMatchException ex2) {
-            System.err.println(ex2);
+
+        // TODO: AuthMessage okazuje się jest widoczny tylko dla logowania
+        if (!newPassword1.equals(newPassword2)) {
+            System.out.println("Passwords do not match.");
+            AuthMessage.setText("Passwords do not match.");
+            return;
         }
+
+        try {
+            HibernateUtil.createClient(newUsername, newPassword1, firstName, lastName);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            AuthMessage.setText(ex.getMessage());
+        }
+
+        System.out.println("Client created.");
     }
+
     @FXML
     protected void exitEvent(ActionEvent event) {
         Stage stage = (Stage) closeBtn.getScene().getWindow();
