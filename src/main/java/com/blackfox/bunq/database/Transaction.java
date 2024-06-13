@@ -1,7 +1,7 @@
 package com.blackfox.bunq.database;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import org.hibernate.annotations.GeneratedColumn;
 
@@ -18,7 +18,7 @@ public class Transaction implements Serializable {
     private String title;
     private float amount;
     @GeneratedColumn("INSERT")
-    private Date date;
+    private Timestamp date;
 
     public Transaction() {
     }
@@ -46,7 +46,7 @@ public class Transaction implements Serializable {
         return amount;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 }

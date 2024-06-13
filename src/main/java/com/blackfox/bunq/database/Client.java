@@ -1,7 +1,8 @@
 package com.blackfox.bunq.database;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
+
 import org.hibernate.Session;
 import org.hibernate.annotations.GeneratedColumn;
 import jakarta.persistence.Entity;
@@ -16,7 +17,7 @@ public class Client implements Serializable {
     private String lastname;
     private float balance;
     @GeneratedColumn("INSERT")
-    private Date created_at;
+    private Timestamp created_at;
     // private int colors_id;
 
     public Client() {
@@ -77,7 +78,7 @@ public class Client implements Serializable {
         return balance;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return created_at;
     }
 }
