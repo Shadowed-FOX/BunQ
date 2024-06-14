@@ -95,21 +95,5 @@ public class HibernateUtil {
         }
     }
 
-    public static List<Transaction> getTransactionList(int id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session
-                    .createQuery("WHERE sender = :id OR receiver = :id",
-                            Transaction.class);
-                    query.setParameter("id", id);
-            
-            List<Transaction> list = query.list();
-            session.close();
 
-            if (list.size() == 0) {
-                return null;
-            }
-
-            return list;
-        }
-    }
 }

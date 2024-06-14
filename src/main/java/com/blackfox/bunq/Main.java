@@ -9,7 +9,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 import com.blackfox.bunq.database.*;
-import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,7 +24,29 @@ public class Main extends Application {
         stage.show();
     }
 
-    static void fetchingExample(String username, String password) {
+
+    public static void main(String[] args) {
+        fetchingExample("Dziady", "123dziady");
+        
+        launch();
+        HibernateUtil.close();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //region functions only for testing ----------------------------------------------------------------------------------------------------------------
+        static void fetchingExample(String username, String password) {
         try {
             ClientAuth clientAuth = HibernateUtil.getClientAuth(username);
             System.out.println("username: " + clientAuth.getUsername());
@@ -40,9 +61,18 @@ public class Main extends Application {
             System.out.println("id: "+client.getId());
             System.out.println("created_at: " + client.getCreatedAt());
 
-            var transactions = HibernateUtil.getTransactionList(client.getId());
+           // var transactions = client.getTransactionList.getTransactionList();
+           //all functions to get transcactions:
+           //client.getTransactionList.getTransactionList()
+           //client.getTransactionList.getTransactionListOrderByAmountASC()
+           //client.getTransactionList.getTransactionListOrderByAmountDESC()
+           //
+           //
+           
+            var transactionsByAmount = client.getTransactionList.getTransactionListOrderByAmountASC(19517347);
+            
             int i=1;
-            for (var transaction : transactions) {
+            for (var transaction : transactionsByAmount) {
                 System.out.println(i+". transaction:");
                 System.out.println(transaction.getTitle());
                 System.out.println(transaction.getAmount() + "zł");
@@ -65,8 +95,9 @@ public class Main extends Application {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public static void main(String[] args) {
-
+ 
+    //region smtg what was in main (only for testing)-------------------------------------------------------------------------
+    
         // try {
         //     // int clientId = HibernateUtil.createClient("cebulla", "cebulion", "Andzej",
         //     // "Grochowalski");
@@ -84,10 +115,11 @@ public class Main extends Application {
         // }
          
 
-     //   transcationsExampleeeee(75601458, 19517347, -20f, "ciekawe czy sam tytul mozna wyslac");
+     //   transcationsExampleeeee(75601458, 19517347, 20, "kwota na cos");
  //fetchingExample("Dziady", "123dziady");
- fetchingExample("Dziady", "123dziady");
-        launch();
-        HibernateUtil.close();
-    }
+ //fetchingExample("Dziady", "123dziady");
+    
+    //endregion smtg what was in main (only for testing)-------------------------------------------------------------------------------------
+    //endregion functions only for testing ----------------------------------------------------------------------------------------------------------------
+    
 }
