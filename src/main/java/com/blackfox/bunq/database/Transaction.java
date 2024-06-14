@@ -3,21 +3,29 @@ package com.blackfox.bunq.database;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import org.hibernate.annotations.GeneratedColumn;
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 public class Transaction implements Serializable {
 
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private int sender;
     private int receiver;
 
     private String title;
     private float amount;
-  @Id
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp date;
 
     public Transaction() {
@@ -28,7 +36,6 @@ public class Transaction implements Serializable {
         this.receiver = receiver;
         this.title = title;
         this.amount = amount;
-        this.date=new Timestamp(System.currentTimeMillis());
     }
 
     public int getSenderId() {
