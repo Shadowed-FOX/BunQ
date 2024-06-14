@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.PasswordField?>
-<VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.LoginController">
+<VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.maintenance.LoginController">
    <children>
       <AnchorPane onMouseDragged="#menuDragEvent" onMousePressed="#menuPressedEvent" prefHeight="26.0" prefWidth="960.0">
          <children>
@@ -39,7 +39,7 @@
                            </image>
                         </ImageView>
                         <Text layoutX="211.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logowanie" />
-                        <Label fx:id="AuthMessage" layoutX="140.0" layoutY="447.0"/>
+                        <Label fx:id="LoginMessage" layoutX="140.0" layoutY="447.0"/>
                         <Text layoutX="131.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do wyświetlania błędów (usunąć później)" />
                      </children>
                   </AnchorPane>
@@ -59,6 +59,8 @@
                               <Image url="@images/Login-Icon.png" />
                            </image>
                         </ImageView>
+                        <Label fx:id="RegisterMessage" layoutX="140.0" layoutY="447.0"/>
+                        <Label layoutX="150.0" layoutY="315.0" text="Nazwisko" AnchorPane.bottomAnchor="242.0" />
                         <Text layoutX="211.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejestracja" />
                         <Label layoutX="149.0" layoutY="441.0" text="Powtórz hasło" />
                         <Label layoutX="149.0" layoutY="257.0" text="Imie" />

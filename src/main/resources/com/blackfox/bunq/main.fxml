@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.maintenance.MainController">
    <children>
       <AnchorPane onMouseDragged="#menuDragEvent" onMousePressed="#menuPressedEvent" prefHeight="26.0" prefWidth="960.0" style="-fx-background-color: grey;">
          <children>
@@ -28,9 +28,9 @@
                <children>
                   <AnchorPane prefHeight="195.0" prefWidth="240.0">
                      <children>
-                        <Text layoutX="87.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Witaj (imię)" wrappingWidth="61.13671875" />
+                        <Text fx:id="name" layoutX="87.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Witaj (imię)" wrappingWidth="61.13671875" />
                         <Text layoutX="100.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo" wrappingWidth="34.13671875" />
-                        <Text layoutX="80.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(stan konta)" wrappingWidth="75.13671875" />
+                        <Text fx:id="funds" layoutX="80.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(stan konta)" wrappingWidth="75.13671875" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="450.0" prefWidth="240.0">
@@ -40,7 +40,7 @@
                         <Button layoutY="104.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Historia transakcji" />
                         <Button layoutY="144.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Pożyczka" />
                         <Button layoutY="208.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Zarządzanie kontem" />
-                        <Button layoutY="388.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Wyloguj" />
+                        <Button layoutY="388.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Wyloguj" onAction="#onLogOutBtnPress" />
                      </children>
                   </AnchorPane>
                </children>
