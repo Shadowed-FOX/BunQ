@@ -17,7 +17,7 @@ public class Transaction implements Serializable {
 
     private String title;
     private float amount;
-    @GeneratedColumn("INSERT")
+  
     private Timestamp date;
 
     public Transaction() {
@@ -28,6 +28,7 @@ public class Transaction implements Serializable {
         this.receiver = receiver;
         this.title = title;
         this.amount = amount;
+        this.date=new Timestamp(System.currentTimeMillis());
     }
 
     public int getSenderId() {

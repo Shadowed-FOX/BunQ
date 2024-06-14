@@ -9,6 +9,9 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 import com.blackfox.bunq.database.*;
+import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main extends Application {
 
@@ -33,6 +36,8 @@ public class Main extends Application {
             Client client = HibernateUtil.getClient(clientAuth.getId());
             System.out.println("firstname: " + client.getFirstname());
             System.out.println("lastname: " + client.getLastname());
+            System.out.println("balance: "+client.getBalance());
+            System.out.println("id: "+client.getId());
             System.out.println("created_at: " + client.getCreatedAt());
 
             var transactions = HibernateUtil.getTransactionList(client.getId());
@@ -48,7 +53,16 @@ public class Main extends Application {
             System.err.println(ex);
         }
     }
-
+    static void transcationsExampleeeee(int idSender,int intReciver,float ammount,String title)
+    {
+        try {
+            HibernateUtil.getClient(idSender).transferMoney(ammount, HibernateUtil.getClient(intReciver),title);
+        } catch (ClientNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public static void main(String[] args) {
 
         // try {
@@ -66,7 +80,10 @@ public class Main extends Application {
         // } catch (Exception ex) {
         // System.err.println(ex);
         // }
+         
 
+        transcationsExampleeeee(75601458, 19517347, 50f, ">:(");
+ fetchingExample("Dziady", "123dziady");
         launch();
         HibernateUtil.close();
     }
