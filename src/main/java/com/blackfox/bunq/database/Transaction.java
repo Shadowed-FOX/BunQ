@@ -11,13 +11,13 @@ import jakarta.persistence.Id;
 @Entity
 public class Transaction implements Serializable {
 
-    @Id
+    
     private int sender;
     private int receiver;
 
     private String title;
     private float amount;
-  
+  @Id
     private Timestamp date;
 
     public Transaction() {

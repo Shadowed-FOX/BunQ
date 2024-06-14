@@ -41,13 +41,15 @@ public class Main extends Application {
             System.out.println("created_at: " + client.getCreatedAt());
 
             var transactions = HibernateUtil.getTransactionList(client.getId());
+            int i=1;
             for (var transaction : transactions) {
-                System.out.println("transaction:");
+                System.out.println(i+". transaction:");
                 System.out.println(transaction.getTitle());
                 System.out.println(transaction.getAmount() + "zł");
                 System.out.println(transaction.getDate());
                 System.out.println((transaction.getSenderId() == client.getId()) ? "debit" : "credit");
                 System.out.println();
+                i++;
             }
         } catch (ClientNotFoundException ex) {
             System.err.println(ex);
@@ -82,7 +84,8 @@ public class Main extends Application {
         // }
          
 
-        transcationsExampleeeee(75601458, 19517347, 50f, ">:(");
+        //transcationsExampleeeee(75601458, 19517347, 5f, ":0");
+ //fetchingExample("Dziady", "123dziady");
  fetchingExample("Dziady", "123dziady");
         launch();
         HibernateUtil.close();
