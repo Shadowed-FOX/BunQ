@@ -12,6 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.PasswordField?>
 <VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.LoginController">
    <children>
       <AnchorPane onMouseDragged="#menuDragEvent" onMousePressed="#menuPressedEvent" prefHeight="26.0" prefWidth="960.0">
@@ -27,10 +28,10 @@
                   <AnchorPane fx:id="loginPane" prefHeight="363.0" prefWidth="480.0">
                      <children>
                         <Label layoutX="150.0" layoutY="264.0" text="Nazwa użytkownika" />
-                        <TextField layoutX="150.0" layoutY="229.0" prefHeight="35.0" prefWidth="180.0" />
-                        <TextField layoutX="150.0" layoutY="298.0" prefHeight="35.0" prefWidth="180.0" AnchorPane.bottomAnchor="241.0" />
+                        <TextField fx:id="username" layoutX="150.0" layoutY="229.0" prefHeight="35.0" prefWidth="180.0" />
+                        <PasswordField fx:id="password" layoutX="150.0" layoutY="298.0" prefHeight="35.0" prefWidth="180.0" AnchorPane.bottomAnchor="241.0" />
                         <Label layoutX="150.0" layoutY="333.0" text="Hasło" AnchorPane.bottomAnchor="224.0" />
-                        <Button layoutX="150.0" layoutY="383.0" mnemonicParsing="false" text="Zaloguj" />
+                        <Button layoutX="150.0" layoutY="383.0" mnemonicParsing="false" onAction="#onLoginAttemptBtnClick" text="Zaloguj" />
                         <Button layoutX="251.0" layoutY="383.0" mnemonicParsing="false" onAction="#onRegisterSwitchBtnClick" text="Załóż konto" />
                         <ImageView fitHeight="121.0" fitWidth="117.0" layoutX="182.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="78.0">
                            <image>
@@ -38,19 +39,20 @@
                            </image>
                         </ImageView>
                         <Text layoutX="211.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logowanie" />
+                        <Label fx:id="AuthMessage" layoutX="140.0" layoutY="447.0"/>
                         <Text layoutX="131.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do wyświetlania błędów (usunąć później)" />
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="registerPane" prefHeight="200.0" prefWidth="200.0" visible="false">
                      <children>
                         <Label layoutX="149.0" layoutY="199.0" text="Nazwa użytkownika" AnchorPane.bottomAnchor="358.0" />
-                        <TextField layoutX="149.0" layoutY="164.0" prefHeight="35.0" prefWidth="180.0" />
-                        <TextField layoutX="149.0" layoutY="222.0" prefHeight="35.0" prefWidth="180.0" />
-                        <TextField layoutX="149.0" layoutY="280.0" prefHeight="35.0" prefWidth="180.0" />
-                        <TextField layoutX="149.0" layoutY="342.0" prefHeight="35.0" prefWidth="180.0" AnchorPane.bottomAnchor="197.0" />
-                        <TextField layoutX="149.0" layoutY="406.0" prefHeight="35.0" prefWidth="180.0" />
+                        <TextField fx:id="NewUsername" layoutX="149.0" layoutY="164.0" prefHeight="35.0" prefWidth="180.0" />
+                        <TextField fx:id="FirstName" layoutX="149.0" layoutY="222.0" prefHeight="35.0" prefWidth="180.0" />
+                        <TextField fx:id="SecondName" layoutX="149.0" layoutY="280.0" prefHeight="35.0" prefWidth="180.0" />
+                        <PasswordField fx:id="NewPassword1" layoutX="149.0" layoutY="342.0" prefHeight="35.0" prefWidth="180.0" AnchorPane.bottomAnchor="197.0" />
+                        <PasswordField fx:id="NewPassword2" layoutX="149.0" layoutY="406.0" prefHeight="35.0" prefWidth="180.0" />
                         <Label layoutX="150.0" layoutY="315.0" text="Nazwisko" AnchorPane.bottomAnchor="242.0" />
-                        <Button layoutX="150.0" layoutY="478.0" mnemonicParsing="false" text="Rejestracja" />
+                        <Button layoutX="150.0" layoutY="478.0" mnemonicParsing="false" onAction="#onRegisterAttemptBtnClick" text="Rejestracja" />
                         <Button layoutX="254.0" layoutY="478.0" mnemonicParsing="false" onAction="#onLoginSwitchBtnClick" text="Mam konto" />
                         <ImageView fitHeight="121.0" fitWidth="117.0" layoutX="181.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="23.0">
                            <image>
