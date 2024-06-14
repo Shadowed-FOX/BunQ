@@ -149,6 +149,7 @@ public class Client implements Serializable {
 
         }
         //functions for use --------------------------------------------------------------------------------------------
+        
         public List<Transaction> getTransactionList() {
 
             return makeAList("WHERE sender = :id OR receiver = :id");
@@ -180,7 +181,7 @@ public class Client implements Serializable {
         }
 
         public List<Transaction> getTransactionListOrderByAmountDESC(int SecondClientId) {
-            return makeAList("WHERE sender = :id OR receiver = :id ORDER BY amount DESC", SecondClientId);
+            return makeAList("WHERE (sender = :id AND receiver = :id2) OR (sender = :id2 AND receiver = :id) ORDER BY amount DESC", SecondClientId);
 
         }
         //end functions for use ---------------------------------------------------------------------------------------------
