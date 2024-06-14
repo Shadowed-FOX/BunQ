@@ -12,9 +12,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-
 @Entity
 public class Client implements Serializable {
+
     public enum TransactionType {
         SENT, RECEIVED
     }
@@ -65,7 +65,7 @@ public class Client implements Serializable {
         session.getTransaction().commit();
         session.close();
     }
-    
+
     public List<Transaction> getTransactions() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             var query = session.createQuery("WHERE sender = :id OR receiver = :id", Transaction.class)
@@ -142,16 +142,22 @@ public class Client implements Serializable {
 
         return null;
     }
-        public List<Transaction> getTransactions(String xD) {
+
+    public List<Transaction> getTransactions(String xD) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            
+
             var query = session.createQuery("WHERE (sender = :id OR receiver = :id) ", Transaction.class)
                     .setParameter("id", id);
-           
+
             List<Transaction> list = query.list();
-            for(int i=0;i<list.size();i++){if(HibernateUtil.getClient(list.get(i).getReceiverId()).getFirstname()!=xD && HibernateUtil.getClient(list.get(i).getReceiverId()).getLastname()!=xD && !list.get(i).getTitle().contains(xD)){list.remove(i);i=0;}}
+            for (int i = 0; i < list.size(); i++) {
+                if (HibernateUtil.getClient(list.get(i).getReceiverId()).getFirstname() != xD && HibernateUtil.getClient(list.get(i).getReceiverId()).getLastname() != xD && !list.get(i).getTitle().contains(xD)) {
+                    list.remove(i);
+                    i = 0;
+                }
+            }
             session.close();
-            
+
             return list;
         } catch (Exception ex) {
             System.err.println(ex);
@@ -159,6 +165,7 @@ public class Client implements Serializable {
 
         return null;
     }
+
     public int getId() {
         return id;
     }
