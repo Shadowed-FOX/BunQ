@@ -9,6 +9,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 import com.blackfox.bunq.database.*;
+import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -68,8 +69,8 @@ public class Main extends Application {
            //client.getTransactionList.getTransactionListOrderByAmountDESC()
            //
            //
-           
-            var transactionsByAmount = client.getTransactionList.getTransactionListOrderByAmountDESC();
+           // System.out.println(Timestamp.valueOf("2024-06-14"+" 00:00:00"));
+            var transactionsByAmount = client.getTransactionList.getTransactionListWithDate("2024-06-11","2024-06-13");
             
             int i=1;
             for (var transaction : transactionsByAmount) {

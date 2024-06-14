@@ -92,7 +92,7 @@ public class Client implements Serializable {
     }
 
     //begin class------------------------------------------------------------------------------------------------------------------------------------------------
-    public class TransactionList { //klasa do dostawania list bo pomyslalem ze wygodnie bd client.getTransactionList.rosnaco()
+    public class TransactionList { 
         //if you need all history for client you dont need put secondId in func
 
         /*
@@ -143,6 +143,24 @@ public class Client implements Serializable {
                 return list;
             }
         }
+                private List<Transaction> makeAList(String sqlText,Timestamp dataFrom,Timestamp dataTo) {
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                var query = session
+                        .createQuery(sqlText,
+                                Transaction.class);
+                query.setParameter("id", id);
+                query.setParameter("fromDate", dataFrom);
+                query.setParameter("toDate", dataTo);
+                List<Transaction> list = query.list();
+                session.close();
+
+                if (list.isEmpty()) {
+                    return null;
+                }
+
+                return list;
+            }
+        }
         //------------------------------------------------
         
         public TransactionList() {
@@ -183,6 +201,10 @@ public class Client implements Serializable {
         public List<Transaction> getTransactionListOrderByAmountDESC(int SecondClientId) {
             return makeAList("WHERE (sender = :id AND receiver = :id2) OR (sender = :id2 AND receiver = :id) ORDER BY amount DESC", SecondClientId);
 
+        }
+                public List<Transaction> getTransactionListWithDate(String fromDate,String toDate) {
+                    
+            return makeAList("WHERE (sender = :id OR receiver = :id) AND date >= :fromDate AND date <= :toDate",Timestamp.valueOf(fromDate+" 00:00:00"),Timestamp.valueOf(toDate+" 00:00:00"));
         }
         //end functions for use ---------------------------------------------------------------------------------------------
     }//end class---------------------------------------------------------------------------------------------------------------------------------
