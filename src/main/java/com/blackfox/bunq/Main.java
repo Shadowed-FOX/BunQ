@@ -84,7 +84,7 @@ public class Main extends Application {
         // }
          
 
-        //transcationsExampleeeee(75601458, 19517347, 5f, ":0");
+     //   transcationsExampleeeee(75601458, 19517347, -20f, "ciekawe czy sam tytul mozna wyslac");
  //fetchingExample("Dziady", "123dziady");
  fetchingExample("Dziady", "123dziady");
         launch();

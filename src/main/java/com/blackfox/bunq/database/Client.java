@@ -41,6 +41,10 @@ public class Client implements Serializable {
         if (this.balance < amount) {
             throw new Exception("Not enough money.");
         }
+        if(amount<=0f)
+        {
+               throw new Exception("amount need be greater that 0");
+        }
         Transaction transaction = new Transaction(id, receiver.getId(), title, amount);
         this.balance -= amount;
         receiver.balance += amount;
