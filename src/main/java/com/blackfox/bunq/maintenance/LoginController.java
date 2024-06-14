@@ -1,7 +1,9 @@
-package com.blackfox.bunq;
+package com.blackfox.bunq.maintenance;
 
 import com.blackfox.bunq.database.*;
+import com.blackfox.bunq.SceneController;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -10,6 +12,8 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
 
 public class LoginController {
     @FXML
@@ -35,7 +39,9 @@ public class LoginController {
     @FXML
     private TextField NewPassword2;
     @FXML
-    private Label AuthMessage;
+    private Label LoginMessage;
+    @FXML
+    private Label RegisterMessage;
 
     private double screenX = 0;
     private double screenY = 0;
@@ -48,21 +54,23 @@ public class LoginController {
 
     @FXML
     protected void onLoginAttemptBtnClick(ActionEvent event) {
-        final String AuthUserNameErr = "Niepoprawna nazwa użytkownika";
-        final String AuthPasswordErr = "Niepoprawne hasło";
-        final String AuthSucc = "Logowanie się powiodło";
+        final String AuthPasswordErr = "Wrong password";
+        final String AuthSucc = "Login was successful";
 
         try {
             ClientAuth clA = HibernateUtil.getClientAuth(username.getText());
-            if (!clA.checkPassword(password.getText()))
-                AuthMessage.setText(AuthPasswordErr);
-            else
-                AuthMessage.setText(AuthSucc);
-
-        } catch (ClientNotFoundException ex) {
-            AuthMessage.setText(AuthUserNameErr);
+            if (!clA.checkPassword(password.getText())) {
+                LoginMessage.setText(AuthPasswordErr);
+                password.clear();
+            } else {
+                LoginMessage.setText(AuthSucc);
+                Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                SceneController sceneController = new SceneController();
+                sceneController.switchSceneMain(stage, clA.getId());
+            }
+        } catch (ClientNotFoundException | IOException ex) {
+            LoginMessage.setText(ex.getMessage());
         }
-
     }
 
     @FXML
@@ -79,21 +87,17 @@ public class LoginController {
         String firstName = FirstName.getText();
         String lastName = SecondName.getText();
 
-        // TODO: AuthMessage okazuje się jest widoczny tylko dla logowania
         if (!newPassword1.equals(newPassword2)) {
-            System.out.println("Passwords do not match.");
-            AuthMessage.setText("Passwords do not match.");
+            RegisterMessage.setText("Passwords do not match.");
             return;
         }
 
         try {
             HibernateUtil.createClient(newUsername, newPassword1, firstName, lastName);
+            RegisterMessage.setText("Client created");
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            AuthMessage.setText(ex.getMessage());
+            RegisterMessage.setText(ex.getMessage());
         }
-
-        System.out.println("Client created.");
     }
 
     @FXML
