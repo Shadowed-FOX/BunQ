@@ -54,8 +54,8 @@ public class Main extends Application {
             //     System.err.println(ex);
             // }
 
-            var transactions = client.getTransactions(TransactionType.RECEIVED);
-
+            var transactions = client.getTransactions("ciekawe");
+            if(transactions==null){System.out.println("puste");return;}
             for (int i = 0; i < transactions.size(); i++) {
                 System.out.println(i + ". transaction:");
                 System.out.println(transactions.get(i).getTitle());
