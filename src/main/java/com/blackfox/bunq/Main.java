@@ -69,7 +69,7 @@ public class Main extends Application {
            //
            //
            
-            var transactionsByAmount = client.getTransactionList.getTransactionListOrderByAmountASC(19517347);
+            var transactionsByAmount = client.getTransactionList.getTransactionListOrderByAmountDESC();
             
             int i=1;
             for (var transaction : transactionsByAmount) {

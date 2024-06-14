@@ -94,135 +94,96 @@ public class Client implements Serializable {
     //begin class------------------------------------------------------------------------------------------------------------------------------------------------
     public class TransactionList { //klasa do dostawania list bo pomyslalem ze wygodnie bd client.getTransactionList.rosnaco()
         //if you need all history for client you dont need put secondId in func
+
+        /*
+        all functions to use:
+        getTransactionList.getTransactionList()//sorting by date (from older to newer)
+         getTransactionList.getTransactionList(second id)//sorting only transactions from second id (sender , reciver doesnt matter)
+        
+        getTransactionList.getTransactionListOrderByAmountASC()//sorting by amount ascending
+        getTransactionList.getTransactionListOrderByAmountASC(second id)//sorting only transactions from second id (sender , reciver doesnt matter)
+        getTransactionList.getTransactionListOrderByAmountDESC()//sorting by amount decreasing
+        getTransactionList.getTransactionListOrderByAmountDESC(second id)//sorting only transactions from second id (sender , reciver doesnt matter)
+        
+        
+         */
+        //only for other functions
+        private List<Transaction> makeAList(String sqlText) {
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                var query = session
+                        .createQuery(sqlText,
+                                Transaction.class);
+                query.setParameter("id", id);
+
+                List<Transaction> list = query.list();
+                session.close();
+
+                if (list.isEmpty()) {
+                    return null;
+                }
+
+                return list;
+            }
+        }
+
+        private List<Transaction> makeAList(String sqlText, int id2) {
+            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+                var query = session
+                        .createQuery(sqlText,
+                                Transaction.class);
+                query.setParameter("id", id);
+                query.setParameter("id2", id2);
+                List<Transaction> list = query.list();
+                session.close();
+
+                if (list.isEmpty()) {
+                    return null;
+                }
+
+                return list;
+            }
+        }
+        //------------------------------------------------
+        
         public TransactionList() {
 
         }
-        //get transactions sorted by date --------------------------------------------------------------------------------------------------------------
-
+        //functions for use --------------------------------------------------------------------------------------------
         public List<Transaction> getTransactionList() {
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                var query = session
-                        .createQuery("WHERE sender = :id OR receiver = :id",
-                                Transaction.class);
-                query.setParameter("id", id);
 
-                List<Transaction> list = query.list();
-                session.close();
-
-                if (list.isEmpty()) {
-                    return null;
-                }
-
-                return list;
-            }
+            return makeAList("WHERE sender = :id OR receiver = :id");
         }
-           //overload with second id to sort thing out  !!!!!(need to test if this is working)!!!!!!!
+
         public List<Transaction> getTransactionList(int SecondClientId) {
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                var query = session
-                        .createQuery("WHERE (sender = :id AND receiver = :id2) OR (sender = :id2 AND receiver = :id)",
-                                Transaction.class);
-                query.setParameter("id", id);
-                query.setParameter("id2", SecondClientId);
 
-                List<Transaction> list = query.list();
-                session.close();
-
-                if (list.isEmpty()) {
-                    return null;
-                }
-
-                return list;
-            }
+            return makeAList("WHERE (sender = :id AND receiver = :id2) OR (sender = :id2 AND receiver = :id)", SecondClientId);
 
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------------------------------
-        //get transactions sorted ascending------------------------------------------------------------------------
-        //normal
 
         public List<Transaction> getTransactionListOrderByAmountASC() {
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                var query = session
-                        .createQuery("WHERE sender = :id OR receiver = :id ORDER BY amount ASC",
-                                Transaction.class);
-                query.setParameter("id", id);
 
-                List<Transaction> list = query.list();
-                session.close();
-
-                if (list.isEmpty()) {
-                    return null;
-                }
-
-                return list;
-            }
+            return makeAList("WHERE sender = :id OR receiver = :id ORDER BY amount ASC");
 
         }
 
-        //overload with second id to sort thing out  !!!!!(need to test if this is working)!!!!!!!
+        //begin overload with second id to sort thing out  !!!!!(need to test if this is working)!!!!!!!
         public List<Transaction> getTransactionListOrderByAmountASC(int SecondClientId) {
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                var query = session
-                        .createQuery("WHERE (sender = :id AND receiver = :id2) OR (sender = :id2 AND receiver = :id) ORDER BY amount ASC",
-                                Transaction.class);
-                query.setParameter("id", id);
-                query.setParameter("id2", SecondClientId);
 
-                List<Transaction> list = query.list();
-                session.close();
-
-                if (list.isEmpty()) {
-                    return null;
-                }
-
-                return list;
-            }
+            return makeAList("WHERE (sender = :id AND receiver = :id2) OR (sender = :id2 AND receiver = :id) ORDER BY amount ASC", SecondClientId);
 
         }
 
-        //--------------------------------------------------------------------------------------------------------------
-        //get transactions sorted decreasing------------------------------------------------------------------------
         public List<Transaction> getTransactionListOrderByAmountDESC() {
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                var query = session
-                        .createQuery("WHERE sender = :id OR receiver = :id ORDER BY amount DESC",
-                                Transaction.class);
-                query.setParameter("id", id);
 
-                List<Transaction> list = query.list();
-                session.close();
-
-                if (list.isEmpty()) {
-                    return null;
-                }
-
-                return list;
-            }
+            return makeAList("WHERE sender = :id OR receiver = :id ORDER BY amount DESC");
 
         }
-        //--------------------------------------------------------------------------------------------------------------
-                //overload with second id to sort thing out  !!!!!(need to test if this is working)!!!!!!!
+
         public List<Transaction> getTransactionListOrderByAmountDESC(int SecondClientId) {
-            try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-                var query = session
-                        .createQuery("WHERE (sender = :id AND receiver = :id2) OR (sender = :id2 AND receiver = :id) ORDER BY amount DESC",
-                                Transaction.class);
-                query.setParameter("id", id);
-                query.setParameter("id2", SecondClientId);
-
-                List<Transaction> list = query.list();
-                session.close();
-
-                if (list.isEmpty()) {
-                    return null;
-                }
-
-                return list;
-            }
+            return makeAList("WHERE sender = :id OR receiver = :id ORDER BY amount DESC", SecondClientId);
 
         }
+        //end functions for use ---------------------------------------------------------------------------------------------
     }//end class---------------------------------------------------------------------------------------------------------------------------------
 
 }
