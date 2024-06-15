@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="574.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="290.0" prefWidth="710.0">
+         <children>
+            <Pane layoutX="609.0" layoutY="62.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: #66e37b;" />
+            <Text layoutX="54.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Przychody)" />
+            <Text layoutX="12.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ostatni miesiąc:" />
+            <PieChart layoutX="294.0" layoutY="24.0" prefHeight="203.0" prefWidth="240.0" style="-fx-background-color: grey;" />
+            <Text layoutX="54.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Wydatki)" />
+            <Text layoutX="635.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Przychody" />
+            <Pane layoutX="609.0" layoutY="92.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: #d14d4d;" />
+            <Text layoutX="635.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wydatki" />
+            <Line endX="360.0" layoutX="360.0" layoutY="291.0" startX="-360.0" />
+         </children>
+      </AnchorPane>
+      <ScrollPane hbarPolicy="NEVER" layoutY="292.0" prefHeight="284.0" prefWidth="720.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="283.0" prefWidth="717.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

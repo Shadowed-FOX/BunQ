@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="574.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="307.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zarządzanie kontem" />
+      <Text layoutX="42.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moje dane" />
+      <Text layoutX="64.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa użytkownika" />
+      <Text layoutX="184.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(nazwa użytkownika)" />
+      <Button layoutX="583.0" layoutY="232.0" mnemonicParsing="false" text="Zmień" />
+      <Line endX="530.0" layoutX="142.0" layoutY="273.0" startX="-100.0" />
+      <Text layoutX="65.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło" />
+      <Button layoutX="583.0" layoutY="292.0" mnemonicParsing="false" text="Zmień" />
+      <Line endX="530.0" layoutX="142.0" layoutY="334.0" startX="-100.0" />
+      <Text layoutX="42.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konto" />
+      <Button layoutX="561.0" layoutY="384.0" mnemonicParsing="false" text="Zamknij konto" />
+      <Text layoutX="64.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zamknięcie konta" />
+      <AnchorPane prefHeight="574.0" prefWidth="720.0" style="-fx-background-color: black; -fx-opacity: 0.4;" visible="false" />
+      <StackPane layoutX="189.0" layoutY="334.0" prefHeight="292.0" prefWidth="358.0">
+         <children>
+            <AnchorPane prefHeight="292.0" prefWidth="353.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Text layoutX="109.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text do wyświetlania błędów" />
+                  <Button layoutX="151.0" layoutY="239.0" mnemonicParsing="false" text="Zatwierdź" />
+                  <Button fx:id="closeBtn2" layoutX="326.0" layoutY="1.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
+                  <Label layoutX="50.0" layoutY="55.0" text="Nowe hasło" />
+                  <TextField layoutX="54.0" layoutY="72.0" prefHeight="40.0" prefWidth="250.0" />
+                  <TextField layoutX="54.0" layoutY="146.0" prefHeight="40.0" prefWidth="250.0" />
+                  <Label layoutX="54.0" layoutY="129.0" text="Powtórz nowe hasło" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="292.0" prefWidth="353.0" style="-fx-background-color: grey;" visible="false">
+               <children>
+                  <Text layoutX="103.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text do wyświetlania błędów" />
+                  <Button layoutX="132.0" layoutY="203.0" mnemonicParsing="false" text="Zamknij konto" />
+                  <Button fx:id="closeBtn211" layoutX="326.0" layoutY="1.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
+                  <Label layoutX="54.0" layoutY="83.0" text="Potwierdź wpisując nazwę użytkownika" />
+                  <TextField layoutX="54.0" layoutY="100.0" prefHeight="40.0" prefWidth="250.0" />
+                  <Text layoutX="78.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Czy na pewno chcesz zamknąć konto?" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="292.0" prefWidth="353.0" style="-fx-background-color: grey;" visible="false">
+               <children>
+                  <Text layoutX="103.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text do wyświetlania błędów" />
+                  <Button layoutX="144.0" layoutY="235.0" mnemonicParsing="false" text="Zatwierdź" />
+                  <Button fx:id="closeBtn21" layoutX="326.0" layoutY="1.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
+                  <Label layoutX="54.0" layoutY="45.0" text="Nowa nazwa użytkownika" />
+                  <TextField layoutX="53.0" layoutY="63.0" prefHeight="40.0" prefWidth="250.0" />
+                  <Label layoutX="54.0" layoutY="119.0" text="Hasło" />
+                  <TextField layoutX="53.0" layoutY="135.0" prefHeight="40.0" prefWidth="250.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+      <Line endX="530.0" layoutX="143.0" layoutY="219.0" startX="-100.0" />
+      <Text layoutX="67.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię" />
+      <Text layoutX="118.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(imie)" />
+      <Text layoutX="66.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko" />
+      <Text layoutX="136.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(nazwisko)" />
+      <Text layoutX="67.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numer konta" />
+      <Text layoutX="164.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(numer konta)" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="235.0">
+         <children>
+            <AnchorPane prefHeight="153.0" prefWidth="240.0">
+               <children>
+                  <Text fx:id="name" layoutX="87.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Witaj (imię)" wrappingWidth="61.13671875" />
+                  <Text layoutX="100.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo" wrappingWidth="34.13671875" />
+                  <Text fx:id="funds" layoutX="80.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(stan konta)" wrappingWidth="75.13671875" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="420.0" prefWidth="208.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Podsumowanie" />
+                  <Button layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Nowa transakcja" />
+                  <Button layoutY="104.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Historia transakcji" />
+                  <Button layoutY="144.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Pożyczka" />
+                  <Button layoutY="208.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Zarządzanie kontem" />
+                  <Button layoutY="380.0" mnemonicParsing="false" onAction="#onLogOutBtnPress" prefHeight="40.0" prefWidth="240.0" text="Wyloguj" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <StackPane prefHeight="574.0" prefWidth="729.0" />
+   </children>
+</HBox>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane hbarPolicy="NEVER" prefHeight="576.0" prefWidth="720.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <content>
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="720.0">
+         <children>
+            <Text layoutX="313.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Historia transakcji" />
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>
