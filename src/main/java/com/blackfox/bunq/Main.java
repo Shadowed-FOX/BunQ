@@ -27,7 +27,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        fetchingExample("Dziady", "123dziady");
+        // fetchingExample("Dziady", "123dziady");
 
         launch();
         HibernateUtil.close();
