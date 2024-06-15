@@ -44,11 +44,11 @@ public class ClientAuth implements Serializable {
     public void setUsername(String username) throws ClientCredentialsException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         var query = session
-                .createQuery("SELECT COUNT(*) FROM ClientAuth WHERE username = :username",
+                .createQuery("SELECT 1 FROM ClientAuth WHERE username = :username",
                         Long.class)
                 .setParameter("username", username);
 
-        if (query.list().getFirst() != 0) {
+        if (query.uniqueResult() != null) {
             session.close();
             throw new ClientCredentialsException("Username already in use.");
         }

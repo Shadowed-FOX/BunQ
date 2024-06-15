@@ -51,9 +51,11 @@ public class Client implements Serializable {
         if (this.balance < amount) {
             throw new Exception("Not enough money.");
         }
+
         if (amount <= 0.f) {
             throw new Exception("Amount needs to be greater that 0!");
         }
+
         Transaction transaction = new Transaction(id, receiver.getId(), title, amount);
         this.balance -= amount;
         receiver.balance += amount;
@@ -68,89 +70,71 @@ public class Client implements Serializable {
     }
 
     public List<Transaction> getTransactions() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session.createQuery("WHERE sender = :id OR receiver = :id", Transaction.class)
-                    .setParameter("id", id);
-            List<Transaction> list = query.list();
-            session.close();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var query = session.createQuery("WHERE sender = :id OR receiver = :id", Transaction.class)
+                .setParameter("id", id);
 
-            return list;
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
+        List<Transaction> list = query.list();
+        session.close();
 
-        return null;
+        return list;
     }
 
     public List<Transaction> getTransactions(Timestamp since, Timestamp until) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session
-                    .createQuery("WHERE sender = :id OR receiver = :id AND date BETWEEN :since AND :until",
-                            Transaction.class)
-                    .setParameter("id", id)
-                    .setParameter("since", since)
-                    .setParameter("until", until);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var query = session
+                .createQuery("WHERE sender = :id OR receiver = :id AND date BETWEEN :since AND :until",
+                        Transaction.class)
+                .setParameter("id", id)
+                .setParameter("since", since)
+                .setParameter("until", until);
 
-            List<Transaction> list = query.list();
-            session.close();
+        List<Transaction> list = query.list();
+        session.close();
 
-            return list;
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
-
-        return null;
+        return list;
     }
 
     public List<Transaction> getTransactions(TransactionType type) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session
-                    .createQuery(
-                            "WHERE " + ((type == TransactionType.SENT) ? "sender"
-                                    : "receiver") + " = :id",
-                            Transaction.class)
-                    .setParameter("id", id);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var query = session
+                .createQuery(
+                        "WHERE " + ((type == TransactionType.SENT) ? "sender"
+                                : "receiver") + " = :id",
+                        Transaction.class)
+                .setParameter("id", id);
 
-            List<Transaction> list = query.list();
-            session.close();
+        List<Transaction> list = query.list();
+        session.close();
 
-            return list;
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
-
-        return null;
+        return list;
     }
 
     public List<Transaction> getTransactions(TransactionType type, Timestamp since, Timestamp until) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session
-                    .createQuery(
-                            "WHERE " + ((type == TransactionType.SENT) ? "sender"
-                                    : "receiver") + " = :id AND date BETWEEN :since AND :until",
-                            Transaction.class)
-                    .setParameter("id", id)
-                    .setParameter("since", since)
-                    .setParameter("until", until);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var query = session
+                .createQuery(
+                        "WHERE " + ((type == TransactionType.SENT) ? "sender"
+                                : "receiver") + " = :id AND date BETWEEN :since AND :until",
+                        Transaction.class)
+                .setParameter("id", id)
+                .setParameter("since", since)
+                .setParameter("until", until);
 
-            List<Transaction> list = query.list();
-            session.close();
+        List<Transaction> list = query.list();
+        session.close();
 
-            return list;
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
-
-        return null;
+        return list;
     }
 
     public List<Transaction> getTransactions(String xD) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-            var query = session.createQuery("WHERE (sender = :id OR receiver = :id) ", Transaction.class)
-                    .setParameter("id", id);
+        var query = session.createQuery("WHERE (sender = :id OR receiver = :id) ", Transaction.class)
+                .setParameter("id", id);
 
-            List<Transaction> list = query.list();
+        List<Transaction> list = query.list();
+        try {
             for (int i = 0; i < list.size(); i++) {
                 if (HibernateUtil.getClient(list.get(i).getReceiverId()).getFirstname() != xD
                         && HibernateUtil.getClient(list.get(i).getReceiverId()).getLastname() != xD
@@ -159,14 +143,12 @@ public class Client implements Serializable {
                     i = 0;
                 }
             }
-            session.close();
-
-            return list;
-        } catch (Exception ex) {
+        } catch (ClientNotFoundException ex) {
             System.err.println(ex);
         }
+        session.close();
 
-        return null;
+        return list;
     }
 
     public int getId() {
