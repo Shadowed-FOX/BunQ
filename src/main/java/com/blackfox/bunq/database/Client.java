@@ -127,25 +127,15 @@ public class Client implements Serializable {
         return list;
     }
 
-    public List<Transaction> getTransactions(String xD) {
+    public List<Transaction> getTransactions(String filter) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        var query = session.createQuery("WHERE (sender = :id OR receiver = :id) ", Transaction.class)
-                .setParameter("id", id);
+        String hql = "FROM Transaction t WHERE t.receiver IN (SELECT c.id FROM Client c WHERE c.firstname = :filter OR c.lastname = :filter) OR t.title  LIKE :filterAnyWhere";
+        var query = session.createQuery(hql, Transaction.class);
 
+        query.setParameter("filter", filter);
+        query.setParameter("filterAnyWhere", "%" + filter + "%");
         List<Transaction> list = query.list();
-        try {
-            for (int i = 0; i < list.size(); i++) {
-                if (HibernateUtil.getClient(list.get(i).getReceiverId()).getFirstname() != xD
-                        && HibernateUtil.getClient(list.get(i).getReceiverId()).getLastname() != xD
-                        && !list.get(i).getTitle().contains(xD)) {
-                    list.remove(i);
-                    i = 0;
-                }
-            }
-        } catch (ClientNotFoundException ex) {
-            System.err.println(ex);
-        }
         session.close();
 
         return list;

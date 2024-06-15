@@ -1,19 +1,18 @@
 package com.blackfox.bunq.maintenance;
 
+import java.io.IOException;
+
 import com.blackfox.bunq.database.*;
-import com.blackfox.bunq.SceneController;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
-
-import java.io.IOException;
 
 public class LoginController {
     @FXML
@@ -61,13 +60,13 @@ public class LoginController {
             ClientAuth clA = HibernateUtil.getClientAuth(username.getText());
             if (!clA.checkPassword(password.getText())) {
                 LoginMessage.setText(AuthPasswordErr);
+                password.clear();
             } else {
                 LoginMessage.setText(AuthSucc);
-                username.clear();
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                SceneController.getInstance().switchSceneMain(stage, clA.getId());
+                SceneController sceneController = new SceneController();
+                sceneController.switchSceneMain(stage, clA.getId());
             }
-            password.clear();
         } catch (ClientNotFoundException | IOException ex) {
             LoginMessage.setText(ex.getMessage());
         }
@@ -87,6 +86,7 @@ public class LoginController {
         String firstName = FirstName.getText();
         String lastName = SecondName.getText();
 
+        // TODO: AuthMessage okazuje się jest widoczny tylko dla logowania
         if (!newPassword1.equals(newPassword2)) {
             RegisterMessage.setText("Passwords do not match.");
             return;

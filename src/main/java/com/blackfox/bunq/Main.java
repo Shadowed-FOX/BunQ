@@ -2,7 +2,6 @@ package com.blackfox.bunq;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -10,16 +9,17 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 import com.blackfox.bunq.database.*;
+import com.blackfox.bunq.database.Client.TransactionType;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Main extends Application {
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("login.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root, 960, 600);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 960, 600);
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
@@ -52,17 +52,13 @@ public class Main extends Application {
             System.out.println("created_at: " + client.getCreatedAt());
 
             // try {
-            // HibernateUtil.getClient(55406669).makeTransaction(50, client, "urodziny 2");
+            //     HibernateUtil.getClient(55406669).makeTransaction(50, client, "urodziny 2");
             // } catch (Exception ex) {
-            // System.err.println(ex);
+            //     System.err.println(ex);
             // }
 
             var transactions = client.getTransactions("ciekawe");
-            if (transactions == null) {
-                System.out.println("puste");
-                return;
-            }
-
+            if(transactions==null){System.out.println("puste");return;}
             for (int i = 0; i < transactions.size(); i++) {
                 System.out.println(i + ". transaction:");
                 System.out.println(transactions.get(i).getTitle());
@@ -76,9 +72,9 @@ public class Main extends Application {
         }
     }
 
-    static void transcationsExample(int idSender, int intReciver, float ammount, String title) {
+    static void transcationsExample(int idSender, int intReceiver, float amount, String title) {
         try {
-            HibernateUtil.getClient(idSender).makeTransaction(ammount, HibernateUtil.getClient(intReciver), title);
+            HibernateUtil.getClient(idSender).makeTransaction(amount, HibernateUtil.getClient(intReceiver), title);
         } catch (ClientNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
