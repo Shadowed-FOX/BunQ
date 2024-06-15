@@ -147,13 +147,13 @@ public class Client implements Serializable {
     public List<Transaction> getTransactions(String xD) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-String hql = "FROM Transaction t WHERE t.receiver IN (SELECT c.id FROM Client c WHERE c.firstname = :firstname OR c.lastname = :lastname) OR t.title  LIKE :title";
-Query query = session.createQuery(hql, Transaction.class);
-query.setParameter("firstname", xD);
-query.setParameter("lastname", xD);
-query.setParameter("title", "%" + xD + "%");
+            String hql = "FROM Transaction t WHERE t.receiver IN (SELECT c.id FROM Client c WHERE c.firstname = :firstname OR c.lastname = :lastname) OR t.title  LIKE :title";
+            Query query = session.createQuery(hql, Transaction.class);
+            query.setParameter("firstname", xD);
+            query.setParameter("lastname", xD);
+            query.setParameter("title", "%" + xD + "%");
 
-List<Transaction> list = query.list();
+            List<Transaction> list = query.list();
             session.close();
 
             return list;
