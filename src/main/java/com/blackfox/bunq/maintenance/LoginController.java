@@ -64,9 +64,8 @@ public class LoginController {
                 password.clear();
             } else {
                 LoginMessage.setText(AuthSucc);
-                Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-                SceneController sceneController = new SceneController();
-                sceneController.switchSceneMain(stage, clA.getId());
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                SceneController.getInstance().switchSceneMain(stage, clA.getId());
             }
         } catch (ClientNotFoundException | IOException ex) {
             LoginMessage.setText(ex.getMessage());

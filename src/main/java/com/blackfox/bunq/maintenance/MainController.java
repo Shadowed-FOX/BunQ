@@ -49,9 +49,8 @@ public class MainController implements Initializable {
 
     @FXML
     protected void onLogOutBtnPress(ActionEvent event) throws IOException {
-        SceneController sceneController = new SceneController();
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        sceneController.switchSceneLogin(stage);
+        SceneController.getInstance().switchSceneLogin(stage);
     }
 
     @Override
