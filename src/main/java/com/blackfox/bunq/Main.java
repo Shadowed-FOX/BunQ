@@ -24,9 +24,12 @@ public class Main extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
+
+        SceneController.getInstance();
     }
 
     public static void main(String[] args) {
+        HibernateUtil.getSessionFactory();
         // fetchingExample("Dziady", "123dziady");
 
         launch();
@@ -49,7 +52,7 @@ public class Main extends Application {
             System.out.println("created_at: " + client.getCreatedAt());
 
             // try {
-            //     HibernateUtil.getClient(55406669).transferMoney(50, client, "urodziny 2");
+            //     HibernateUtil.getClient(55406669).makeTransaction(50, client, "urodziny 2");
             // } catch (Exception ex) {
             //     System.err.println(ex);
             // }
@@ -69,9 +72,9 @@ public class Main extends Application {
         }
     }
 
-    static void transcationsExample(int idSender, int intReciver, float ammount, String title) {
+    static void transcationsExample(int idSender, int intReceiver, float amount, String title) {
         try {
-            HibernateUtil.getClient(idSender).transferMoney(ammount, HibernateUtil.getClient(intReciver), title);
+            HibernateUtil.getClient(idSender).makeTransaction(amount, HibernateUtil.getClient(intReceiver), title);
         } catch (ClientNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

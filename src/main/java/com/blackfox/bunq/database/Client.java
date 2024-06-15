@@ -11,7 +11,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import org.hibernate.query.Query;
 
 @Entity
 public class Client implements Serializable {
@@ -25,6 +24,7 @@ public class Client implements Serializable {
     private String firstname;
     private String lastname;
     private float balance;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp created_at;
@@ -47,7 +47,7 @@ public class Client implements Serializable {
         session.close();
     }
 
-    public void transferMoney(float amount, Client receiver, String title) throws Exception {
+    public void makeTransaction(float amount, Client receiver, String title) throws Exception {
         if (this.balance < amount) {
             throw new Exception("Not enough money.");
         }
@@ -139,7 +139,6 @@ public class Client implements Serializable {
         session.close();
 
         return list;
-
     }
 
     public int getId() {
