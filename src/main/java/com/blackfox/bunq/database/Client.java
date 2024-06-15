@@ -131,7 +131,7 @@ public class Client implements Serializable {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         String hql = "FROM Transaction t WHERE t.receiver IN (SELECT c.id FROM Client c WHERE c.firstname = :filter OR c.lastname = :filter) OR t.title  LIKE :filterAnyWhere";
-        Query query = session.createQuery(hql, Transaction.class);
+        var query = session.createQuery(hql, Transaction.class);
 
         query.setParameter("filter", filter);
         query.setParameter("filterAnyWhere", "%" + filter + "%");
