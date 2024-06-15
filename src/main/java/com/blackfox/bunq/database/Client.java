@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import org.hibernate.query.Query;
 
 @Entity
 public class Client implements Serializable {
@@ -146,16 +147,13 @@ public class Client implements Serializable {
     public List<Transaction> getTransactions(String xD) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            var query = session.createQuery("WHERE (sender = :id OR receiver = :id) ", Transaction.class)
-                    .setParameter("id", id);
+String hql = "FROM Transaction t WHERE t.receiver IN (SELECT c.id FROM Client c WHERE c.firstname = :firstname OR c.lastname = :lastname) OR t.title  LIKE :title";
+Query query = session.createQuery(hql, Transaction.class);
+query.setParameter("firstname", xD);
+query.setParameter("lastname", xD);
+query.setParameter("title", "%" + xD + "%");
 
-            List<Transaction> list = query.list();
-            for (int i = 0; i < list.size(); i++) {
-                if (HibernateUtil.getClient(list.get(i).getReceiverId()).getFirstname() != xD && HibernateUtil.getClient(list.get(i).getReceiverId()).getLastname() != xD && !list.get(i).getTitle().contains(xD)) {
-                    list.remove(i);
-                    i = 0;
-                }
-            }
+List<Transaction> list = query.list();
             session.close();
 
             return list;
