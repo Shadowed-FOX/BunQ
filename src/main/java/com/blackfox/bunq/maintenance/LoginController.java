@@ -61,12 +61,13 @@ public class LoginController {
             ClientAuth clA = HibernateUtil.getClientAuth(username.getText());
             if (!clA.checkPassword(password.getText())) {
                 LoginMessage.setText(AuthPasswordErr);
-                password.clear();
             } else {
                 LoginMessage.setText(AuthSucc);
+                username.clear();
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 SceneController.getInstance().switchSceneMain(stage, clA.getId());
             }
+            password.clear();
         } catch (ClientNotFoundException | IOException ex) {
             LoginMessage.setText(ex.getMessage());
         }
