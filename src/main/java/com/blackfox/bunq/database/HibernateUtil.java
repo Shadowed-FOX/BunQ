@@ -3,7 +3,14 @@ package com.blackfox.bunq.database;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+
+import jakarta.persistence.NoResultException;
+
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 import org.hibernate.Session;
 
 public class HibernateUtil {
@@ -11,6 +18,9 @@ public class HibernateUtil {
     private static final SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory() {
+        Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
+        Logger.getLogger("com.mchange").setLevel(Level.WARNING);
+
         try {
             Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
             configuration.addAnnotatedClass(Client.class);
@@ -36,61 +46,62 @@ public class HibernateUtil {
     }
 
     public static ClientAuth getClientAuth(String username) throws ClientNotFoundException {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session
-                    .createQuery("WHERE username = :username",
-                            ClientAuth.class)
-                    .setParameter("username", username);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var query = session
+                .createQuery("WHERE username = :username",
+                        ClientAuth.class)
+                .setParameter("username", username);
 
-            if (query.list().size() != 1) {
-                session.close();
-                throw new ClientNotFoundException(username);
-            }
-
-            ClientAuth client = query.list().getFirst();
+        try {
+            ClientAuth client = query.getSingleResult();
             session.close();
             return client;
+
+        } catch (NoResultException noResultException) {
+            throw new ClientNotFoundException(username);
         }
     }
 
     public static Client getClient(int id) throws ClientNotFoundException {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Client client = session.get(Client.class, id);
-            session.close();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Client client = session.get(Client.class, id);
+        session.close();
 
-            if (client == null) {
-                throw new ClientNotFoundException(id);
-            }
-            return client;
+        if (client == null) {
+            throw new ClientNotFoundException(id);
         }
+        return client;
     }
 
     public static int createClient(String username, String password, String firstname, String lastname)
             throws ClientCredentialsException, ClientIdException {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            int id = -1;
-            int attempts = 0;
-            do {
-                id = (int) (Math.random() * 100000000);
-                ClientAuth temp_id = session.get(ClientAuth.class, id);
-                if (temp_id != null)
-                    id = -1;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        int id = -1;
+        int attempts = 0;
+        do {
+            id = (int) (Math.random() * 100000000);
+            ClientAuth temp_id = session.get(ClientAuth.class, id);
+            if (temp_id != null)
+                id = -1;
 
-                if (attempts++ > 3)
-                    throw new ClientIdException();
+            if (attempts++ > 3)
+                throw new ClientIdException();
 
-            } while (id == -1);
+        } while (id == -1);
 
-            session.beginTransaction();
-            ClientAuth auth = new ClientAuth(id, username, password);
-            Client client = new Client(id, firstname, lastname);
+        var tr = session.beginTransaction();
+        ClientAuth auth = new ClientAuth(id, username, password);
+        Client client = new Client(id, firstname, lastname);
 
+        try {
             session.persist(auth);
             session.persist(client);
             session.getTransaction().commit();
             session.close();
-
-            return id;
+        } catch (Exception ex) {
+            tr.rollback();
         }
+
+        return id;
     }
 }
