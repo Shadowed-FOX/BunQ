@@ -24,9 +24,12 @@ public class Main extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
+
+        SceneController.getInstance();
     }
 
     public static void main(String[] args) {
+        HibernateUtil.getSessionFactory();
         // fetchingExample("Dziady", "123dziady");
 
         launch();
