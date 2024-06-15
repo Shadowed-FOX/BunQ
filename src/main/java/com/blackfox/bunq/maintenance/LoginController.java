@@ -2,6 +2,7 @@ package com.blackfox.bunq.maintenance;
 
 import java.io.IOException;
 
+import com.blackfox.bunq.SceneController;
 import com.blackfox.bunq.database.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -64,8 +65,8 @@ public class LoginController {
             } else {
                 LoginMessage.setText(AuthSucc);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                SceneController sceneController = new SceneController();
-                sceneController.switchSceneMain(stage, clA.getId());
+                SceneController.getInstance().switchSceneMain(stage, clA.getId());
+                ;
             }
         } catch (ClientNotFoundException | IOException ex) {
             LoginMessage.setText(ex.getMessage());
