@@ -24,6 +24,7 @@ public class Client implements Serializable {
     private String firstname;
     private String lastname;
     private float balance;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp created_at;
@@ -46,7 +47,7 @@ public class Client implements Serializable {
         session.close();
     }
 
-    public void transferMoney(float amount, Client receiver, String title) throws Exception {
+    public void makeTransaction(float amount, Client receiver, String title) throws Exception {
         if (this.balance < amount) {
             throw new Exception("Not enough money.");
         }
@@ -151,7 +152,9 @@ public class Client implements Serializable {
 
             List<Transaction> list = query.list();
             for (int i = 0; i < list.size(); i++) {
-                if (HibernateUtil.getClient(list.get(i).getReceiverId()).getFirstname() != xD && HibernateUtil.getClient(list.get(i).getReceiverId()).getLastname() != xD && !list.get(i).getTitle().contains(xD)) {
+                if (HibernateUtil.getClient(list.get(i).getReceiverId()).getFirstname() != xD
+                        && HibernateUtil.getClient(list.get(i).getReceiverId()).getLastname() != xD
+                        && !list.get(i).getTitle().contains(xD)) {
                     list.remove(i);
                     i = 0;
                 }

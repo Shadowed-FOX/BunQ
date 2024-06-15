@@ -10,7 +10,6 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 import com.blackfox.bunq.database.*;
-import com.blackfox.bunq.database.Client.TransactionType;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,13 +49,17 @@ public class Main extends Application {
             System.out.println("created_at: " + client.getCreatedAt());
 
             // try {
-            //     HibernateUtil.getClient(55406669).transferMoney(50, client, "urodziny 2");
+            // HibernateUtil.getClient(55406669).makeTransaction(50, client, "urodziny 2");
             // } catch (Exception ex) {
-            //     System.err.println(ex);
+            // System.err.println(ex);
             // }
 
             var transactions = client.getTransactions("ciekawe");
-            if(transactions==null){System.out.println("puste");return;}
+            if (transactions == null) {
+                System.out.println("puste");
+                return;
+            }
+
             for (int i = 0; i < transactions.size(); i++) {
                 System.out.println(i + ". transaction:");
                 System.out.println(transactions.get(i).getTitle());
@@ -72,7 +75,7 @@ public class Main extends Application {
 
     static void transcationsExample(int idSender, int intReciver, float ammount, String title) {
         try {
-            HibernateUtil.getClient(idSender).transferMoney(ammount, HibernateUtil.getClient(intReciver), title);
+            HibernateUtil.getClient(idSender).makeTransaction(ammount, HibernateUtil.getClient(intReciver), title);
         } catch (ClientNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
