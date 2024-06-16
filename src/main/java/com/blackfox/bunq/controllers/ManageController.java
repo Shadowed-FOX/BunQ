@@ -13,7 +13,9 @@ public class ManageController {
 
     private Client currentClient;
 
-    private void postInitialize(){
+    public void postInitialize(){
+        currentClient=HibernateUtil.getActiveClient();
+
         firstName.setText(currentClient.getFirstname());
         surName.setText(currentClient.getLastname());
         accId.setText(String.valueOf(currentClient.getId()));
@@ -22,10 +24,5 @@ public class ManageController {
     @FXML
     protected void exitEvent(ActionEvent event){
         System.out.println("XDDDD");
-    }
-
-    public void setCurrentClient(Client client){
-        this.currentClient=client;
-        postInitialize();
     }
 }

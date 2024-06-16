@@ -35,6 +35,10 @@ public class NewTransactionController {
         System.out.println("XDDDD");
     }
 
+    public void postInitialize(){
+        currentClient=HibernateUtil.getActiveClient();
+    }
+
     public void setCurrentClient(Client client){
         this.currentClient=client;
     }

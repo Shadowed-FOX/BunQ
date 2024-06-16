@@ -3,6 +3,7 @@ package com.blackfox.bunq.controllers;
 import com.blackfox.bunq.Main;
 import com.blackfox.bunq.database.Client;
 import com.blackfox.bunq.database.ClientNotFoundException;
+import com.blackfox.bunq.database.HibernateUtil;
 import com.blackfox.bunq.database.Transaction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,7 +34,9 @@ public class SummaryController {
     private PieChart chart;
 
 
-    private void postInitialize() {
+    public void postInitialize() {
+        currentClient = HibernateUtil.getActiveClient();
+
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime before = now.minusDays(30);
 
@@ -54,13 +57,11 @@ public class SummaryController {
         setTransactions(allTransactions);
 
         income.setText("+" + sumIncome);
-        System.out.println(sumIncome);
         outcome.setText(String.valueOf(sumOutcome));
-        System.out.println(sumOutcome);
     }
 
-    private void setTransactions(List<Transaction> all){
-        for(Transaction transaction : all){
+    private void setTransactions(List<Transaction> all) {
+        for (Transaction transaction : all) {
             try {
                 FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/last_transaction.fxml"));
                 AnchorPane pane = loader.load();
@@ -75,7 +76,7 @@ public class SummaryController {
         scrollPane.setContent(vBox);
     }
 
-    private void setChart(float income, float outcome){
+    private void setChart(float income, float outcome) {
         ObservableList<PieChart.Data> chartData = FXCollections.observableArrayList(
                 new PieChart.Data("Wydatki", outcome),
                 new PieChart.Data("Przychody", income)
@@ -83,16 +84,11 @@ public class SummaryController {
         chart.setData(chartData);
     }
 
-    private float sumTransactions(List<Transaction> list){
+    private float sumTransactions(List<Transaction> list) {
         float sum = 0;
-        for(Transaction transaction : list){
+        for (Transaction transaction : list) {
             sum += transaction.getAmount();
         }
         return sum;
-    }
-
-    public void setCurrentClient(Client client){
-        this.currentClient=client;
-        postInitialize();
     }
 }

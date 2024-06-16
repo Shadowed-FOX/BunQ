@@ -24,12 +24,9 @@ public class TransactionHistoryController {
     private VBox vBox;
     private Client currentClient;
 
-    public void setCurrentClient(Client currentClient){
-        this.currentClient=currentClient;
-        postInitialize();
-    }
-
     public void postInitialize() {
+        currentClient = HibernateUtil.getActiveClient();
+
         List<Transaction> transactionList = currentClient.getTransactions();
 
         for (Transaction transaction : transactionList) {
@@ -40,9 +37,7 @@ public class TransactionHistoryController {
                 controller.setCurrentClient(currentClient);
                 controller.getData(transaction);
                 vBox.getChildren().add(pane);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClientNotFoundException e) {
+            } catch (ClientNotFoundException | IOException e) {
                 throw new RuntimeException(e);
             }
         }

@@ -37,58 +37,53 @@ public class DashboardController {
 
     @FXML
     protected void onNewTransactionPress(ActionEvent event) throws IOException {
-        loadNewTransaction(currentClient);
+        loadNewTransaction();
     }
 
     @FXML
     protected void onHistoryPress(ActionEvent event) throws IOException {
-        loadTransactionsHistory(currentClient);
+        loadTransactionsHistory();
     }
 
     @FXML
     protected void onAccManagePress(ActionEvent event) throws IOException {
-        loadAccManage(currentClient);
+        loadAccManage();
     }
 
     public void loadSummary() throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/acc_summary.fxml"));
         Parent child = loader.load();
         SummaryController summaryController = loader.getController();
-        summaryController.setCurrentClient(currentClient);
+        summaryController.postInitialize();
         refreshInfo();
         pane.getChildren().setAll(child);
     }
 
-    public void loadNewTransaction(Client client) throws IOException{
+    public void loadNewTransaction() throws IOException{
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/new_transaction.fxml"));
         Parent child = loader.load();
         NewTransactionController newTransactionController = loader.getController();
-        newTransactionController.setCurrentClient(client);
+        newTransactionController.postInitialize();
         refreshInfo();
         pane.getChildren().setAll(child);
     }
 
-    public void loadTransactionsHistory(Client current) throws IOException{
+    public void loadTransactionsHistory() throws IOException{
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/transactions_history.fxml"));
         Parent child = loader.load();
         TransactionHistoryController transactionHistoryController = loader.getController();
-        transactionHistoryController.setCurrentClient(current);
+        transactionHistoryController.postInitialize();
         refreshInfo();
         pane.getChildren().setAll(child);
     }
 
-    public void loadAccManage(Client current) throws IOException{
+    public void loadAccManage() throws IOException{
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/acc_manage.fxml"));
         Parent child = loader.load();
         ManageController manageController = loader.getController();
-        manageController.setCurrentClient(current);
+        manageController.postInitialize();
         refreshInfo();
         pane.getChildren().setAll(child);
-    }
-
-    public void setCurrentClient(Client client) throws IOException {
-        this.currentClient=client;
-
     }
 
     public void setMainController(MainController mainController){
