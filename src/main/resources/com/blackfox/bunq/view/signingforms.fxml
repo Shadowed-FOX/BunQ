@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="window" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.LoginController">
    <children>
       <StackPane prefHeight="600.0" prefWidth="480.0">
          <children>
@@ -29,12 +29,11 @@
                   <Button layoutX="251.0" layoutY="383.0" mnemonicParsing="false" onAction="#onRegisterSwitchBtnClick" text="Załóż konto" />
                   <ImageView fitHeight="121.0" fitWidth="117.0" layoutX="182.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="78.0">
                      <image>
-                        <Image url="@images/Login-Icon.png" />
+                        <Image url="@../images/Login-Icon.png" />
                      </image>
                   </ImageView>
                   <Text layoutX="211.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logowanie" />
-                  <Label fx:id="LoginMessage" layoutX="140.0" layoutY="447.0" />
-                  <Text layoutX="131.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do wyświetlania błędów (usunąć później)" wrappingWidth="224.34490966796875">
+                  <Text fx:id="LoginMessage" layoutX="131.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="224.34490966796875">
                      <font>
                         <Font name="Roboto" size="12.0" />
                      </font></Text>
@@ -53,16 +52,15 @@
                   <Button layoutX="254.0" layoutY="478.0" mnemonicParsing="false" onAction="#onLoginSwitchBtnClick" text="Mam konto" />
                   <ImageView fitHeight="121.0" fitWidth="117.0" layoutX="181.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="23.0">
                      <image>
-                        <Image url="@images/Login-Icon.png" />
+                        <Image url="@../images/Login-Icon.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="RegisterMessage" layoutX="140.0" layoutY="447.0" />
                   <Label layoutX="150.0" layoutY="315.0" text="Nazwisko" AnchorPane.bottomAnchor="242.0" />
                   <Text layoutX="211.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejestracja" />
                   <Label layoutX="149.0" layoutY="441.0" text="Powtórz hasło" />
                   <Label layoutX="149.0" layoutY="257.0" text="Imie" />
                   <Label layoutX="149.0" layoutY="377.0" text="Hasło" />
-                  <Text layoutX="130.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do wyświetlania błędów (później usunąć)" />
+                  <Text fx:id="RegisterMessage" layoutX="130.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                </children>
             </AnchorPane>
          </children>

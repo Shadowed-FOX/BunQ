@@ -1,6 +1,5 @@
-package com.blackfox.bunq.maintenance;
+package com.blackfox.bunq.old;
 
-import com.blackfox.bunq.SceneController;
 import com.blackfox.bunq.database.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

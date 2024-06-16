@@ -1,8 +1,7 @@
-package com.blackfox.bunq;
+package com.blackfox.bunq.old;
 
 import com.blackfox.bunq.database.ClientNotFoundException;
 import com.blackfox.bunq.database.HibernateUtil;
-import com.blackfox.bunq.maintenance.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;

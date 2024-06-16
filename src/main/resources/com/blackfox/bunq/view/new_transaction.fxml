@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="576.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="576.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.NewTransactionController">
    <children>
       <TextField layoutX="50.0" layoutY="116.0" prefHeight="40.0" prefWidth="324.0" />
       <Text layoutX="317.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nowa transakcja" />

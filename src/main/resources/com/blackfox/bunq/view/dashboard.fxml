@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.DashboardController">
    <children>
       <VBox prefHeight="600.0" prefWidth="235.0">
          <children>
@@ -20,8 +20,8 @@
             </AnchorPane>
             <AnchorPane prefHeight="420.0" prefWidth="208.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Podsumowanie" />
-                  <Button layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Nowa transakcja" />
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" onAction="#onSummaryPress" text="Podsumowanie" />
+                  <Button layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" onAction="#onNewTransactionPress" text="Nowa transakcja" />
                   <Button layoutY="104.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Historia transakcji" />
                   <Button layoutY="144.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Pożyczka" />
                   <Button layoutY="208.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Zarządzanie kontem" />
@@ -30,6 +30,6 @@
             </AnchorPane>
          </children>
       </VBox>
-      <StackPane prefHeight="574.0" prefWidth="729.0" />
+      <StackPane fx:id="pane" prefHeight="574.0" prefWidth="729.0" />
    </children>
 </HBox>

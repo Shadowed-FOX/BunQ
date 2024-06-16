@@ -1,50 +1,27 @@
-package com.blackfox.bunq.maintenance;
+package com.blackfox.bunq.controllers;
 
 import com.blackfox.bunq.database.*;
-import com.blackfox.bunq.SceneController;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
 public class LoginController {
     @FXML
-    private AnchorPane loginPane;
+    private AnchorPane loginPane, registerPane;
     @FXML
-    private AnchorPane registerPane;
+    private TextField username, password, NewUsername, FirstName, SecondName, NewPassword1, NewPassword2;
     @FXML
-    private VBox window;
-    @FXML
-    private Button closeBtn;
-    @FXML
-    private TextField username;
-    @FXML
-    private TextField password;
-    @FXML
-    private TextField NewUsername;
-    @FXML
-    private TextField FirstName;
-    @FXML
-    private TextField SecondName;
-    @FXML
-    private TextField NewPassword1;
-    @FXML
-    private TextField NewPassword2;
-    @FXML
-    private Label LoginMessage;
-    @FXML
-    private Label RegisterMessage;
+    private Text LoginMessage, RegisterMessage;
 
-    private double screenX = 0;
-    private double screenY = 0;
+    private MainController mainController;
+
+    public void setMainController(MainController mainController){
+        this.mainController=mainController;
+    }
 
     @FXML
     protected void onLoginSwitchBtnClick() {
@@ -63,9 +40,8 @@ public class LoginController {
                 LoginMessage.setText(AuthPasswordErr);
             } else {
                 LoginMessage.setText(AuthSucc);
+                mainController.loadDashboard(HibernateUtil.getClient(clA.getId()));
                 username.clear();
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                SceneController.getInstance().switchSceneMain(stage, clA.getId());
             }
             password.clear();
         } catch (ClientNotFoundException | IOException ex) {
@@ -98,24 +74,5 @@ public class LoginController {
         } catch (Exception ex) {
             RegisterMessage.setText(ex.getMessage());
         }
-    }
-
-    @FXML
-    protected void exitEvent(ActionEvent event) {
-        Stage stage = (Stage) closeBtn.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    protected void menuDragEvent(MouseEvent event) {
-        Stage stage = (Stage) window.getScene().getWindow();
-        stage.setX(event.getScreenX() - screenX);
-        stage.setY(event.getScreenY() - screenY);
-    }
-
-    @FXML
-    protected void menuPressedEvent(MouseEvent event) {
-        screenX = event.getSceneX();
-        screenY = event.getSceneY();
     }
 }
