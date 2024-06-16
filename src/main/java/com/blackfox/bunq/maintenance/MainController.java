@@ -1,5 +1,6 @@
-package com.blackfox.bunq.old;
+package com.blackfox.bunq.maintenance;
 
+import com.blackfox.bunq.SceneController;
 import com.blackfox.bunq.database.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,8 +49,9 @@ public class MainController implements Initializable {
 
     @FXML
     protected void onLogOutBtnPress(ActionEvent event) throws IOException {
+        SceneController sceneController = new SceneController();
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        SceneController.getInstance().switchSceneLogin(stage);
+        sceneController.switchSceneLogin(stage);
     }
 
     @Override

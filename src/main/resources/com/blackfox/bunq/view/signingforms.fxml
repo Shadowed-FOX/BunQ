@@ -14,7 +14,7 @@
 
 <HBox fx:id="window" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.LoginController">
    <children>
-      <StackPane prefHeight="600.0" prefWidth="480.0">
+      <StackPane fx:id="stackpane" prefHeight="600.0" prefWidth="480.0">
          <children>
             <AnchorPane fx:id="loginPane" prefHeight="363.0" prefWidth="480.0">
                <children>
@@ -25,14 +25,14 @@
                      <font>
                         <Font name="Roboto" size="12.0" />
                      </font></Label>
-                  <Button layoutX="150.0" layoutY="383.0" mnemonicParsing="false" onAction="#onLoginAttemptBtnClick" text="Zaloguj" />
-                  <Button layoutX="251.0" layoutY="383.0" mnemonicParsing="false" onAction="#onRegisterSwitchBtnClick" text="Załóż konto" />
+                  <Button fx:id="login_button" layoutX="150.0" layoutY="383.0" mnemonicParsing="false" onAction="#onLoginAttemptBtnClick" text="Zaloguj" />
+                  <Button fx:id="register_button" layoutX="251.0" layoutY="383.0" mnemonicParsing="false" onAction="#onRegisterSwitchBtnClick" text="Załóż konto" />
                   <ImageView fitHeight="121.0" fitWidth="117.0" layoutX="182.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="78.0">
                      <image>
                         <Image url="@../images/Login-Icon.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="211.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logowanie" />
+                  <Text fx:id="title1" layoutX="211.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logowanie" />
                   <Text fx:id="LoginMessage" layoutX="131.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="224.34490966796875">
                      <font>
                         <Font name="Roboto" size="12.0" />
@@ -48,15 +48,15 @@
                   <PasswordField fx:id="NewPassword1" layoutX="149.0" layoutY="342.0" prefHeight="35.0" prefWidth="180.0" AnchorPane.bottomAnchor="197.0" />
                   <PasswordField fx:id="NewPassword2" layoutX="149.0" layoutY="406.0" prefHeight="35.0" prefWidth="180.0" />
                   <Label layoutX="150.0" layoutY="315.0" text="Nazwisko" AnchorPane.bottomAnchor="242.0" />
-                  <Button layoutX="150.0" layoutY="478.0" mnemonicParsing="false" onAction="#onRegisterAttemptBtnClick" text="Rejestracja" />
-                  <Button layoutX="254.0" layoutY="478.0" mnemonicParsing="false" onAction="#onLoginSwitchBtnClick" text="Mam konto" />
+                  <Button fx:id="reg_button" layoutX="150.0" layoutY="478.0" mnemonicParsing="false" onAction="#onRegisterAttemptBtnClick" text="Rejestracja" />
+                  <Button fx:id="haveacc_button" layoutX="254.0" layoutY="478.0" mnemonicParsing="false" onAction="#onLoginSwitchBtnClick" text="Mam konto" />
                   <ImageView fitHeight="121.0" fitWidth="117.0" layoutX="181.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="23.0">
                      <image>
                         <Image url="@../images/Login-Icon.png" />
                      </image>
                   </ImageView>
                   <Label layoutX="150.0" layoutY="315.0" text="Nazwisko" AnchorPane.bottomAnchor="242.0" />
-                  <Text layoutX="211.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejestracja" />
+                  <Text fx:id="title2" layoutX="211.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejestracja" />
                   <Label layoutX="149.0" layoutY="441.0" text="Powtórz hasło" />
                   <Label layoutX="149.0" layoutY="257.0" text="Imie" />
                   <Label layoutX="149.0" layoutY="377.0" text="Hasło" />
@@ -65,6 +65,14 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="480.0" HBox.hgrow="ALWAYS" />
+      <AnchorPane fx:id = "left" maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="480.0" HBox.hgrow="ALWAYS">
+         <children>
+            <ImageView fitHeight="183.0" fitWidth="180.0" layoutX="150.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/bunq_logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </HBox>

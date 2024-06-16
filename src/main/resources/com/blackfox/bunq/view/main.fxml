@@ -6,10 +6,10 @@
 
 <VBox fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="958.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.MainController">
    <children>
-      <AnchorPane onMouseDragged="#menuDragEvent" onMousePressed="#menuPressedEvent" prefHeight="26.0" prefWidth="960.0">
+      <AnchorPane fx:id = "close" onMouseDragged="#menuDragEvent" onMousePressed="#menuPressedEvent" prefHeight="26.0" prefWidth="960.0">
          <children>
             <Button fx:id="closeBtn" layoutX="929.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
-            <Button layoutX="898.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="31.0" onAction="#onMinimizeBtnPress" text="_" />
+            <Button fx:id="minButton" layoutX="898.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="31.0" onAction="#onMinimizeBtnPress" text="_" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="root" prefHeight="594.0" prefWidth="958.0" />
