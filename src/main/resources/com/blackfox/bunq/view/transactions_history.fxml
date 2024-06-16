@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane hbarPolicy="NEVER" prefHeight="576.0" prefWidth="720.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fx:id="pane" hbarPolicy="NEVER" prefHeight="576.0" prefWidth="720.0" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.TransactionHistoryController">
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="574.0" prefWidth="720.0">
          <children>
             <Text layoutX="313.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Historia transakcji" />
+            <Label layoutX="79.0" layoutY="72.0" text="Odbiorca/Nadawca" />
+            <Label layoutX="379.0" layoutY="72.0" text="Data" />
+            <Label layoutX="573.0" layoutY="72.0" text="Kwota" />
+            <VBox fx:id="vBox" layoutX="2.0" layoutY="97.0" prefHeight="484.0" prefWidth="712.0" />
          </children>
       </AnchorPane>
    </content>
