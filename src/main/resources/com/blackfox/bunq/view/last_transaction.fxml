@@ -1,32 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<HBox prefHeight="40.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="(Odbiorca lub nadawca)">
-         <HBox.margin>
-            <Insets left="10.0" right="100.0" top="10.0" />
-         </HBox.margin></Text>
-      <Line endX="-70.0" endY="-5.7220458984375E-6" rotate="90.0" startX="-100.0">
-         <HBox.margin>
-            <Insets top="18.0" />
-         </HBox.margin></Line>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="(Data)">
-         <HBox.margin>
-            <Insets left="50.0" right="50.0" top="10.0" />
-         </HBox.margin></Text>
-      <Line endX="-70.0" endY="-5.7220458984375E-6" rotate="90.0" startX="-100.0">
-         <HBox.margin>
-            <Insets top="18.0" />
-         </HBox.margin>
-      </Line>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="(Kwota)">
-         <HBox.margin>
-            <Insets left="70.0" top="10.0" />
-         </HBox.margin></Text>
+      <Text layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(odbiorca/nadawca)" wrappingWidth="227.216796875" />
+      <Line endX="-70.0" endY="-5.7220458984375E-6" layoutX="540.0" layoutY="20.0" rotate="90.0" startX="-100.0" />
+      <Text layoutX="294.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="data" textAlignment="CENTER" wrappingWidth="120.865234375" />
+      <Line endX="-70.0" endY="-5.7220458984375E-6" layoutX="336.0" layoutY="20.0" rotate="90.0" startX="-100.0" />
+      <Text layoutX="491.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kwota" textAlignment="CENTER" wrappingWidth="120.865234375" />
    </children>
-</HBox>
+</AnchorPane>
