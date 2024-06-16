@@ -27,10 +27,8 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
-
         String css = this.getClass().getResource("style.css").toExternalForm();
         scene.getStylesheets().add(css);
-
         stage.setTitle("BunQ");
         stage.show();
     }

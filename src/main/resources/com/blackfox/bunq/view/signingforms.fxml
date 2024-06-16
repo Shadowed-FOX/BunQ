@@ -12,27 +12,27 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox fx:id="window" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.LoginController">
+<HBox fx:id="window" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.LoginController">
    <children>
-      <StackPane fx:id="stackpane" prefHeight="600.0" prefWidth="480.0">
+      <StackPane fx:id="stackpane" prefHeight="574.0" prefWidth="552.0">
          <children>
-            <AnchorPane fx:id="loginPane" prefHeight="363.0" prefWidth="480.0">
+            <AnchorPane fx:id="loginPane" prefHeight="575.0" prefWidth="422.0">
                <children>
-                  <Label layoutX="150.0" layoutY="264.0" text="Nazwa użytkownika" />
-                  <TextField fx:id="username" layoutX="150.0" layoutY="229.0" prefHeight="35.0" prefWidth="180.0" />
-                  <PasswordField fx:id="password" layoutX="150.0" layoutY="298.0" prefHeight="35.0" prefWidth="180.0" AnchorPane.bottomAnchor="241.0" />
-                  <Label layoutX="150.0" layoutY="333.0" text="Hasło" AnchorPane.bottomAnchor="224.0">
+                  <Label layoutX="173.0" layoutY="264.0" text="Nazwa użytkownika" />
+                  <TextField fx:id="username" layoutX="173.0" layoutY="224.0" prefHeight="40.0" prefWidth="196.0" />
+                  <PasswordField fx:id="password" layoutX="173.0" layoutY="293.0" prefHeight="40.0" prefWidth="196.0" AnchorPane.bottomAnchor="237.0" />
+                  <Label layoutX="173.0" layoutY="337.0" text="Hasło" AnchorPane.bottomAnchor="215.0">
                      <font>
                         <Font name="Roboto" size="12.0" />
                      </font></Label>
-                  <Button fx:id="login_button" layoutX="150.0" layoutY="383.0" mnemonicParsing="false" onAction="#onLoginAttemptBtnClick" text="Zaloguj" />
-                  <Button fx:id="register_button" layoutX="251.0" layoutY="383.0" mnemonicParsing="false" onAction="#onRegisterSwitchBtnClick" text="Załóż konto" />
-                  <ImageView fitHeight="121.0" fitWidth="117.0" layoutX="182.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="78.0">
+                  <Button fx:id="login_button" layoutX="174.0" layoutY="383.0" mnemonicParsing="false" onAction="#onLoginAttemptBtnClick" text="Zaloguj" />
+                  <Button fx:id="register_button" layoutX="263.0" layoutY="383.0" mnemonicParsing="false" onAction="#onRegisterSwitchBtnClick" text="Załóż konto" />
+                  <ImageView fitHeight="121.0" fitWidth="117.0" layoutX="218.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="61.0">
                      <image>
                         <Image url="@../images/Login-Icon.png" />
                      </image>
                   </ImageView>
-                  <Text fx:id="title1" layoutX="211.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logowanie" />
+                  <Text fx:id="title1" layoutX="216.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logowanie" />
                   <Text fx:id="LoginMessage" layoutX="131.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="224.34490966796875">
                      <font>
                         <Font name="Roboto" size="12.0" />
@@ -41,33 +41,32 @@
             </AnchorPane>
             <AnchorPane fx:id="registerPane" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <Label layoutX="149.0" layoutY="199.0" text="Nazwa użytkownika" AnchorPane.bottomAnchor="358.0" />
-                  <TextField fx:id="NewUsername" layoutX="149.0" layoutY="164.0" prefHeight="35.0" prefWidth="180.0" />
-                  <TextField fx:id="FirstName" layoutX="149.0" layoutY="222.0" prefHeight="35.0" prefWidth="180.0" />
-                  <TextField fx:id="SecondName" layoutX="149.0" layoutY="280.0" prefHeight="35.0" prefWidth="180.0" />
-                  <PasswordField fx:id="NewPassword1" layoutX="149.0" layoutY="342.0" prefHeight="35.0" prefWidth="180.0" AnchorPane.bottomAnchor="197.0" />
-                  <PasswordField fx:id="NewPassword2" layoutX="149.0" layoutY="406.0" prefHeight="35.0" prefWidth="180.0" />
-                  <Label layoutX="150.0" layoutY="315.0" text="Nazwisko" AnchorPane.bottomAnchor="242.0" />
-                  <Button fx:id="reg_button" layoutX="150.0" layoutY="478.0" mnemonicParsing="false" onAction="#onRegisterAttemptBtnClick" text="Rejestracja" />
-                  <Button fx:id="haveacc_button" layoutX="254.0" layoutY="478.0" mnemonicParsing="false" onAction="#onLoginSwitchBtnClick" text="Mam konto" />
-                  <ImageView fitHeight="121.0" fitWidth="117.0" layoutX="181.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="23.0">
+                  <Label layoutX="150.0" layoutY="187.0" text="Nazwa użytkownika" AnchorPane.bottomAnchor="365.0" />
+                  <TextField fx:id="NewUsername" layoutX="149.0" layoutY="152.0" prefHeight="35.0" prefWidth="224.0" />
+                  <TextField fx:id="FirstName" layoutX="149.0" layoutY="215.0" prefHeight="35.0" prefWidth="224.0" />
+                  <TextField fx:id="SecondName" layoutX="149.0" layoutY="280.0" prefHeight="35.0" prefWidth="224.0" />
+                  <PasswordField fx:id="NewPassword1" layoutX="149.0" layoutY="348.0" prefHeight="35.0" prefWidth="224.0" AnchorPane.bottomAnchor="190.0" />
+                  <PasswordField fx:id="NewPassword2" layoutX="149.0" layoutY="412.0" prefHeight="35.0" prefWidth="224.0" />
+                  <Label layoutX="149.0" layoutY="315.0" text="Nazwisko" AnchorPane.bottomAnchor="237.0" />
+                  <Button fx:id="reg_button" layoutX="147.0" layoutY="496.0" mnemonicParsing="false" onAction="#onRegisterAttemptBtnClick" text="Rejestracja" />
+                  <Button fx:id="haveacc_button" layoutX="269.0" layoutY="496.0" mnemonicParsing="false" onAction="#onLoginSwitchBtnClick" text="Mam konto" />
+                  <ImageView fitHeight="121.0" fitWidth="117.0" layoutX="211.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="5.0">
                      <image>
                         <Image url="@../images/Login-Icon.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="150.0" layoutY="315.0" text="Nazwisko" AnchorPane.bottomAnchor="242.0" />
-                  <Text fx:id="title2" layoutX="211.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejestracja" />
-                  <Label layoutX="149.0" layoutY="441.0" text="Powtórz hasło" />
-                  <Label layoutX="149.0" layoutY="257.0" text="Imie" />
-                  <Label layoutX="149.0" layoutY="377.0" text="Hasło" />
-                  <Text fx:id="RegisterMessage" layoutX="130.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text fx:id="title2" layoutX="211.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejestracja" />
+                  <Label layoutX="149.0" layoutY="447.0" text="Powtórz hasło" />
+                  <Label layoutX="149.0" layoutY="250.0" text="Imie" />
+                  <Label layoutX="150.0" layoutY="383.0" text="Hasło" />
+                  <Text fx:id="RegisterMessage" layoutX="255.0" layoutY="554.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="13.0" />
                </children>
             </AnchorPane>
          </children>
       </StackPane>
-      <AnchorPane fx:id = "left" maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="480.0" HBox.hgrow="ALWAYS">
+      <AnchorPane fx:id="left" maxHeight="-1.0" maxWidth="-1.0" prefHeight="575.0" prefWidth="399.0" HBox.hgrow="ALWAYS">
          <children>
-            <ImageView fitHeight="183.0" fitWidth="180.0" layoutX="150.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="183.0" fitWidth="180.0" layoutX="114.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/bunq_logo.png" />
                </image>

@@ -52,17 +52,17 @@ PasswordField.caret {
 	-fx-border-radius: 0px;
 }
 
-#login_button:hover, #haveacc_button:hover, #reg_button:hover {
+#login_button:hover, #reg_button:hover {
 	-fx-background-color: #112711;
 }
 
-#register_button {
+#register_button, #haveacc_button {
 	-fx-background-color: transparent;
 	-fx-font-size: 16px;
 	-fx-text-fill: #183618;
 }
 
-#register_button:hover{
+#register_button:hover, #haveacc_button:hover{
     -fx-background-color: #183618;
     -fx-text-fill: #eeeeee;
 }
@@ -78,16 +78,24 @@ PasswordField.caret {
 #closeBtn{
     -fx-background-color: #eeeeee;
     -fx-text-fill: #3d3b39;
+	-fx-background-image: url("./images/icons/close.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size: 12 12;
 }
 
 #closeBtn:hover{
-    -fx-background-color:  #df2c26;
+    -fx-background-color:  #df2c26
 
 }
 
 #minButton{
     -fx-background-color: #eeeeee;
     -fx-text-fill: #3d3b39;
+	-fx-background-image: url("./images/icons/minimize.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size: 12 12;
 }
 
 #minButton:hover{
