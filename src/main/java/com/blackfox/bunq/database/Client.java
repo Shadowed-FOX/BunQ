@@ -51,9 +51,11 @@ public class Client implements Serializable {
         if (this.balance < amount) {
             throw new Exception("Not enough money.");
         }
+
         if (amount <= 0.f) {
             throw new Exception("Amount needs to be greater that 0!");
         }
+
         Transaction transaction = new Transaction(id, receiver.getId(), title, amount);
         this.balance -= amount;
         receiver.balance += amount;
@@ -68,105 +70,75 @@ public class Client implements Serializable {
     }
 
     public List<Transaction> getTransactions() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session.createQuery("WHERE sender = :id OR receiver = :id", Transaction.class)
-                    .setParameter("id", id);
-            List<Transaction> list = query.list();
-            session.close();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var query = session.createQuery("WHERE sender = :id OR receiver = :id", Transaction.class)
+                .setParameter("id", id);
 
-            return list;
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
+        List<Transaction> list = query.list();
+        session.close();
 
-        return null;
+        return list;
     }
 
     public List<Transaction> getTransactions(Timestamp since, Timestamp until) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session
-                    .createQuery("WHERE sender = :id OR receiver = :id AND date BETWEEN :since AND :until",
-                            Transaction.class)
-                    .setParameter("id", id)
-                    .setParameter("since", since)
-                    .setParameter("until", until);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var query = session
+                .createQuery("WHERE sender = :id OR receiver = :id AND date BETWEEN :since AND :until",
+                        Transaction.class)
+                .setParameter("id", id)
+                .setParameter("since", since)
+                .setParameter("until", until);
 
-            List<Transaction> list = query.list();
-            session.close();
+        List<Transaction> list = query.list();
+        session.close();
 
-            return list;
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
-
-        return null;
+        return list;
     }
 
     public List<Transaction> getTransactions(TransactionType type) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session
-                    .createQuery(
-                            "WHERE " + ((type == TransactionType.SENT) ? "sender"
-                                    : "receiver") + " = :id",
-                            Transaction.class)
-                    .setParameter("id", id);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var query = session
+                .createQuery(
+                        "WHERE " + ((type == TransactionType.SENT) ? "sender"
+                                : "receiver") + " = :id",
+                        Transaction.class)
+                .setParameter("id", id);
 
-            List<Transaction> list = query.list();
-            session.close();
+        List<Transaction> list = query.list();
+        session.close();
 
-            return list;
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
-
-        return null;
+        return list;
     }
 
     public List<Transaction> getTransactions(TransactionType type, Timestamp since, Timestamp until) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            var query = session
-                    .createQuery(
-                            "WHERE " + ((type == TransactionType.SENT) ? "sender"
-                                    : "receiver") + " = :id AND date BETWEEN :since AND :until",
-                            Transaction.class)
-                    .setParameter("id", id)
-                    .setParameter("since", since)
-                    .setParameter("until", until);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var query = session
+                .createQuery(
+                        "WHERE " + ((type == TransactionType.SENT) ? "sender"
+                                : "receiver") + " = :id AND date BETWEEN :since AND :until",
+                        Transaction.class)
+                .setParameter("id", id)
+                .setParameter("since", since)
+                .setParameter("until", until);
 
-            List<Transaction> list = query.list();
-            session.close();
+        List<Transaction> list = query.list();
+        session.close();
 
-            return list;
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
-
-        return null;
+        return list;
     }
 
-    public List<Transaction> getTransactions(String xD) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+    public List<Transaction> getTransactions(String filter) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
 
-            var query = session.createQuery("WHERE (sender = :id OR receiver = :id) ", Transaction.class)
-                    .setParameter("id", id);
+        String hql = "FROM Transaction t WHERE t.receiver IN (SELECT c.id FROM Client c WHERE c.firstname = :filter OR c.lastname = :filter) OR t.title  LIKE :filterAnyWhere";
+        var query = session.createQuery(hql, Transaction.class);
 
-            List<Transaction> list = query.list();
-            for (int i = 0; i < list.size(); i++) {
-                if (HibernateUtil.getClient(list.get(i).getReceiverId()).getFirstname() != xD
-                        && HibernateUtil.getClient(list.get(i).getReceiverId()).getLastname() != xD
-                        && !list.get(i).getTitle().contains(xD)) {
-                    list.remove(i);
-                    i = 0;
-                }
-            }
-            session.close();
+        query.setParameter("filter", filter);
+        query.setParameter("filterAnyWhere", "%" + filter + "%");
+        List<Transaction> list = query.list();
+        session.close();
 
-            return list;
-        } catch (Exception ex) {
-            System.err.println(ex);
-        }
-
-        return null;
+        return list;
     }
 
     public int getId() {
