@@ -1,20 +1,14 @@
 package com.blackfox.bunq.controllers;
 
 import com.blackfox.bunq.Main;
-import com.blackfox.bunq.database.Client;
 import com.blackfox.bunq.database.HibernateUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
-
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class DashboardController {
     @FXML
@@ -23,7 +17,6 @@ public class DashboardController {
     private StackPane pane;
 
     private MainController mainController;
-    private Client currentClient;
 
     @FXML
     protected void onLogOutBtnPress(ActionEvent event) throws IOException {
@@ -59,16 +52,14 @@ public class DashboardController {
         pane.getChildren().setAll(child);
     }
 
-    public void loadNewTransaction() throws IOException{
+    public void loadNewTransaction() throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/new_transaction.fxml"));
         Parent child = loader.load();
-        NewTransactionController newTransactionController = loader.getController();
-        newTransactionController.postInitialize();
         refreshInfo();
         pane.getChildren().setAll(child);
     }
 
-    public void loadTransactionsHistory() throws IOException{
+    public void loadTransactionsHistory() throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/transactions_history.fxml"));
         Parent child = loader.load();
         TransactionHistoryController transactionHistoryController = loader.getController();
@@ -77,7 +68,7 @@ public class DashboardController {
         pane.getChildren().setAll(child);
     }
 
-    public void loadAccManage() throws IOException{
+    public void loadAccManage() throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/acc_manage.fxml"));
         Parent child = loader.load();
         ManageController manageController = loader.getController();
@@ -86,17 +77,16 @@ public class DashboardController {
         pane.getChildren().setAll(child);
     }
 
-    public void setMainController(MainController mainController){
-        this.mainController=mainController;
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
-    private void refreshInfo(){
-        name.setText("Witaj " + currentClient.getFirstname());
-        funds.setText(currentClient.getBalance() + " PLN");
+    private void refreshInfo() {
+        name.setText("Witaj " + HibernateUtil.getActiveClient().getFirstname());
+        funds.setText(HibernateUtil.getActiveClient().getBalance() + " PLN");
     }
 
-    public void postInitialize() throws IOException{
-        currentClient = HibernateUtil.getActiveClient();
+    public void postInitialize() throws IOException {
         refreshInfo();
         loadSummary();
     }

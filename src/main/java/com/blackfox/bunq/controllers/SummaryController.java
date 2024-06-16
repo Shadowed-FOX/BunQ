@@ -23,7 +23,6 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 public class SummaryController {
-    private Client currentClient;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -33,10 +32,7 @@ public class SummaryController {
     @FXML
     private PieChart chart;
 
-
     public void postInitialize() {
-        currentClient = HibernateUtil.getActiveClient();
-
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime before = now.minusDays(30);
 
@@ -46,18 +42,19 @@ public class SummaryController {
         Timestamp until = Timestamp.from(zonedNow.toInstant());
         Timestamp since = Timestamp.from(zonedBefore.toInstant());
 
-        List<Transaction> outcomeTransactions = currentClient.getTransactions(Client.TransactionType.SENT, since, until);
-        List<Transaction> incomeTransactions = currentClient.getTransactions(Client.TransactionType.RECEIVED, since, until);
-        List<Transaction> allTransactions = currentClient.getTransactions(since, until);
+        Client client = HibernateUtil.getActiveClient();
+        List<Transaction> outcomeTransactions = client.getTransactions(Client.TransactionType.SENT, since, until);
+        List<Transaction> incomeTransactions = client.getTransactions(Client.TransactionType.RECEIVED, since, until);
+        List<Transaction> allTransactions = client.getTransactions(since, until);
 
         float sumIncome = sumTransactions(incomeTransactions);
-        float sumOutcome = sumTransactions(outcomeTransactions) * -1;
+        float sumOutcome = -sumTransactions(outcomeTransactions);
 
         setChart(sumIncome, sumOutcome);
         setTransactions(allTransactions);
 
-        income.setText("+" + sumIncome);
-        outcome.setText(String.valueOf(sumOutcome));
+        income.setText("+" + sumIncome + " PLN");
+        outcome.setText(String.valueOf(sumOutcome) + " PLN");
     }
 
     private void setTransactions(List<Transaction> all) {
@@ -66,7 +63,6 @@ public class SummaryController {
                 FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/last_transaction.fxml"));
                 AnchorPane pane = loader.load();
                 LastTransactionController controller = loader.getController();
-                controller.setCurrentClient(currentClient);
                 controller.getData(transaction);
                 vBox.getChildren().add(pane);
             } catch (IOException | ClientNotFoundException e) {

@@ -6,23 +6,19 @@ import javafx.event.ActionEvent;
 import javafx.scene.text.Text;
 import javafx.fxml.FXML;
 
-
 public class ManageController {
     @FXML
     private Text firstName, surName, accId, usernameField;
 
-    private Client currentClient;
-
-    public void postInitialize(){
-        currentClient=HibernateUtil.getActiveClient();
-
-        firstName.setText(currentClient.getFirstname());
-        surName.setText(currentClient.getLastname());
-        accId.setText(String.valueOf(currentClient.getId()));
+    public void postInitialize() {
+        Client client = HibernateUtil.getActiveClient();
+        firstName.setText(client.getFirstname());
+        surName.setText(client.getLastname());
+        accId.setText(String.valueOf(client.getId()));
     }
 
     @FXML
-    protected void exitEvent(ActionEvent event){
+    protected void exitEvent(ActionEvent event) {
         System.out.println("XDDDD");
     }
 }
