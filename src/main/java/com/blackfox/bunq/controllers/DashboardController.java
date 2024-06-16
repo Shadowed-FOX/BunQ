@@ -2,6 +2,7 @@ package com.blackfox.bunq.controllers;
 
 import com.blackfox.bunq.Main;
 import com.blackfox.bunq.database.Client;
+import com.blackfox.bunq.database.HibernateUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,7 +32,7 @@ public class DashboardController {
 
     @FXML
     protected void onSummaryPress(ActionEvent event) throws IOException {
-        loadSummary(currentClient);
+        loadSummary();
     }
 
     @FXML
@@ -49,11 +50,12 @@ public class DashboardController {
         loadAccManage(currentClient);
     }
 
-    public void loadSummary(Client current) throws IOException {
+    public void loadSummary() throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/acc_summary.fxml"));
         Parent child = loader.load();
         SummaryController summaryController = loader.getController();
-        summaryController.setCurrentClient(current);
+        summaryController.setCurrentClient(currentClient);
+        refreshInfo();
         pane.getChildren().setAll(child);
     }
 
@@ -62,6 +64,7 @@ public class DashboardController {
         Parent child = loader.load();
         NewTransactionController newTransactionController = loader.getController();
         newTransactionController.setCurrentClient(client);
+        refreshInfo();
         pane.getChildren().setAll(child);
     }
 
@@ -70,27 +73,36 @@ public class DashboardController {
         Parent child = loader.load();
         TransactionHistoryController transactionHistoryController = loader.getController();
         transactionHistoryController.setCurrentClient(current);
+        refreshInfo();
         pane.getChildren().setAll(child);
     }
 
-    public void loadAccManage(Client client) throws IOException{
+    public void loadAccManage(Client current) throws IOException{
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/acc_manage.fxml"));
         Parent child = loader.load();
+        ManageController manageController = loader.getController();
+        manageController.setCurrentClient(current);
+        refreshInfo();
         pane.getChildren().setAll(child);
     }
 
     public void setCurrentClient(Client client) throws IOException {
         this.currentClient=client;
-        name.setText("Witaj " + currentClient.getFirstname());
-        funds.setText(currentClient.getBalance() + " PLN");
-        postInitialize();
+
     }
 
     public void setMainController(MainController mainController){
         this.mainController=mainController;
     }
 
-    private void postInitialize() throws IOException{
-        loadSummary(currentClient);
+    private void refreshInfo(){
+        name.setText("Witaj " + currentClient.getFirstname());
+        funds.setText(currentClient.getBalance() + " PLN");
+    }
+
+    public void postInitialize() throws IOException{
+        currentClient = HibernateUtil.getActiveClient();
+        refreshInfo();
+        loadSummary();
     }
 }

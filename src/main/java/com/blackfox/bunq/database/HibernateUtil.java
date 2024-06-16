@@ -8,6 +8,7 @@ import jakarta.persistence.NoResultException;
 
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import java.lang.ref.Cleaner;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -71,6 +72,15 @@ public class HibernateUtil {
             throw new ClientNotFoundException(id);
         }
         return client;
+    }
+
+    static Client activeClient;
+
+    public static void setActiveClient(Client client){
+        activeClient = client;
+    }
+    public static Client getActiveClient(){
+        return activeClient;
     }
 
     public static int createClient(String username, String password, String firstname, String lastname)

@@ -36,7 +36,6 @@ public class TransactionHistoryController {
             try {
                 FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/last_transaction.fxml"));
                 AnchorPane pane = loader.load();
-
                 LastTransactionController controller = loader.getController();
                 controller.setCurrentClient(currentClient);
                 controller.getData(transaction);

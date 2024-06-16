@@ -40,12 +40,12 @@ public class MainController {
         root.getChildren().setAll(child);
     }
 
-    public void loadDashboard(Client current) throws IOException{
+    public void loadDashboard() throws IOException{
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/dashboard.fxml"));
         Parent child = loader.load();
         DashboardController dashboardController = loader.getController();
         dashboardController.setMainController(this);
-        dashboardController.setCurrentClient(current);
+        dashboardController.postInitialize();
         root.getChildren().setAll(child);
     }
 

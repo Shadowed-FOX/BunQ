@@ -40,12 +40,14 @@ public class LoginController {
                 LoginMessage.setText(AuthPasswordErr);
             } else {
                 LoginMessage.setText(AuthSucc);
-                mainController.loadDashboard(HibernateUtil.getClient(clA.getId()));
-                username.clear();
+                HibernateUtil.setActiveClient(HibernateUtil.getClient(clA.getId()));
+                mainController.loadDashboard();
             }
-            password.clear();
         } catch (ClientNotFoundException | IOException ex) {
             LoginMessage.setText(ex.getMessage());
+            username.clear();
+        } finally {
+            password.clear();
         }
     }
 
