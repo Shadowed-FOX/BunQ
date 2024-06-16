@@ -4,6 +4,7 @@ import com.blackfox.bunq.Main;
 import com.blackfox.bunq.database.Client;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -11,6 +12,8 @@ import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class DashboardController {
     @FXML
@@ -37,31 +40,57 @@ public class DashboardController {
     }
 
     @FXML
-    public void initialize() throws IOException {
-        loadSummary(currentClient);
+    protected void onHistoryPress(ActionEvent event) throws IOException {
+        loadTransactionsHistory(currentClient);
     }
 
     @FXML
-    public void loadSummary(Client client) throws IOException {
+    protected void onAccManagePress(ActionEvent event) throws IOException {
+        loadAccManage(currentClient);
+    }
+
+    public void loadSummary(Client current) throws IOException {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/acc_summary.fxml"));
         Parent child = loader.load();
+        SummaryController summaryController = loader.getController();
+        summaryController.setCurrentClient(current);
         pane.getChildren().setAll(child);
     }
 
-    @FXML
     public void loadNewTransaction(Client client) throws IOException{
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/new_transaction.fxml"));
         Parent child = loader.load();
+        NewTransactionController newTransactionController = loader.getController();
+        newTransactionController.setCurrentClient(client);
         pane.getChildren().setAll(child);
     }
 
-    public void setCurrentClient(Client currentClient){
-        this.currentClient=currentClient;
+    public void loadTransactionsHistory(Client current) throws IOException{
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/transactions_history.fxml"));
+        Parent child = loader.load();
+        TransactionHistoryController transactionHistoryController = loader.getController();
+        transactionHistoryController.setCurrentClient(current);
+        pane.getChildren().setAll(child);
+    }
+
+    public void loadAccManage(Client client) throws IOException{
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/acc_manage.fxml"));
+        Parent child = loader.load();
+        pane.getChildren().setAll(child);
+    }
+
+    public void setCurrentClient(Client client) throws IOException {
+        this.currentClient=client;
         name.setText("Witaj " + currentClient.getFirstname());
         funds.setText(currentClient.getBalance() + " PLN");
+        postInitialize();
     }
 
     public void setMainController(MainController mainController){
         this.mainController=mainController;
+    }
+
+    private void postInitialize() throws IOException{
+        loadSummary(currentClient);
     }
 }

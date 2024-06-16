@@ -10,14 +10,14 @@
 
 <AnchorPane prefHeight="576.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.NewTransactionController">
    <children>
-      <TextField layoutX="50.0" layoutY="116.0" prefHeight="40.0" prefWidth="324.0" />
+      <TextField fx:id="accnumb" layoutX="50.0" layoutY="116.0" prefHeight="40.0" prefWidth="324.0" />
       <Text layoutX="317.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nowa transakcja" />
       <Label layoutX="50.0" layoutY="99.0" text="Numer konta" />
-      <TextField layoutX="50.0" layoutY="304.0" prefHeight="40.0" prefWidth="324.0" />
+      <TextField fx:id="title" layoutX="50.0" layoutY="304.0" prefHeight="40.0" prefWidth="324.0" />
       <Label layoutX="54.0" layoutY="288.0" text="Tytuł przelewu" />
-      <TextField layoutX="51.0" layoutY="380.0" prefHeight="40.0" prefWidth="176.0" />
+      <TextField fx:id="ammount" layoutX="51.0" layoutY="380.0" prefHeight="40.0" prefWidth="176.0" />
       <Label layoutX="51.0" layoutY="363.0" text="Kwota przelewu" />
-      <Button layoutX="312.0" layoutY="451.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" text="Zatwierdź" />
+      <Button layoutX="312.0" layoutY="451.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" onAction="#onAcceptPaymentPress" text="Zatwierdź" />
       <Text layoutX="236.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLN" />
       <Button layoutX="374.0" layoutY="116.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="54.0" text="Z listy" />
       <CheckBox layoutX="49.0" layoutY="251.0" mnemonicParsing="false" text="Zapisz odbiorcę w kontaktach" />
@@ -30,9 +30,9 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <TextField layoutX="49.0" layoutY="202.0" prefHeight="40.0" prefWidth="180.0" />
+      <TextField fx:id="name" layoutX="49.0" layoutY="202.0" prefHeight="40.0" prefWidth="180.0" />
       <Label layoutX="51.0" layoutY="182.0" text="Imie" />
-      <TextField layoutX="257.0" layoutY="202.0" prefHeight="40.0" prefWidth="180.0" />
+      <TextField fx:id="surname" layoutX="257.0" layoutY="202.0" prefHeight="40.0" prefWidth="180.0" />
       <Label layoutX="257.0" layoutY="182.0" text="Nazwisko" />
    </children>
 </AnchorPane>

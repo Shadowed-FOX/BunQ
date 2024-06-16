@@ -30,7 +30,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         // fetchingExample("Dziady", "123dziady");
-
+        HibernateUtil.getSessionFactory();
         launch();
         HibernateUtil.close();
     }

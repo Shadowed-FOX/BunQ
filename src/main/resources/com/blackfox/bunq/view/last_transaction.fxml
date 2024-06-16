@@ -5,12 +5,12 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.LastTransactionController">
    <children>
-      <Text layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(odbiorca/nadawca)" wrappingWidth="227.216796875" />
+      <Text fx:id="reciever" layoutX="14.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(odbiorca/nadawca)" wrappingWidth="227.216796875" />
       <Line endX="-70.0" endY="-5.7220458984375E-6" layoutX="540.0" layoutY="20.0" rotate="90.0" startX="-100.0" />
-      <Text layoutX="294.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="data" textAlignment="CENTER" wrappingWidth="120.865234375" />
+      <Text fx:id="data" layoutX="294.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="data" textAlignment="CENTER" wrappingWidth="120.865234375" />
       <Line endX="-70.0" endY="-5.7220458984375E-6" layoutX="336.0" layoutY="20.0" rotate="90.0" startX="-100.0" />
-      <Text layoutX="491.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kwota" textAlignment="CENTER" wrappingWidth="120.865234375" />
+      <Text fx:id="kwota" layoutX="491.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kwota" textAlignment="CENTER" wrappingWidth="120.865234375" />
    </children>
 </AnchorPane>

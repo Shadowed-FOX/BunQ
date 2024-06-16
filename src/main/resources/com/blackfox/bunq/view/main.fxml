@@ -9,8 +9,9 @@
       <AnchorPane onMouseDragged="#menuDragEvent" onMousePressed="#menuPressedEvent" prefHeight="26.0" prefWidth="960.0">
          <children>
             <Button fx:id="closeBtn" layoutX="929.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
-            <Button layoutX="898.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="31.0" text="_" />
+            <Button layoutX="898.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="31.0" onAction="#onMinimizeBtnPress" text="_" />
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="root" prefHeight="594.0" prefWidth="958.0" />
    </children>
 </VBox>

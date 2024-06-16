@@ -22,9 +22,9 @@
                <children>
                   <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" onAction="#onSummaryPress" text="Podsumowanie" />
                   <Button layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" onAction="#onNewTransactionPress" text="Nowa transakcja" />
-                  <Button layoutY="104.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Historia transakcji" />
+                  <Button layoutY="104.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" onAction="#onHistoryPress" text="Historia transakcji" />
                   <Button layoutY="144.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Pożyczka" />
-                  <Button layoutY="208.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Zarządzanie kontem" />
+                  <Button layoutY="208.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" onAction="#onAccManagePress" text="Zarządzanie kontem" />
                   <Button layoutY="380.0" mnemonicParsing="false" onAction="#onLogOutBtnPress" prefHeight="40.0" prefWidth="240.0" text="Wyloguj" />
                </children>
             </AnchorPane>
