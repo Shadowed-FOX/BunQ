@@ -32,12 +32,10 @@ public class TransactionHistoryController {
                 throw new RuntimeException(e);
             }
         }
-
     }
 
     @FXML
     protected void exitEvent(ActionEvent event){
         System.out.println("Pepega");
     }
-
 }

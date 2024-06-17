@@ -70,7 +70,7 @@ public class ManageController {
         String confirmPassword1 = ConfirmUsernamePassword.getText();
         try {
             if(HibernateUtil.getActiveClientAuth().checkPassword(confirmPassword1)){
-                HibernateUtil.getActiveClientAuth().setUsername(newUsername);
+                HibernateUtil.getActiveClientAuth().updateUsername(newUsername);
                 errNewUsernameText.setText("Zmiana nazwy użytkownika powiodła się");
                 NewUsernameField.clear();
                 getInfo();
@@ -94,7 +94,7 @@ public class ManageController {
             errPasswordText.setText("Hasła nie są takie same.");
         } else {
             try {
-                HibernateUtil.getActiveClientAuth().setPassword(password1);
+                HibernateUtil.getActiveClientAuth().updatePassword(password1);
                 errPasswordText.setText("Hasło zostało zmienione.");
                 password1Field.clear();
                 password2Field.clear();

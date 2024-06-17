@@ -41,7 +41,7 @@ public class ClientAuth implements Serializable {
         session.close();
     }
 
-    public void setUsername(String username) throws ClientCredentialsException {
+    private void setUsername(String username) throws ClientCredentialsException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         var query = session
                 .createQuery("SELECT 1 FROM ClientAuth WHERE username = :username",
@@ -58,6 +58,15 @@ public class ClientAuth implements Serializable {
             throw new ClientCredentialsException("Invalid username.");
         }
         this.username = username;
+    }
+
+    public void updateUsername(String username) throws ClientCredentialsException {
+        setUsername(username);
+        update();
+    }
+
+    public void updatePassword(String password) throws ClientCredentialsException {
+        setUsername(password);
         update();
     }
 
@@ -65,11 +74,10 @@ public class ClientAuth implements Serializable {
         return this.password.equals(DigestUtils.sha256Hex(password + id));
     }
 
-    public void setPassword(String password) throws ClientCredentialsException {
+    private void setPassword(String password) throws ClientCredentialsException {
         if (password.length() < 8) {
             throw new ClientCredentialsException("Invalid password.");
         }
         this.password = DigestUtils.sha256Hex(password + id);
-        update();
     }
 }
