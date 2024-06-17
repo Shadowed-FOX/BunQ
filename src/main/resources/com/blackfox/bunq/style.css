@@ -89,7 +89,7 @@ PasswordField.caret {
 	-fx-background-size: 12 12;
 }
 
-.btnclose:hover{
+.btnclose:hover, #logout:hover{
     -fx-background-color:  #df2c26
 
 }
@@ -103,13 +103,16 @@ PasswordField.caret {
 	-fx-background-size: 12 12;
 }
 
+#con_delete {
+    -fx-background-image: url("./images/icons/remove.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 12 12;
+}
+
 #minButton:hover{
     -fx-background-color: #a8a8a8;
     -fx-text-fill: #3e3b39
-}
-
-#dashboard{
-    -fx-background-color: #eeeeee;
 }
 
 .b1{
@@ -141,17 +144,47 @@ PasswordField.caret {
 }
 
 #vBox{
-    -fx-border-color: transparent transparent transparent transparent;
     -fx-background-color: #eeeeee;
 }
 
+#name, #funds {
+    -fx-font-size: 17;
+    -fx-font-weight: bold;
+    -fx-fill: #3d3b39;
+}
+
+#dashboard, #dashboard_menu {
+    -fx-background-color: #e2e2e2;
+}
 
 #newPassword, #destroyAcc, #newUserName{
     -fx-background-color: #eeeeee
+}
+
+#income {
+    -fx-fill: #37d12f;
+    -fx-font-weight: bold;
+}
+
+#outcome {
+    -fx-fill: #df2c26;
+    -fx-font-weight: bold;
 }
 
 
 Line{
     -fx-stroke: #bebebe;
     -fx-stroke-width: 0.75px;
+}
+
+#scrollPane, #pane {
+    -fx-background-color: #eeeeee;
+}
+
+#history_anchor {
+    -fx-background-color: #eeeeee;
+}
+
+.summary_labels {
+    -fx-font-size: 17;
 }
