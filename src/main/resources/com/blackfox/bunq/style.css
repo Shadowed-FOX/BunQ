@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-2,233&display=swap');
 
 .root {
-	-fx-font: 15px "Inter" ;
+	-fx-font: 18px "Inter" ;
+	-fx-text-fill: #3e3b39;
 }
 
 #window {
@@ -14,10 +15,14 @@
     -fx-border-width: 1px 0 0 0;
 }
 
-#title1 , #title2, #error{
+#title1 , #title2, #error, #titleSummary, #titleHistory, #manageTitle{
 	-fx-fill: #3d3b39;
 	-fx-font-size: 25px;
 	-fx-text-align: center;
+}
+
+.subtitle{
+    -fx-font-size: 23px;
 }
 
 Label{
@@ -102,3 +107,31 @@ PasswordField.caret {
     -fx-background-color: #a8a8a8;
     -fx-text-fill: #3e3b39
 }
+
+#dashboard{
+    -fx-background-color: #eeeeee;
+}
+
+.b1{
+    -fx-text-fill: #eeeeee;
+    -fx-background-color: #183618;
+    -fx-padding: 4;
+}
+
+.b1:hover{
+    -fx-background-color: #112711;
+}
+Text{
+    -fx-font-size: 20px;
+}
+#newTransaction_title{
+    -fx-font-size: 24px;
+}
+
+
+.bg{
+    -fx-background-color: #eeeeee;
+}
+
+
+
