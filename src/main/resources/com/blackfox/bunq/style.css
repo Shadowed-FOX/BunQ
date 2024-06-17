@@ -85,7 +85,7 @@ PasswordField.caret {
 }
 
 #closeBtn:hover{
-    -fx-background-color:  #df2c26
+    -fx-background-color:  #df2c26;
 
 }
 
@@ -100,5 +100,9 @@ PasswordField.caret {
 
 #minButton:hover{
     -fx-background-color: #a8a8a8;
-    -fx-text-fill: #3e3b39
+    -fx-text-fill: #3e3b39;
+}
+
+#LoginMessage {
+	-fx-text-fill: #df2c26;
 }

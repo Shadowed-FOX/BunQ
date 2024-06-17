@@ -13,7 +13,7 @@
       <Text layoutX="307.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zarządzanie kontem" />
       <Text layoutX="42.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moje dane" />
       <Text layoutX="64.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa użytkownika" />
-      <Text layoutX="184.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(nazwa użytkownika)" />
+      <Text fx:id="usernameField" layoutX="184.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(nazwa użytkownika)" />
       <Button layoutX="583.0" layoutY="232.0" mnemonicParsing="false" text="Zmień" />
       <Line endX="530.0" layoutX="142.0" layoutY="273.0" startX="-100.0" />
       <Text layoutX="65.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło" />
@@ -61,10 +61,10 @@
       </StackPane>
       <Line endX="530.0" layoutX="143.0" layoutY="219.0" startX="-100.0" />
       <Text layoutX="67.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię" />
-      <Text layoutX="118.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(imie)" />
+      <Text fx:id="firstName" layoutX="118.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(imie)" />
       <Text layoutX="66.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko" />
-      <Text layoutX="136.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(nazwisko)" />
+      <Text fx:id="surName" layoutX="136.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(nazwisko)" />
       <Text layoutX="67.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numer konta" />
-      <Text layoutX="164.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(numer konta)" />
+      <Text fx:id="accId" layoutX="164.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(numer konta)" />
    </children>
 </AnchorPane>
