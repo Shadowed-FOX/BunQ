@@ -1,5 +1,6 @@
 package com.blackfox.bunq;
 
+import com.blackfox.bunq.maintenance.SceneLoader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,10 +18,7 @@ import java.util.logging.Logger;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        // Parent root = FxmlLoader.getPane("main");
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/main.fxml"));
-
-        Parent root = loader.load();
+        Parent root = SceneLoader.getPane("main");
         Scene scene = new Scene(root, 960, 600);
 
         stage.setResizable(false);
@@ -31,6 +29,7 @@ public class Main extends Application {
         stage.setTitle("BunQ");
         stage.show();
     }
+
 
     public static void main(String[] args) {
         Logger.getLogger("org.hibernate").setLevel(Level.WARNING);

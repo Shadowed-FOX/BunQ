@@ -21,7 +21,7 @@ import java.io.IOException;
 
 public class ManageController {
     @FXML
-    private Text firstName, surName, accId, usernameField, errPasswordText, errNewUsernameText;
+    private Text firstName, surName, accId, usernameField, errPasswordText, errNewUsernameText, errAccountDestroyText;
     @FXML
     private TextField NewUsernameField, ConfirmUsernameField;
     @FXML
@@ -55,15 +55,21 @@ public class ManageController {
         String usernamefield = ConfirmUsernameField.getText();
 
         if (usernamefield.equals(HibernateUtil.getActiveClientAuth().getUsername())) {
+            HibernateUtil.removeActiveClient();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Parent newParent = SceneLoader.getPane("main");
-            Scene newScene = new Scene(newParent, 960, 600);
-            String css = Main.class.getResource("./style.css").toExternalForm();
-            newScene.getStylesheets().add(css);
-            stage.setScene(newScene);
+            restart(stage);
         } else {
-
+            ConfirmUsernameField.requestFocus();
+            errAccountDestroyText.setText("Niepoprawna nazwa użytkownika.");
         }
+    }
+
+    private void restart(Stage stage) throws IOException {
+        Parent newParent = SceneLoader.getPane("main");
+        Scene newScene = new Scene(newParent, 960, 600);
+        String css = Main.class.getResource("./style.css").toExternalForm();
+        newScene.getStylesheets().add(css);
+        stage.setScene(newScene);
     }
 
     @FXML
@@ -78,6 +84,7 @@ public class ManageController {
                 getInfo();
             } else {
                 errNewUsernameText.setText("Nieprawidłowe hasło");
+                ConfirmUsernamePassword.requestFocus();
             }
         } catch (ClientCredentialsException e) {
             errNewUsernameText.setText(e.getMessage());
@@ -94,6 +101,7 @@ public class ManageController {
 
         if (!password1.equals(password2)) {
             errPasswordText.setText("Hasła nie są takie same.");
+            password2Field.requestFocus();
         } else {
             try {
                 HibernateUtil.getActiveClientAuth().updatePassword(password1);
