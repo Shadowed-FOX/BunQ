@@ -5,26 +5,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.layout.Pane?>
-<AnchorPane prefHeight="574.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.SummaryController">
+<AnchorPane prefHeight="574.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.SummaryController">
    <children>
-      <AnchorPane prefHeight="290.0" prefWidth="710.0">
+      <AnchorPane prefHeight="290.0" prefWidth="720.0">
          <children>
-            <Text fx:id="income" layoutX="54.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Przychody)" />
-            <PieChart fx:id="chart" layoutX="294.0" layoutY="24.0" prefHeight="203.0" prefWidth="240.0" style="-fx-background-color: grey;" />
-            <Text fx:id="outcome" layoutX="54.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Wydatki)" />
+            <Text fx:id="income" layoutX="139.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Przychody)" />
+            <PieChart fx:id="chart" layoutX="355.0" layoutY="24.0" prefHeight="243.0" prefWidth="292.0" />
+            <Text fx:id="outcome" layoutX="139.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Wydatki)" />
             <Text fx:id="titleSummary" layoutX="12.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ostatni miesiąc:" />
-            <Text layoutX="635.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Przychody" />
-            <Pane layoutX="609.0" layoutY="92.0" prefHeight="16.0" prefWidth="16.0" style="-fx-background-color: #d14d4d;" />
-            <Text layoutX="635.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wydatki" />
+            <Text layoutX="52.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="summary_labels" text="Przychody" />
+            <Text layoutX="53.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wydatki" />
          </children>
       </AnchorPane>
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="30.0" layoutY="291.0" prefHeight="285.0" prefWidth="690.0" vbarPolicy="NEVER">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="1.0" layoutY="290.0" prefHeight="285.0" prefWidth="719.0" vbarPolicy="NEVER">
          <content>
-            <VBox fx:id="vBox" prefHeight="282.0" prefWidth="721.0" />
+            <VBox fx:id="vBox" prefHeight="282.0" prefWidth="719.0" />
          </content>
       </ScrollPane>
    </children>
