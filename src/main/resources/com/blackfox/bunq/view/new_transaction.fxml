@@ -8,9 +8,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="576.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.NewTransactionController">
+<?import javafx.scene.text.TextFlow?>
+<AnchorPane prefHeight="576.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.NewTransactionController">
    <children>
-      <TextField fx:id="accnumb" layoutX="50.0" layoutY="116.0" prefHeight="40.0" prefWidth="324.0" />
+      <TextField fx:id="accnumb" layoutX="50.0" layoutY="116.0" prefHeight="40.0"  prefWidth="324.0" />
       <Text fx:id="newTransaction_title" layoutX="317.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nowa transakcja" />
       <Label layoutX="50.0" layoutY="99.0" text="Numer konta" />
       <TextField fx:id="title" layoutX="50.0" layoutY="304.0" prefHeight="40.0" prefWidth="324.0" />

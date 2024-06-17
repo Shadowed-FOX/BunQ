@@ -8,9 +8,6 @@ import jakarta.persistence.NoResultException;
 
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import java.util.logging.Logger;
-import java.util.logging.Level;
-
 import org.hibernate.Session;
 
 public class HibernateUtil {
@@ -22,21 +19,17 @@ public class HibernateUtil {
         activeClient = getClient(clientAuth.getId());
     }
 
-    public static ClientAuth getActiveClientAuth(){
+    public static ClientAuth getActiveClientAuth() {
         return activeClientAuth;
     }
 
-
-    public static Client getActiveClient(){
+    public static Client getActiveClient() {
         return activeClient;
     }
 
-    private static final SessionFactory sessionFactory = buildSessionFactory();
+    private static SessionFactory sessionFactory;
 
     private static SessionFactory buildSessionFactory() {
-        Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
-        Logger.getLogger("com.mchange").setLevel(Level.WARNING);
-
         try {
             Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
             configuration.addAnnotatedClass(Client.class);
@@ -54,6 +47,13 @@ public class HibernateUtil {
     }
 
     public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            new Thread() {
+                public void run() {
+                    sessionFactory = buildSessionFactory();
+                }
+            }.start();
+        }
         return sessionFactory;
     }
 
@@ -106,19 +106,41 @@ public class HibernateUtil {
 
         } while (id == -1);
 
-        var tr = session.beginTransaction();
         ClientAuth auth = new ClientAuth(id, username, password);
         Client client = new Client(id, firstname, lastname);
 
+        var tr = session.beginTransaction();
         try {
-            session.persist(auth);
             session.persist(client);
-            session.getTransaction().commit();
+            session.persist(auth);
+            tr.commit();
             session.close();
         } catch (Exception ex) {
             tr.rollback();
         }
 
         return id;
+    }
+
+    public static void removeActiveClient() {
+        if (getActiveClient() == null)
+            return;
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var tr = session.beginTransaction();
+        try {
+            activeClient.setOpen(false);
+
+            session.remove(activeClientAuth);
+            session.merge(activeClient);
+            tr.commit();
+            session.close();
+
+            activeClient = null;
+            activeClientAuth = null;
+
+        } catch (Exception ex) {
+            tr.rollback();
+        }
     }
 }

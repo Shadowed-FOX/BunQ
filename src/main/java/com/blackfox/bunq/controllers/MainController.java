@@ -19,8 +19,6 @@ public class MainController {
     private VBox window;
     @FXML
     private AnchorPane root;
-    @FXML
-    private Stage primatyStage;
 
     private double screenX, screenY;
 

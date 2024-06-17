@@ -19,8 +19,8 @@ public class LoginController {
 
     private MainController mainController;
 
-    public void setMainController(MainController mainController){
-        this.mainController=mainController;
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
     @FXML
@@ -38,6 +38,7 @@ public class LoginController {
             ClientAuth clA = HibernateUtil.getClientAuth(username.getText());
             if (!clA.checkPassword(password.getText())) {
                 LoginMessage.setText(AuthPasswordErr);
+                password.requestFocus();
             } else {
                 LoginMessage.setText(AuthSucc);
                 HibernateUtil.setActiveClientAuth(clA);
@@ -45,6 +46,7 @@ public class LoginController {
             }
         } catch (ClientNotFoundException | IOException ex) {
             LoginMessage.setText(ex.getMessage());
+            username.requestFocus();
             username.clear();
         } finally {
             password.clear();
@@ -72,7 +74,10 @@ public class LoginController {
 
         try {
             HibernateUtil.createClient(newUsername, newPassword1, firstName, lastName);
-            RegisterMessage.setText("Client created");
+            onLoginSwitchBtnClick();
+            username.setText(newUsername);
+            password.requestFocus();
+            LoginMessage.setText("Rejestracja się powiodła.");
         } catch (Exception ex) {
             RegisterMessage.setText(ex.getMessage());
         }

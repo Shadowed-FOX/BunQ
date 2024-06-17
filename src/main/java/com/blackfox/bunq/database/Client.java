@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Entity;
@@ -30,24 +31,23 @@ public class Client implements Serializable {
     private Timestamp created_at;
     // private int colors_id;
 
+    @ColumnDefault("TRUE")
+    private boolean is_open;
+
     public Client() {
     }
 
-    public Client(int id, String firstname, String lastname) {
+    public Client(int id, String firstname, String lastname) throws ClientCredentialsException {
         this.id = id;
         setFirstname(firstname);
         setLastname(lastname);
     }
 
-    public void update() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.merge(this);
-        session.getTransaction().commit();
-        session.close();
-    }
-
     public void makeTransaction(float amount, Client receiver, String title) throws Exception {
+        if (!receiver.isOpen()) {
+            throw new Exception("Receiver's account is closed");
+        }
+
         if (this.balance < amount) {
             throw new Exception("Not enough money.");
         }
@@ -60,13 +60,23 @@ public class Client implements Serializable {
         this.balance -= amount;
         receiver.balance += amount;
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.persist(transaction);
-        session.merge(this);
-        session.merge(receiver);
-        session.getTransaction().commit();
-        session.close();
+        Client client = this;
+
+        new Thread() {
+            public void run() {
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                var tr = session.beginTransaction();
+                try {
+                    session.persist(transaction);
+                    session.merge(client);
+                    session.merge(receiver);
+                    session.getTransaction().commit();
+                    session.close();
+                } catch (Exception ex) {
+                    tr.rollback();
+                }
+            }
+        }.start();
     }
 
     public List<Transaction> getTransactions() {
@@ -149,16 +159,45 @@ public class Client implements Serializable {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    private void setFirstname(String firstname) throws ClientCredentialsException {
+        this.firstname = parseName("Firstname", firstname);
+    }
+
+    public void updateFirstname(String firstname) throws ClientCredentialsException {
+        setFirstname(firstname);
+        update();
+    }
+
+    private void update() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var tr = session.beginTransaction();
+        session.merge(this);
+        tr.commit();
+        session.close();
     }
 
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    private void setLastname(String lastname) throws ClientCredentialsException {
+        this.lastname = parseName("Lastname", lastname);
+    }
+
+    public void updateLastname(String lastname) throws ClientCredentialsException {
+        setLastname(lastname);
+        update();
+    }
+
+    private String parseName(String debug, String name) throws ClientCredentialsException {
+        String formatted = name.trim();
+        if (formatted.length() < 2) {
+            throw new ClientCredentialsException(debug + " must contain at least 2 characters");
+        }
+        if (formatted.contains(" ")) {
+            throw new ClientCredentialsException(debug + " cannot contain any white characters");
+        }
+        return formatted = formatted.substring(0, 1).toUpperCase() + formatted.substring(1).toLowerCase();
     }
 
     public float getBalance() {
@@ -167,5 +206,13 @@ public class Client implements Serializable {
 
     public Timestamp getCreatedAt() {
         return created_at;
+    }
+
+    public boolean isOpen() {
+        return is_open;
+    }
+
+    protected void setOpen(boolean value) {
+        is_open = value;
     }
 }
