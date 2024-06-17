@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-2,233&display=swap');
 
 .root {
-	-fx-font: 18px "Inter" ;
+	-fx-font: 14px "Inter" ;
 	-fx-text-fill: #3e3b39;
 }
 
@@ -80,7 +80,7 @@ PasswordField.caret {
     -fx-background-color: #eeeeee;
 }
 
-#closeBtn{
+.btnclose{
     -fx-background-color: #eeeeee;
     -fx-text-fill: #3d3b39;
 	-fx-background-image: url("./images/icons/close.png");
@@ -89,7 +89,7 @@ PasswordField.caret {
 	-fx-background-size: 12 12;
 }
 
-#closeBtn:hover{
+.btnclose:hover{
     -fx-background-color:  #df2c26
 
 }
@@ -113,6 +113,8 @@ PasswordField.caret {
 }
 
 .b1{
+    -fx-background-radius: 0 ;
+    -fx-font-size: 18px;
     -fx-text-fill: #eeeeee;
     -fx-background-color: #183618;
     -fx-padding: 4;
@@ -121,17 +123,35 @@ PasswordField.caret {
 .b1:hover{
     -fx-background-color: #112711;
 }
-Text{
-    -fx-font-size: 20px;
+
+.b2{
+    -fx-background-radius: 0 ;
+    -fx-font-size: 15px;
+    -fx-text-fill: #eeeeee;
+    -fx-background-color: #183618;
+    -fx-padding: 4;
 }
+
+.b2:hover{
+    -fx-background-color: #112711;
+}
+
 #newTransaction_title{
     -fx-font-size: 24px;
 }
 
-
-.bg{
+#vBox{
+    -fx-border-color: transparent transparent transparent transparent;
     -fx-background-color: #eeeeee;
 }
 
 
+#newPassword, #destroyAcc, #newUserName{
+    -fx-background-color: #eeeeee
+}
 
+
+Line{
+    -fx-stroke: #bebebe;
+    -fx-stroke-width: 0.75px;
+}

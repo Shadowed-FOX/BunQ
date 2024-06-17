@@ -4,6 +4,7 @@ import com.blackfox.bunq.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -14,8 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainController {
-    @FXML
-    private Button closeBtn;
     @FXML
     private VBox window;
     @FXML
@@ -47,8 +46,8 @@ public class MainController {
     }
 
     @FXML
-    protected void exitEvent(ActionEvent event) {
-        Stage stage = (Stage) closeBtn.getScene().getWindow();
+    protected void exitMainEvent(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 

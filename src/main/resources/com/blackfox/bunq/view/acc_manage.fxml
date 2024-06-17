@@ -15,13 +15,13 @@
       <Text layoutX="42.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moje dane" />
       <Text layoutX="64.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa użytkownika" />
       <Text fx:id="usernameField" layoutX="184.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(nazwa użytkownika)" />
-      <Button styleClass="b1" layoutX="583.0" layoutY="232.0" mnemonicParsing="false" onAction="#onUsernameChangePress" text="Zmień" />
+      <Button styleClass="b2" layoutX="583.0" layoutY="232.0" mnemonicParsing="false" onAction="#onUsernameChangePress" text="Zmień" />
       <Line endX="530.0" layoutX="142.0" layoutY="273.0" startX="-100.0" />
       <Text layoutX="65.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło" />
-      <Button styleClass="b1" layoutX="583.0" layoutY="292.0" mnemonicParsing="false" onAction="#onPasswordChangePress" text="Zmień" />
+      <Button styleClass="b2" layoutX="583.0" layoutY="292.0" mnemonicParsing="false" onAction="#onPasswordChangePress" text="Zmień" />
       <Line endX="530.0" layoutX="142.0" layoutY="334.0" startX="-100.0" />
       <Text layoutX="42.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konto" />
-      <Button styleClass="b1" layoutX="561.0" layoutY="384.0" mnemonicParsing="false" onAction="#onAccountDestroyPress" text="Zamknij konto" />
+      <Button styleClass="b2" layoutX="561.0" layoutY="384.0" mnemonicParsing="false" onAction="#onAccountDestroyPress" text="Zamknij konto" />
       <Text layoutX="64.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zamknięcie konta" />
       <Line endX="530.0" layoutX="143.0" layoutY="219.0" startX="-100.0" />
       <Text layoutX="67.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię" />
@@ -33,32 +33,32 @@
       <AnchorPane fx:id="colorChange" prefHeight="574.0" prefWidth="720.0" style="-fx-background-color: black; -fx-opacity: 0.4;" visible="false" />
       <StackPane fx:id="stackPane" layoutX="178.0" layoutY="141.0" prefHeight="292.0" prefWidth="358.0">
          <children>
-            <AnchorPane fx:id="newPassword" prefHeight="292.0" prefWidth="353.0" style="-fx-background-color: white;" visible="false">
+            <AnchorPane fx:id="newPassword" prefHeight="292.0" prefWidth="353.0"  visible="false">
                <children>
                   <Text fx:id="errPasswordText" layoutX="109.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text do wyświetlania błędów" />
-                  <Button layoutX="151.0" layoutY="239.0" mnemonicParsing="false" onAction="#onNewPasswordConfirm" text="Zatwierdź" />
-                  <Button layoutX="326.0" layoutY="1.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
+                  <Button styleClass="b2" layoutX="151.0" layoutY="239.0" mnemonicParsing="false" onAction="#onNewPasswordConfirm" text="Zatwierdź" />
+                  <Button styleClass = "btnclose" layoutX="326.0" layoutY="1.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" />
                   <Label layoutX="50.0" layoutY="55.0" text="Nowe hasło" />
                   <PasswordField fx:id="password1Field" layoutX="54.0" layoutY="72.0" prefHeight="40.0" prefWidth="250.0" />
                   <PasswordField fx:id="password2Field" layoutX="54.0" layoutY="146.0" prefHeight="40.0" prefWidth="250.0" />
                   <Label layoutX="54.0" layoutY="129.0" text="Powtórz nowe hasło" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="destroyAcc" prefHeight="292.0" prefWidth="353.0" style="-fx-background-color: grey;" visible="false">
+            <AnchorPane fx:id="destroyAcc" prefHeight="292.0" prefWidth="353.0"  visible="false">
                <children>
                   <Text fx:id="errAccountDestroyText" layoutX="103.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text do wyświetlania błędów" />
-                  <Button layoutX="132.0" layoutY="203.0" mnemonicParsing="false" onAction="#onAccountDestroyConfirm" text="Zamknij konto" />
-                  <Button layoutX="326.0" layoutY="1.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
+                  <Button styleClass="b2" layoutX="132.0" layoutY="203.0" mnemonicParsing="false" onAction="#onAccountDestroyConfirm" text="Zamknij konto" />
+                  <Button styleClass = "btnclose"  layoutX="326.0" layoutY="1.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0"  />
                   <Label layoutX="54.0" layoutY="83.0" text="Potwierdź wpisując nazwę użytkownika" />
                   <TextField fx:id="ConfirmUsernameField" layoutX="54.0" layoutY="100.0" prefHeight="40.0" prefWidth="250.0" />
                   <Text layoutX="78.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Czy na pewno chcesz zamknąć konto?" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="newUserName" prefHeight="292.0" prefWidth="353.0" style="-fx-background-color: grey;" visible="false">
+            <AnchorPane fx:id="newUserName" prefHeight="292.0" prefWidth="353.0"  visible="false">
                <children>
                   <Text fx:id="errNewUsernameText" layoutX="103.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text do wyświetlania błędów" />
-                  <Button layoutX="144.0" layoutY="235.0" mnemonicParsing="false" onAction="#onNewUsernameConfirm" text="Zatwierdź" />
-                  <Button layoutX="326.0" layoutY="1.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
+                  <Button styleClass="b2" layoutX="144.0" layoutY="235.0" mnemonicParsing="false" onAction="#onNewUsernameConfirm" text="Zatwierdź" />
+                  <Button styleClass = "btnclose"  layoutX="326.0" layoutY="1.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0"  />
                   <Label layoutX="54.0" layoutY="45.0" text="Nowa nazwa użytkownika" />
                   <TextField fx:id="NewUsernameField" layoutX="53.0" layoutY="63.0" prefHeight="40.0" prefWidth="250.0" />
                   <Label layoutX="54.0" layoutY="119.0" text="Hasło" />
