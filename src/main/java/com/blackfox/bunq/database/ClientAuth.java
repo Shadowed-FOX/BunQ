@@ -33,27 +33,13 @@ public class ClientAuth implements Serializable {
         return username;
     }
 
-    private void update() {
-        ClientAuth clientAuth = this;
-
-        new Thread() {
-            @Override
-            public void run() {
-                Session session = HibernateUtil.getSessionFactory().openSession();
-                var tr = session.beginTransaction();
-                try {
-                    session.merge(clientAuth);
-                    session.getTransaction().commit();
-                    session.close();
-                } catch (Exception ex) {
-                    tr.rollback();
-                    System.err.println(ex.getCause());
-                }
-            }
-        }.start();
-    }
-
     private void setUsername(String username) throws ClientCredentialsException {
+        try {
+            HibernateUtil.getClientAuth(username);
+            throw new ClientCredentialsException("Username already in use");
+        } catch (ClientNotFoundException ex) {
+        }
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         var query = session
                 .createQuery("SELECT 1 FROM ClientAuth WHERE username = :username",
@@ -72,13 +58,19 @@ public class ClientAuth implements Serializable {
         this.username = username;
     }
 
+    private void update() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.merge(this);
+        session.close();
+    }
+
     public void updateUsername(String username) throws ClientCredentialsException {
         setUsername(username);
         update();
     }
 
     public void updatePassword(String password) throws ClientCredentialsException {
-        setUsername(password);
+        setPassword(password);
         update();
     }
 

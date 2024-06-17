@@ -17,9 +17,8 @@ import java.util.logging.Logger;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        //Parent root = FxmlLoader.getPane("main");
+        // Parent root = FxmlLoader.getPane("main");
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/main.fxml"));
-
 
         Parent root = loader.load();
         Scene scene = new Scene(root, 960, 600);
@@ -32,7 +31,6 @@ public class Main extends Application {
         stage.setTitle("BunQ");
         stage.show();
     }
-
 
     public static void main(String[] args) {
         Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
