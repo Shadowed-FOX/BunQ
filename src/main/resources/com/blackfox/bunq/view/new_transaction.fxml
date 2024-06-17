@@ -17,9 +17,9 @@
       <Label layoutX="54.0" layoutY="288.0" text="Tytuł przelewu" />
       <TextField fx:id="ammount" layoutX="51.0" layoutY="380.0" prefHeight="40.0" prefWidth="176.0" />
       <Label layoutX="51.0" layoutY="363.0" text="Kwota przelewu" />
-      <Button styleClass="b1" layoutX="312.0" layoutY="451.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" onAction="#onAcceptPaymentPress" text="Zatwierdź" />
+      <Button styleClass="b2" layoutX="312.0" layoutY="451.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" onAction="#onAcceptPaymentPress" text="Zatwierdź" />
       <Text layoutX="236.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLN" />
-      <Button styleClass="b1" layoutX="374.0" layoutY="116.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="54.0" text="Z listy" />
+      <Button styleClass="b2" layoutX="374.0" layoutY="116.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="54.0" text="Z listy" />
       <CheckBox layoutX="49.0" layoutY="251.0" mnemonicParsing="false" text="Zapisz odbiorcę w kontaktach" />
       <ScrollPane hbarPolicy="NEVER" layoutX="151.0" layoutY="143.0" prefHeight="273.0" prefWidth="378.0" vbarPolicy="NEVER" visible="false">
          <content>
