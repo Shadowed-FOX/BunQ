@@ -170,7 +170,9 @@ public class Client implements Serializable {
 
     private void update() {
         Session session = HibernateUtil.getSessionFactory().openSession();
+        var tr = session.beginTransaction();
         session.merge(this);
+        tr.commit();
         session.close();
     }
 
@@ -210,7 +212,7 @@ public class Client implements Serializable {
         return is_open;
     }
 
-    public void setOpen(boolean value) {
+    protected void setOpen(boolean value) {
         is_open = value;
     }
 }

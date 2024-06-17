@@ -60,7 +60,9 @@ public class ClientAuth implements Serializable {
 
     private void update() {
         Session session = HibernateUtil.getSessionFactory().openSession();
+        var tr = session.beginTransaction();
         session.merge(this);
+        tr.commit();
         session.close();
     }
 
