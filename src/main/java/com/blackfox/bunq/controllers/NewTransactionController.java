@@ -22,7 +22,7 @@ public class NewTransactionController {
         try {
             HibernateUtil.getActiveClient().makeTransaction(Ammount, HibernateUtil.getClient(Accnumb), Title);
         } catch (Exception ex) {
-            System.err.println(ex);
+            System.err.println(ex.getMessage());
         }
     }
 

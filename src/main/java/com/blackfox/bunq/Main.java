@@ -28,6 +28,7 @@ public class Main extends Application {
         stage.show();
     }
 
+
     public static void main(String[] args) {
         HibernateUtil.getSessionFactory();
         // fetchingExample("Dziady", "123dziady");

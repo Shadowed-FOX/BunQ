@@ -33,7 +33,7 @@ public class ClientAuth implements Serializable {
         return username;
     }
 
-    public void update() {
+    private void update() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.merge(this);
@@ -58,6 +58,7 @@ public class ClientAuth implements Serializable {
             throw new ClientCredentialsException("Invalid username.");
         }
         this.username = username;
+        update();
     }
 
     public boolean checkPassword(String password) {
@@ -69,5 +70,6 @@ public class ClientAuth implements Serializable {
             throw new ClientCredentialsException("Invalid password.");
         }
         this.password = DigestUtils.sha256Hex(password + id);
+        update();
     }
 }

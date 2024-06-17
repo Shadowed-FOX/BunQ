@@ -14,12 +14,18 @@ import java.util.logging.Level;
 import org.hibernate.Session;
 
 public class HibernateUtil {
-
     static Client activeClient;
+    static ClientAuth activeClientAuth;
 
-    public static void setActiveClient(Client client){
-        activeClient = client;
+    public static void setActiveClientAuth(ClientAuth clientAuth) throws ClientNotFoundException {
+        activeClientAuth = clientAuth;
+        activeClient = getClient(clientAuth.getId());
     }
+
+    public static ClientAuth getActiveClientAuth(){
+        return activeClientAuth;
+    }
+
 
     public static Client getActiveClient(){
         return activeClient;
@@ -85,6 +91,7 @@ public class HibernateUtil {
 
     public static int createClient(String username, String password, String firstname, String lastname)
             throws ClientCredentialsException, ClientIdException {
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         int id = -1;
         int attempts = 0;

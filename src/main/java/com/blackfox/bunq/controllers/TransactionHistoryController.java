@@ -16,7 +16,8 @@ public class TransactionHistoryController {
     @FXML
     private VBox vBox;
 
-    public void postInitialize() {
+    @FXML
+    public void initialize() {
         List<Transaction> transactionList = HibernateUtil.getActiveClient().getTransactions();
 
         for (Transaction transaction : transactionList) {

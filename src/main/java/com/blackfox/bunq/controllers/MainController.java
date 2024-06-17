@@ -43,7 +43,6 @@ public class MainController {
         Parent child = loader.load();
         DashboardController dashboardController = loader.getController();
         dashboardController.setMainController(this);
-        dashboardController.postInitialize();
         root.getChildren().setAll(child);
     }
 

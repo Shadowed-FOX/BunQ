@@ -32,7 +32,8 @@ public class SummaryController {
     @FXML
     private PieChart chart;
 
-    public void postInitialize() {
+    @FXML
+    public void initialize() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime before = now.minusDays(30);
 

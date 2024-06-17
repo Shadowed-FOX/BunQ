@@ -40,7 +40,7 @@ public class LoginController {
                 LoginMessage.setText(AuthPasswordErr);
             } else {
                 LoginMessage.setText(AuthSucc);
-                HibernateUtil.setActiveClient(HibernateUtil.getClient(clA.getId()));
+                HibernateUtil.setActiveClientAuth(clA);
                 mainController.loadDashboard();
             }
         } catch (ClientNotFoundException | IOException ex) {

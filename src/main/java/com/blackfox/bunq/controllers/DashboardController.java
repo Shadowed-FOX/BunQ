@@ -2,6 +2,7 @@ package com.blackfox.bunq.controllers;
 
 import com.blackfox.bunq.Main;
 import com.blackfox.bunq.database.HibernateUtil;
+import com.blackfox.bunq.maintenance.SceneLoader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,35 +45,23 @@ public class DashboardController {
     }
 
     public void loadSummary() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/acc_summary.fxml"));
-        Parent child = loader.load();
-        SummaryController summaryController = loader.getController();
-        summaryController.postInitialize();
-        refreshInfo();
-        pane.getChildren().setAll(child);
+        load("acc_summary");
     }
 
     public void loadNewTransaction() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/new_transaction.fxml"));
-        Parent child = loader.load();
-        refreshInfo();
-        pane.getChildren().setAll(child);
+        load("new_transaction");
     }
 
     public void loadTransactionsHistory() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/transactions_history.fxml"));
-        Parent child = loader.load();
-        TransactionHistoryController transactionHistoryController = loader.getController();
-        transactionHistoryController.postInitialize();
-        refreshInfo();
-        pane.getChildren().setAll(child);
+        load("transactions_history");
     }
 
     public void loadAccManage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/acc_manage.fxml"));
-        Parent child = loader.load();
-        ManageController manageController = loader.getController();
-        manageController.postInitialize();
+        load("acc_manage");
+    }
+
+    public void load(String filename) throws IOException {
+        Parent child = SceneLoader.getPane(filename);
         refreshInfo();
         pane.getChildren().setAll(child);
     }
@@ -86,7 +75,8 @@ public class DashboardController {
         funds.setText(HibernateUtil.getActiveClient().getBalance() + " PLN");
     }
 
-    public void postInitialize() throws IOException {
+    @FXML
+    public void initialize() throws IOException {
         refreshInfo();
         loadSummary();
     }
