@@ -75,6 +75,7 @@ public class DashboardController {
         funds.setText(HibernateUtil.getActiveClient().getBalance() + " PLN");
     }
 
+
     @FXML
     public void initialize() throws IOException {
         refreshInfo();

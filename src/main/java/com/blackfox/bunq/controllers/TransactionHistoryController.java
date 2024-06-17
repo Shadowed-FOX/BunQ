@@ -4,6 +4,7 @@ import com.blackfox.bunq.Main;
 import com.blackfox.bunq.database.ClientNotFoundException;
 import com.blackfox.bunq.database.HibernateUtil;
 import com.blackfox.bunq.database.Transaction;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -31,5 +32,12 @@ public class TransactionHistoryController {
                 throw new RuntimeException(e);
             }
         }
+
     }
+
+    @FXML
+    protected void exitEvent(ActionEvent event){
+        System.out.println("Pepega");
+    }
+
 }
