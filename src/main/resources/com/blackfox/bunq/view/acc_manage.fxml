@@ -11,17 +11,17 @@
 
 <AnchorPane prefHeight="574.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.ManageController">
    <children>
-      <Text layoutX="307.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zarządzanie kontem" />
+      <Text fx:id="manageTitle" layoutX="307.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zarządzanie kontem" />
       <Text layoutX="42.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moje dane" />
       <Text layoutX="64.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa użytkownika" />
       <Text fx:id="usernameField" layoutX="184.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(nazwa użytkownika)" />
-      <Button layoutX="583.0" layoutY="232.0" mnemonicParsing="false" onAction="#onUsernameChangePress" text="Zmień" />
+      <Button styleClass="b1" layoutX="583.0" layoutY="232.0" mnemonicParsing="false" onAction="#onUsernameChangePress" text="Zmień" />
       <Line endX="530.0" layoutX="142.0" layoutY="273.0" startX="-100.0" />
       <Text layoutX="65.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło" />
-      <Button layoutX="583.0" layoutY="292.0" mnemonicParsing="false" onAction="#onPasswordChangePress" text="Zmień" />
+      <Button styleClass="b1" layoutX="583.0" layoutY="292.0" mnemonicParsing="false" onAction="#onPasswordChangePress" text="Zmień" />
       <Line endX="530.0" layoutX="142.0" layoutY="334.0" startX="-100.0" />
       <Text layoutX="42.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konto" />
-      <Button layoutX="561.0" layoutY="384.0" mnemonicParsing="false" onAction="#onAccountDestroyPress" text="Zamknij konto" />
+      <Button styleClass="b1" layoutX="561.0" layoutY="384.0" mnemonicParsing="false" onAction="#onAccountDestroyPress" text="Zamknij konto" />
       <Text layoutX="64.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zamknięcie konta" />
       <Line endX="530.0" layoutX="143.0" layoutY="219.0" startX="-100.0" />
       <Text layoutX="67.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imię" />

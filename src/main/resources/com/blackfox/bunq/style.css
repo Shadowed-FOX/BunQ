@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-2,233&display=swap');
+
+.root {
+	-fx-font: 18px "Inter" ;
+	-fx-text-fill: #3e3b39;
+}
+
+#window {
+	-fx-background-color: #eeeeee;
+}
+
+
+#stackpane, #left{
+    -fx-border-color: #3d3b39 transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+}
+
+#title1 , #title2, #error, #titleSummary, #titleHistory, #manageTitle{
+	-fx-fill: #3d3b39;
+	-fx-font-size: 25px;
+	-fx-text-align: center;
+}
+
+.subtitle{
+    -fx-font-size: 23px;
+}
+
+Label{
+	-fx-text-fill: #3d3b39;
+	-fx-padding-top: 3px;
+	-fx-font-size: 12px;
+}
+
+TextField,
+PasswordField {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent transparent #132a13 transparent;
+	-fx-border-width: 0 0 2px 0;
+	-fx-text-fill: #3d3b39;
+}
+TextField:focused, PasswordField:focused{
+    	-fx-background-color: #d6d6d6;
+}
+
+TextField.caret {
+	-fx-stroke: #132a13;
+}
+
+PasswordField.caret {
+	-fx-stroke: #132a13;
+}
+
+#login_button, #haveacc_button, #reg_button{
+	-fx-background-color: #183618;
+	-fx-text-fill: #eeeeee;
+	-fx-font-size: 16px;
+	-fx-border-radius: 0px;
+}
+
+#login_button:hover, #reg_button:hover {
+	-fx-background-color: #112711;
+}
+
+#register_button, #haveacc_button {
+	-fx-background-color: transparent;
+	-fx-font-size: 16px;
+	-fx-text-fill: #183618;
+}
+
+#register_button:hover, #haveacc_button:hover{
+    -fx-background-color: #183618;
+    -fx-text-fill: #eeeeee;
+}
+
+#left {
+    -fx-background-color: #183618;
+}
+
+#close {
+    -fx-background-color: #eeeeee;
+}
+
+#closeBtn{
+    -fx-background-color: #eeeeee;
+    -fx-text-fill: #3d3b39;
+	-fx-background-image: url("./images/icons/close.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size: 12 12;
+}
+
+#closeBtn:hover{
+    -fx-background-color:  #df2c26
+
+}
+
+#minButton{
+    -fx-background-color: #eeeeee;
+    -fx-text-fill: #3d3b39;
+	-fx-background-image: url("./images/icons/minimize.png");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size: 12 12;
+}
+
+#minButton:hover{
+    -fx-background-color: #a8a8a8;
+    -fx-text-fill: #3e3b39
+}
+
+#dashboard{
+    -fx-background-color: #eeeeee;
+}
+
+.b1{
+    -fx-text-fill: #eeeeee;
+    -fx-background-color: #183618;
+    -fx-padding: 4;
+}
+
+.b1:hover{
+    -fx-background-color: #112711;
+}
+Text{
+    -fx-font-size: 20px;
+}
+#newTransaction_title{
+    -fx-font-size: 24px;
+}
+
+
+.bg{
+    -fx-background-color: #eeeeee;
+}
+
+
+

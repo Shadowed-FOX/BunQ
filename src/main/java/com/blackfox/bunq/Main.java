@@ -19,11 +19,16 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         //Parent root = FxmlLoader.getPane("main");
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/main.fxml"));
+
+
         Parent root = loader.load();
         Scene scene = new Scene(root, 960, 600);
+
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
+        String css = this.getClass().getResource("style.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setTitle("BunQ");
         stage.show();
     }
