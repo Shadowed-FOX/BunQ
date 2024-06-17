@@ -39,12 +39,16 @@ public class Client implements Serializable {
         setLastname(lastname);
     }
 
-    public void update() {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.merge(this);
-        session.getTransaction().commit();
-        session.close();
+    private void update() {
+        new Thread() {
+            public void run() {
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                session.merge(this);
+                session.getTransaction().commit();
+                session.close();
+            }
+        }.start();
     }
 
     public void makeTransaction(float amount, Client receiver, String title) throws Exception {
@@ -60,13 +64,21 @@ public class Client implements Serializable {
         this.balance -= amount;
         receiver.balance += amount;
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.persist(transaction);
-        session.merge(this);
-        session.merge(receiver);
-        session.getTransaction().commit();
-        session.close();
+        new Thread() {
+            public void run() {
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                var tr = session.beginTransaction();
+                try {
+                    session.persist(transaction);
+                    session.merge(this);
+                    session.merge(receiver);
+                    session.getTransaction().commit();
+                    session.close();
+                } catch (Exception ex) {
+                    tr.rollback();
+                }
+            }
+        }.start();
     }
 
     public List<Transaction> getTransactions() {
@@ -151,6 +163,7 @@ public class Client implements Serializable {
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
+        update();
     }
 
     public String getLastname() {
@@ -159,6 +172,7 @@ public class Client implements Serializable {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+        update();
     }
 
     public float getBalance() {
