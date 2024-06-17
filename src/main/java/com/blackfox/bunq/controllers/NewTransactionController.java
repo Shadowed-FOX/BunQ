@@ -12,9 +12,7 @@ import javafx.scene.text.Text;
 
 public class NewTransactionController {
     @FXML
-    private TextField accnumb, title, ammount;
-    @FXML
-    private Text name, surname;
+    private TextField accnumb, title, ammount, name, surname;
     @FXML
     private Button closeBtn;
 
