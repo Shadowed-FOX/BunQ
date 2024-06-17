@@ -9,7 +9,7 @@
    <children>
       <AnchorPane fx:id="close" onMouseDragged="#menuDragEvent" onMousePressed="#menuPressedEvent" prefHeight="25.0" prefWidth="958.0">
          <children>
-            <Button fx:id="closeBtn" layoutX="914.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="25.0" prefWidth="50.0" textAlignment="CENTER">
+            <Button fx:id="closeBtn" layoutX="914.0" mnemonicParsing="false" onAction="#exitMainEvent" prefHeight="25.0" prefWidth="50.0" textAlignment="CENTER">
                <font>
                   <Font size="10.0" />
                </font></Button>

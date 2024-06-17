@@ -1,5 +1,6 @@
 package com.blackfox.bunq.controllers;
 
+import com.blackfox.bunq.Main;
 import com.blackfox.bunq.database.Client;
 import com.blackfox.bunq.database.ClientCredentialsException;
 import com.blackfox.bunq.database.HibernateUtil;
@@ -57,6 +58,8 @@ public class ManageController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Parent newParent = SceneLoader.getPane("main");
             Scene newScene = new Scene(newParent, 960, 600);
+            String css = Main.class.getResource("./style.css").toExternalForm();
+            newScene.getStylesheets().add(css);
             stage.setScene(newScene);
         } else {
 
