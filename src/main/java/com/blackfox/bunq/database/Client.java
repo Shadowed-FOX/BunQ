@@ -40,11 +40,13 @@ public class Client implements Serializable {
     }
 
     private void update() {
+        Client client = this;
+
         new Thread() {
             public void run() {
                 Session session = HibernateUtil.getSessionFactory().openSession();
                 session.beginTransaction();
-                session.merge(this);
+                session.merge(client);
                 session.getTransaction().commit();
                 session.close();
             }
@@ -64,13 +66,15 @@ public class Client implements Serializable {
         this.balance -= amount;
         receiver.balance += amount;
 
+        Client client = this;
+
         new Thread() {
             public void run() {
                 Session session = HibernateUtil.getSessionFactory().openSession();
                 var tr = session.beginTransaction();
                 try {
                     session.persist(transaction);
-                    session.merge(this);
+                    session.merge(client);
                     session.merge(receiver);
                     session.getTransaction().commit();
                     session.close();

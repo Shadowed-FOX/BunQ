@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
 public class ManageController {
     @FXML
     private Text firstName, surName, accId, usernameField, errPasswordText, errNewUsernameText;
@@ -36,7 +35,7 @@ public class ManageController {
         getInfo();
     }
 
-    private void getInfo(){
+    private void getInfo() {
         Client client = HibernateUtil.getActiveClient();
         firstName.setText(client.getFirstname());
         surName.setText(client.getLastname());
@@ -45,7 +44,7 @@ public class ManageController {
     }
 
     @FXML
-    protected void onPasswordChangePress(ActionEvent event){
+    protected void onPasswordChangePress(ActionEvent event) {
         backgroundColor();
         newPassword.setVisible(true);
     }
@@ -54,8 +53,8 @@ public class ManageController {
     protected void onAccountDestroyConfirm(ActionEvent event) throws IOException {
         String usernamefield = ConfirmUsernameField.getText();
 
-        if(usernamefield.equals(HibernateUtil.getActiveClientAuth().getUsername())){
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        if (usernamefield.equals(HibernateUtil.getActiveClientAuth().getUsername())) {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Parent newParent = SceneLoader.getPane("main");
             Scene newScene = new Scene(newParent, 960, 600);
             stage.setScene(newScene);
@@ -65,11 +64,11 @@ public class ManageController {
     }
 
     @FXML
-    protected void onNewUsernameConfirm(ActionEvent event){
+    protected void onNewUsernameConfirm(ActionEvent event) {
         String newUsername = NewUsernameField.getText();
         String confirmPassword1 = ConfirmUsernamePassword.getText();
         try {
-            if(HibernateUtil.getActiveClientAuth().checkPassword(confirmPassword1)){
+            if (HibernateUtil.getActiveClientAuth().checkPassword(confirmPassword1)) {
                 HibernateUtil.getActiveClientAuth().setUsername(newUsername);
                 errNewUsernameText.setText("Zmiana nazwy użytkownika powiodła się");
                 NewUsernameField.clear();
@@ -78,19 +77,19 @@ public class ManageController {
                 errNewUsernameText.setText("Nieprawidłowe hasło");
             }
         } catch (ClientCredentialsException e) {
-                errNewUsernameText.setText(e.getMessage());
-                ConfirmUsernamePassword.clear();
+            errNewUsernameText.setText(e.getMessage());
+            ConfirmUsernamePassword.clear();
         } finally {
             ConfirmUsernamePassword.clear();
         }
     }
 
     @FXML
-    protected void onNewPasswordConfirm(ActionEvent event){
+    protected void onNewPasswordConfirm(ActionEvent event) {
         String password1 = password1Field.getText();
         String password2 = password2Field.getText();
 
-        if(!password1.equals(password2)){
+        if (!password1.equals(password2)) {
             errPasswordText.setText("Hasła nie są takie same.");
         } else {
             try {
@@ -105,25 +104,25 @@ public class ManageController {
         }
     }
 
-    private void backgroundColor(){
+    private void backgroundColor() {
         colorChange.setVisible(true);
         stackPane.setVisible(true);
     }
 
     @FXML
-    protected void onAccountDestroyPress(ActionEvent event){
+    protected void onAccountDestroyPress(ActionEvent event) {
         backgroundColor();
         destroyAcc.setVisible(true);
     }
 
     @FXML
-    protected void onUsernameChangePress(ActionEvent event){
+    protected void onUsernameChangePress(ActionEvent event) {
         backgroundColor();
         newUserName.setVisible(true);
     }
 
     @FXML
-    protected void exitEvent(ActionEvent event){
+    protected void exitEvent(ActionEvent event) {
         newUserName.setVisible(false);
         newPassword.setVisible(false);
         destroyAcc.setVisible(false);
