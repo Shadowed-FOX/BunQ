@@ -47,6 +47,10 @@ public class NewTransactionController {
                 HibernateUtil.getActiveClient().saveReceiver(Accnumb);
             }
             HibernateUtil.getActiveClient().makeTransaction(Ammount, HibernateUtil.getClient(Accnumb), Title);
+            errField.setText("Transakcja się powiodła.");
+            accnumb.clear();
+            title.clear();
+            ammount.clear();
         } catch (Exception ex) {
             errField.setText(ex.getMessage());
         }
@@ -87,24 +91,31 @@ public class NewTransactionController {
         });
     }
 
-    public void setContactID(int contactID){
-        accnumb.setText(String.valueOf(contactID));
-    }
-
     @FXML
     public void initialize(){
         CredentialSetup();
+        AmmountSetup();
+    }
+
+    private void AmmountSetup(){
+        ammount.textProperty().addListener((obs,old,niu) -> {
+            if(!niu.matches("\\d{0,5}(\\.\\d{0,2})?")){
+                ammount.setText(old);
+            }
+        });
     }
 
     private void CredentialSetup(){
         accnumb.textProperty().addListener((obs,old,niu) -> {
-            String str = accnumb.getText();
-
             if(niu.length() > 8) {
-                str = str.substring(0, 8);
-                accnumb.setText(str);
+                accnumb.setText(old);
             }
 
+            if(!niu.matches("\\d*\\.?\\d*")){
+                accnumb.setText(old);
+            }
+
+            String str = accnumb.getText();
             int val;
             try {
                 if(!str.isEmpty()) {

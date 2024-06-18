@@ -5,9 +5,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.exception.ConstraintViolationException;
 
@@ -37,8 +35,6 @@ public class Client implements Serializable {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp created_at;
-
-    @ColumnDefault("TRUE")
     private boolean is_open;
 
     public Client() {
@@ -48,6 +44,7 @@ public class Client implements Serializable {
         this.id = id;
         setFirstname(firstname);
         setLastname(lastname);
+        this.is_open = true;
     }
 
     public void makeTransaction(float amount, Client receiver, String title) throws Exception {
