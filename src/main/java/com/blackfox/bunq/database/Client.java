@@ -174,12 +174,24 @@ public class Client implements Serializable {
         }
     }
 
-    public void removeReceiver(ClientReceiver receiver) {
+    public void removeReceiver(ClientReceiver receiver) throws ClientNotFoundException {
+        int index = -1;
+        for (int i = 0; i < receivers.size(); i++) {
+            if (receivers.get(i).getReceiverId() == receiver.getReceiverId()) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index == -1) {
+            throw new ClientNotFoundException(receiver.getReceiverId());
+        }
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         var tr = session.beginTransaction();
 
         try {
-            receivers.remove(receiver.getReceiverId());
+            receivers.remove(index);
             session.merge(this);
             tr.commit();
             session.close();
