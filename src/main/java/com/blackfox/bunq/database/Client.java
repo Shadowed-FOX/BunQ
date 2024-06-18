@@ -66,13 +66,11 @@ public class Client implements Serializable {
         this.balance -= amount;
         receiver.balance += amount;
 
-        Client client = this;
-
         Session session = HibernateUtil.getSessionFactory().openSession();
         var tr = session.beginTransaction();
         try {
             session.persist(transaction);
-            session.merge(client);
+            session.merge(this);
             session.merge(receiver);
             session.getTransaction().commit();
             session.close();

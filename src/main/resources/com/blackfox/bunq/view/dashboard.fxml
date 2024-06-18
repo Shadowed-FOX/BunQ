@@ -7,25 +7,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.DashboardController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.DashboardController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="235.0">
+      <VBox prefHeight="575.0" prefWidth="235.0">
          <children>
             <AnchorPane fx:id="dashboard" prefHeight="153.0" prefWidth="240.0">
                <children>
-                  <Text  fx:id="name" layoutX="87.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Witaj (imię)" wrappingWidth="61.13671875" />
-                  <Text  fx:id ="fundsTitle" layoutX="100.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo" wrappingWidth="34.13671875" />
-                  <Text  fx:id="funds" layoutX="80.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(stan konta)" wrappingWidth="75.13671875" />
+                  <Text fx:id="name" layoutX="26.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Witaj (imię)" textAlignment="CENTER" wrappingWidth="188.13671875" />
+                  <Text fx:id="fundsTitle" layoutX="98.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo" wrappingWidth="38.13671875" />
+                  <Text fx:id="funds" layoutX="26.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(stan konta)" textAlignment="CENTER" wrappingWidth="182.13671875" />
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="420.0" prefWidth="208.0">
+            <AnchorPane fx:id="dashboard_menu" prefHeight="422.0" prefWidth="240.0">
                <children>
-                  <Button styleClass="b1" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" onAction="#onSummaryPress" text="Podsumowanie" />
-                  <Button styleClass="b1" layoutY="64.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" onAction="#onNewTransactionPress" text="Nowa transakcja" />
-                  <Button styleClass="b1" layoutY="104.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" onAction="#onHistoryPress" text="Historia transakcji" />
-                  <Button styleClass="b1" layoutY="144.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Pożyczka" />
-                  <Button styleClass="b1" layoutY="208.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" onAction="#onAccManagePress" text="Zarządzanie kontem" />
-                  <Button styleClass="b1" layoutY="380.0" mnemonicParsing="false" onAction="#onLogOutBtnPress" prefHeight="40.0" prefWidth="240.0" text="Wyloguj" />
+                  <Button mnemonicParsing="false" onAction="#onSummaryPress" prefHeight="45.0" prefWidth="240.0" styleClass="b1" text="Podsumowanie" />
+                  <Button layoutY="45.0" mnemonicParsing="false" onAction="#onNewTransactionPress" prefHeight="45.0" prefWidth="240.0" styleClass="b1" text="Nowa transakcja" />
+                  <Button layoutY="90.0" mnemonicParsing="false" onAction="#onHistoryPress" prefHeight="45.0" prefWidth="240.0" styleClass="b1" text="Historia transakcji" />
+                  <Button layoutY="135.0" mnemonicParsing="false" onAction="#onAccManagePress" prefHeight="45.0" prefWidth="240.0" styleClass="b1" text="Zarządzanie kontem" />
+                  <Button fx:id="logout" layoutY="377.0" mnemonicParsing="false" onAction="#onLogOutBtnPress" prefHeight="45.0" prefWidth="240.0" styleClass="b1" text="Wyloguj" />
                </children>
             </AnchorPane>
          </children>
