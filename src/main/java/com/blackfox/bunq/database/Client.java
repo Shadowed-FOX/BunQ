@@ -51,16 +51,20 @@ public class Client implements Serializable {
     }
 
     public void makeTransaction(float amount, Client receiver, String title) throws Exception {
+        if (HibernateUtil.getActiveClient().getId() == receiver.getId()) {
+            throw new Exception("Nie możesz wysłać pieniędzy do siebie");
+        }
+
         if (!receiver.isOpen()) {
-            throw new Exception("Receiver's account is closed");
+            throw new Exception("Konto odbiorcy jest zamknięte");
         }
 
         if (this.balance < amount) {
-            throw new Exception("Not enough money.");
+            throw new Exception("Nie masz wystarczających środków");
         }
 
         if (amount <= 0.f) {
-            throw new Exception("Amount needs to be greater that 0!");
+            throw new Exception("Kwota musi być większa od 0");
         }
 
         Transaction transaction = new Transaction(id, receiver.getId(), title, amount);
@@ -154,6 +158,9 @@ public class Client implements Serializable {
     }
 
     public void saveReceiver(int receiver_id) throws ReceiverDuplicateException {
+        if (receiver_id == HibernateUtil.getActiveClient().getId())
+            return;
+
         Session session = HibernateUtil.getSessionFactory().openSession();
         var transaction = session.beginTransaction();
         ClientReceiver new_receiver = new ClientReceiver(this.getId(), receiver_id);
