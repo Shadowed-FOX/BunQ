@@ -50,7 +50,7 @@ public class SummaryController {
         List<Transaction> allTransactions = client.getTransactions(since, until);
 
         float sumIncome = sumTransactions(incomeTransactions);
-        float sumOutcome = -sumTransactions(outcomeTransactions);
+        float sumOutcome = sumTransactions(outcomeTransactions);
 
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
@@ -61,7 +61,7 @@ public class SummaryController {
         setTransactions(allTransactions);
 
         income.setText("+" + sumIncome + " PLN");
-        outcome.setText(sumOutcome + " PLN");
+        outcome.setText("-" +sumOutcome + " PLN");
     }
 
     private void setTransactions(List<Transaction> all) {

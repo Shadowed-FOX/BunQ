@@ -9,7 +9,6 @@
 	-fx-background-color: #eeeeee;
 }
 
-
 #stackpane, #left{
     -fx-border-color: #3d3b39 transparent transparent transparent;
     -fx-border-width: 1px 0 0 0;
@@ -80,6 +79,12 @@ PasswordField.caret {
     -fx-background-color: #eeeeee;
 }
 
+
+
+
+
+
+
 .btnclose{
     -fx-background-color: #eeeeee;
     -fx-text-fill: #3d3b39;
@@ -143,7 +148,7 @@ PasswordField.caret {
     -fx-font-size: 24px;
 }
 
-#vBox{
+#vBox, #bar{
     -fx-background-color: #eeeeee;
 }
 
@@ -187,4 +192,34 @@ Line{
 
 .summary_labels {
     -fx-font-size: 17;
+}
+
+.chart-pie .chart-pie-data {
+    -fx-pie-color: transparent;
+}
+
+.data0.chart-pie {
+    -fx-pie-color: #df2c26;
+}
+.data1.chart-pie {
+    -fx-pie-color:  #37d12f;
+}
+
+
+.chart-pie-label-line {
+    -fx-stroke: #132a13;
+    -fx-fill: #3d3b39;
+}
+
+.chart-legend {
+    -fx-background-color:  #eeeeee;
+ }
+
+
+#con_delete{
+ -fx-background-color: #eeeeee;
+}
+
+#con_delete:hover{
+    -fx-background-color: #bebebe;
 }
