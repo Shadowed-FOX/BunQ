@@ -8,14 +8,15 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.exception.ConstraintViolationException;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.RollbackException;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import java.util.AbstractList;
 
 @Entity
 public class Client implements Serializable {
@@ -30,12 +31,11 @@ public class Client implements Serializable {
     private String lastname;
     private float balance;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client_id", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ClientReceiver> receivers;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp created_at;
-    // private int colors_id;
 
     @ColumnDefault("TRUE")
     private boolean is_open;
@@ -68,21 +68,17 @@ public class Client implements Serializable {
 
         Client client = this;
 
-        new Thread() {
-            public void run() {
-                Session session = HibernateUtil.getSessionFactory().openSession();
-                var tr = session.beginTransaction();
-                try {
-                    session.persist(transaction);
-                    session.merge(client);
-                    session.merge(receiver);
-                    session.getTransaction().commit();
-                    session.close();
-                } catch (Exception ex) {
-                    tr.rollback();
-                }
-            }
-        }.start();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var tr = session.beginTransaction();
+        try {
+            session.persist(transaction);
+            session.merge(client);
+            session.merge(receiver);
+            session.getTransaction().commit();
+            session.close();
+        } catch (Exception ex) {
+            tr.rollback();
+        }
     }
 
     public List<Transaction> getTransactions() {
@@ -143,11 +139,6 @@ public class Client implements Serializable {
         return list;
     }
 
-    public void addReceiver(ClientReceiver receiver) {
-        receivers.add(receiver);
-        receiver.setClient(this);
-    }
-
     public List<Transaction> getTransactions(String filter) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -162,36 +153,31 @@ public class Client implements Serializable {
         return list;
     }
 
-    public void SafeReciver(Client receiver) {
-
-        for (var i : getRecivers()) {
-            if (i.getReceiverId() == receiver.getId()) {
-                System.out.println("reciver already is in list");
-                return;
-            }
-        }
-
+    public void saveReceiver(int receiver_id) throws ReceiverDuplicateException {
         Session session = HibernateUtil.getSessionFactory().openSession();
         var transaction = session.beginTransaction();
+        ClientReceiver new_receiver = new ClientReceiver(this.getId(), receiver_id);
 
-        ClientReceiver newReceiver = new ClientReceiver(this, receiver.getId());
+        try {
+            receivers.add(new_receiver);
 
-        this.addReceiver(newReceiver);
+            session.persist(new_receiver);
+            transaction.commit();
+            session.close();
 
-        session.persist(newReceiver);
-
-        session.merge(this);
-
-        session.merge(receiver);
-
-        transaction.commit();
-        session.close();
+        } catch (ConstraintViolationException ex) {
+            receivers.removeLast();
+            throw new ReceiverDuplicateException("Client is already saved");
+        } catch (RollbackException ex) {
+            receivers.removeLast();
+            transaction.rollback();
+        }
     }
 
-    public List<ClientReceiver> getRecivers() {
+    public List<ClientReceiver> getSavedReceivers() {
         return receivers;
     }
- 
+
     public int getId() {
         return id;
     }

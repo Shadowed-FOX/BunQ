@@ -36,32 +36,32 @@ public class Main extends Application {
         Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
         Logger.getLogger("com.mchange").setLevel(Level.WARNING);
         HibernateUtil.getSessionFactory();
-                   
-           
-           
-        
-            
+
         // fetchingExample("Dziady", "123dziady");
-      
+
         launch();
         testWithRecivers();
         HibernateUtil.close();
     }
-    public static void testWithRecivers()
-    {
+
+    public static void testWithRecivers() {
+        Client test;
         try {
-            Client test=  HibernateUtil.getClient(75601458);
-                        Client test2=  HibernateUtil.getClient(19517347);
-                        
-            test.SafeReciver(HibernateUtil.getClient(57161548));
-            System.out.println(test.getRecivers().size());
-            for(var i : test.getRecivers())
-            {
-                System.out.println(i.getReceiverId()+" "+i.getReceiverAsClient().getLastname());  
-            }
+            test = HibernateUtil.getClient(57161548);
         } catch (ClientNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            return;
         }
-      
+
+        try {
+            test.saveReceiver(57161548);
+        } catch (ReceiverDuplicateException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.println(test.getSavedReceivers().size());
+        for (var i : test.getSavedReceivers()) {
+            System.out.println(i.getReceiverId() + " " + i.getReceiverAsClient().getLastname());
+        }
     }
 }
