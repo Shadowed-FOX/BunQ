@@ -1,5 +1,6 @@
 package com.blackfox.bunq.database;
 
+import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -9,9 +10,12 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import java.util.AbstractList;
 
 @Entity
 public class Client implements Serializable {
@@ -26,6 +30,8 @@ public class Client implements Serializable {
     private String lastname;
     private float balance;
 
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<ClientReceiver> receivers;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp created_at;
@@ -137,6 +143,11 @@ public class Client implements Serializable {
         return list;
     }
 
+    public void addReceiver(ClientReceiver receiver) {
+        receivers.add(receiver);
+        receiver.setClient(this);
+    }
+
     public List<Transaction> getTransactions(String filter) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -151,6 +162,36 @@ public class Client implements Serializable {
         return list;
     }
 
+    public void SafeReciver(Client receiver) {
+
+        for (var i : getRecivers()) {
+            if (i.getReceiverId() == receiver.getId()) {
+                System.out.println("reciver already is in list");
+                return;
+            }
+        }
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var transaction = session.beginTransaction();
+
+        ClientReceiver newReceiver = new ClientReceiver(this, receiver.getId());
+
+        this.addReceiver(newReceiver);
+
+        session.persist(newReceiver);
+
+        session.merge(this);
+
+        session.merge(receiver);
+
+        transaction.commit();
+        session.close();
+    }
+
+    public List<ClientReceiver> getRecivers() {
+        return receivers;
+    }
+ 
     public int getId() {
         return id;
     }
