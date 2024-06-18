@@ -29,7 +29,6 @@ public class Client implements Serializable {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp created_at;
-    // private int colors_id;
 
     @ColumnDefault("TRUE")
     private boolean is_open;
@@ -60,23 +59,17 @@ public class Client implements Serializable {
         this.balance -= amount;
         receiver.balance += amount;
 
-        Client client = this;
-
-        new Thread() {
-            public void run() {
-                Session session = HibernateUtil.getSessionFactory().openSession();
-                var tr = session.beginTransaction();
-                try {
-                    session.persist(transaction);
-                    session.merge(client);
-                    session.merge(receiver);
-                    session.getTransaction().commit();
-                    session.close();
-                } catch (Exception ex) {
-                    tr.rollback();
-                }
-            }
-        }.start();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var tr = session.beginTransaction();
+        try {
+            session.persist(transaction);
+            session.merge(this);
+            session.merge(receiver);
+            session.getTransaction().commit();
+            session.close();
+        } catch (Exception ex) {
+            tr.rollback();
+        }
     }
 
     public List<Transaction> getTransactions() {
