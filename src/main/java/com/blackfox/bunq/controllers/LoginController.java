@@ -74,6 +74,12 @@ public class LoginController {
 
         try {
             HibernateUtil.createClient(newUsername, newPassword1, firstName, lastName);
+            NewUsername.clear();
+            NewPassword1.clear();
+            NewPassword2.clear();
+            FirstName.clear();
+            SecondName.clear();
+
             onLoginSwitchBtnClick();
             username.setText(newUsername);
             password.requestFocus();

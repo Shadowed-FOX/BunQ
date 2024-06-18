@@ -53,6 +53,7 @@ public class SummaryController {
         float sumOutcome = sumTransactions(outcomeTransactions);
 
         DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
         df.format(sumIncome);
         df.format(sumOutcome);
 

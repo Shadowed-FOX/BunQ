@@ -28,8 +28,6 @@
       <TextField fx:id="surname" disable="true" layoutX="257.0" layoutY="202.0" prefHeight="40.0" prefWidth="180.0" />
       <Label layoutX="257.0" layoutY="182.0" text="Nazwisko" />
       <Text fx:id="errField" layoutX="219.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(do błędów)" textAlignment="CENTER" wrappingWidth="281.13671875" />
-
-
       <AnchorPane fx:id="colorChange" prefHeight="574.0" prefWidth="720.0" style="-fx-background-color: black; -fx-opacity: 0.4;" visible="false" />
       <AnchorPane fx:id="bar" layoutX="170.0" layoutY="150.0" minHeight="0.0" minWidth="0.0" prefHeight="274.0" prefWidth="378.0" visible="false">
 
