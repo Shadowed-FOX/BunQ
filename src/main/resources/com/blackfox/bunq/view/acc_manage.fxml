@@ -9,12 +9,12 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="575.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.ManageController">
+<AnchorPane prefHeight="575.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.ManageController">
    <children>
       <Text fx:id="manageTitle" layoutX="249.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zarządzanie kontem" />
       <Text layoutX="42.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moje dane" />
       <Text layoutX="64.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa użytkownika" />
-      <Text fx:id="usernameField" layoutX="200.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(nazwa użytkownika)" />
+      <Text fx:id="usernameField" layoutX="200.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(nazwa użytkownika)" />
       <Button layoutX="583.0" layoutY="232.0" mnemonicParsing="false" onAction="#onUsernameChangePress" styleClass="b2" text="Zmień" />
       <Line endX="530.0" layoutX="142.0" layoutY="273.0" startX="-100.0" />
       <Text layoutX="65.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło" />
@@ -31,7 +31,7 @@
       <Text layoutX="67.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numer konta" />
       <Text fx:id="accId" layoutX="164.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(numer konta)" />
       <AnchorPane fx:id="colorChange" prefHeight="574.0" prefWidth="720.0" style="-fx-background-color: black; -fx-opacity: 0.4;" visible="false" />
-      <StackPane fx:id="stackPane" layoutX="181.0" layoutY="141.0" prefHeight="292.0" prefWidth="358.0">
+      <StackPane fx:id="stackPane" layoutX="181.0" layoutY="150.0" prefHeight="292.0" prefWidth="358.0">
          <children>
             <AnchorPane fx:id="newPassword" prefHeight="292.0" prefWidth="353.0" visible="false">
                <children>

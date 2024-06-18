@@ -27,7 +27,7 @@ public class TransactionHistoryController {
     @FXML
     private Label senderCred, recieverCred;
     @FXML
-    private AnchorPane tranInfo;
+    private AnchorPane tranInfo, colorChange;
 
 
     @FXML
@@ -53,10 +53,11 @@ public class TransactionHistoryController {
         pane.setOnMousePressed(event -> {
             int sendID = transaction.getSenderId(), recID = transaction.getReceiverId();
             tranInfo.setVisible(true);
+            colorChange.setVisible(true);
 
             try {
-                String SenderCred = HibernateUtil.getClient(sendID).getFirstname() + HibernateUtil.getClient(sendID).getLastname();
-                String RecieverCred = HibernateUtil.getClient(recID).getFirstname() + HibernateUtil.getClient(recID).getLastname();
+                String SenderCred = HibernateUtil.getClient(sendID).getFirstname() + " " + HibernateUtil.getClient(sendID).getLastname();
+                String RecieverCred = HibernateUtil.getClient(recID).getFirstname() + " " + HibernateUtil.getClient(recID).getLastname();
 
                 senderCred.setText(SenderCred);
                 senderID.setText(String.valueOf(sendID));
@@ -78,6 +79,8 @@ public class TransactionHistoryController {
     @FXML
     protected void exitEvent(ActionEvent event){
         tranInfo.setVisible(false);
+        colorChange.setVisible(false);
+
     }
 
 }
