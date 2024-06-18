@@ -47,6 +47,10 @@ public class NewTransactionController {
                 HibernateUtil.getActiveClient().saveReceiver(Accnumb);
             }
             HibernateUtil.getActiveClient().makeTransaction(Ammount, HibernateUtil.getClient(Accnumb), Title);
+            errField.setText("Transakcja się powiodła.");
+            accnumb.clear();
+            title.clear();
+            ammount.clear();
         } catch (Exception ex) {
             errField.setText(ex.getMessage());
         }
