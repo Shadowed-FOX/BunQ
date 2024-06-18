@@ -21,28 +21,30 @@
             <VBox fx:id="vBox" prefHeight="464.0" prefWidth="684.0" />
          </content>
       </ScrollPane>
+
+      <AnchorPane fx:id="colorChange" prefHeight="574.0" prefWidth="720.0" style="-fx-background-color: black; -fx-opacity: 0.4;" visible="false" />
       <AnchorPane fx:id="tranInfo" layoutX="110.0" layoutY="140.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: #eeeeee" visible="false">
          <children>
-            <Button fx:id="closeBtn" layoutX="450.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="25.0" prefWidth="50.0" textAlignment="CENTER">
+            <Button layoutX="450.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="25.0" prefWidth="50.0" styleClass="btnclose" textAlignment="CENTER">
                <font>
                   <Font size="10.0" />
                </font>
             </Button>
             <Label fx:id="senderCred" layoutX="39.0" layoutY="25.0" text="(imie i nazwisko odbiorcy)" />
-            <Text fx:id="senderID" layoutX="39.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(numer konta)" />
+            <Text fx:id="senderID" layoutX="39.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(numer konta)" />
             <ImageView fitHeight="29.0" fitWidth="31.0" layoutX="76.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
                   <Image url="@../images/icons/right-arrow.png" />
                </image>
             </ImageView>
             <Label fx:id="recieverCred" layoutX="38.0" layoutY="130.0" text="(mie i nazwisko odbiorcy)" />
-            <Text fx:id="recieverID" layoutX="39.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(numer konta)" />
+            <Text fx:id="recieverID" layoutX="39.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(numer konta)" />
             <Label layoutX="277.0" layoutY="25.0" text="Tytuł" />
             <Label layoutX="277.0" layoutY="79.0" text="Data" />
             <Label layoutX="277.0" layoutY="130.0" text="Kwota" />
             <Label layoutX="277.0" layoutY="182.0" text="Identyfikator transakcji" />
-            <Text fx:id="tranTitle" layoutX="277.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Tytuł)" />
-            <Text fx:id="tranDate" layoutX="277.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(data)" />
+            <Text fx:id="tranTitle" layoutX="277.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Tytuł)" />
+            <Text fx:id="tranDate" layoutX="277.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(data)" />
             <Text fx:id="tranAmmount" layoutX="277.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(kwota)" />
             <Text fx:id="tranID" layoutX="277.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(ID)" />
          </children>
