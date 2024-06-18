@@ -122,6 +122,9 @@ public class NewTransactionController {
                     val = Integer.parseInt(str);
                     name.setText(HibernateUtil.getClient(val).getFirstname());
                     surname.setText(HibernateUtil.getClient(val).getLastname());
+                } else {
+                    name.setText("");
+                    surname.setText("");
                 }
             } catch (ClientNotFoundException e) {
                 name.setText("");
