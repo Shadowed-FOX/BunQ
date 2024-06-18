@@ -18,7 +18,6 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         Parent root = SceneLoader.getPane("main");
         Scene scene = new Scene(root, 960, 600);
-
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
@@ -32,32 +31,7 @@ public class Main extends Application {
         Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
         Logger.getLogger("com.mchange").setLevel(Level.WARNING);
         HibernateUtil.getSessionFactory();
-
-        // fetchingExample("Dziady", "123dziady");
-
         launch();
-        // testWithRecivers();
         HibernateUtil.close();
     }
-
-    /*public static void testWithRecivers() {
-        Client test;
-        try {
-            test = HibernateUtil.getClient(57161548);
-        } catch (ClientNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-            return;
-        }
-
-        try {
-            test.saveReceiver(57161548);
-        } catch (ReceiverDuplicateException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        System.out.println(test.getSavedReceivers().size());
-        for (var i : test.getSavedReceivers()) {
-            System.out.println(i.getReceiverId() + " " + i.getReceiverAsClient().getLastname());
-        }
-    }*/
 }

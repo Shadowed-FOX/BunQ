@@ -24,7 +24,7 @@ import java.util.List;
 
 public class NewTransactionController {
     @FXML
-    private TextField accnumb, title, ammount, name, surname;
+    private TextField accnumb, title, ammount, nameField, surname;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -120,14 +120,14 @@ public class NewTransactionController {
             try {
                 if(!str.isEmpty()) {
                     val = Integer.parseInt(str);
-                    name.setText(HibernateUtil.getClient(val).getFirstname());
+                    nameField.setText(HibernateUtil.getClient(val).getFirstname());
                     surname.setText(HibernateUtil.getClient(val).getLastname());
                 } else {
-                    name.setText("");
+                    nameField.setText("");
                     surname.setText("");
                 }
             } catch (ClientNotFoundException e) {
-                name.setText("");
+                nameField.setText("");
                 surname.setText("");
             }
         });
