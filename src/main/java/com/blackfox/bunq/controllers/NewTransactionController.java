@@ -28,7 +28,7 @@ public class NewTransactionController {
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private AnchorPane bar;
+    private AnchorPane bar, colorChange;
     @FXML
     private VBox vBox;
     @FXML
@@ -55,6 +55,7 @@ public class NewTransactionController {
     @FXML
     protected void onFromListClicked() throws IOException {
         bar.setVisible(true);
+        colorChange.setVisible(true);
         scrollPane.setVisible(true);
         contactGenerate();
     }
@@ -120,6 +121,7 @@ public class NewTransactionController {
 
     protected void close(){
         bar.setVisible(false);
+        colorChange.setVisible(false);
         scrollPane.setVisible(false);
     }
 
