@@ -6,7 +6,9 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 
@@ -14,7 +16,9 @@ public class NewTransactionController {
     @FXML
     private TextField accnumb, title, ammount, name, surname;
     @FXML
-    private Button closeBtn;
+    private ScrollPane scrollPane;
+    @FXML
+    private VBox vBox;
 
     @FXML
     protected void onAcceptPaymentPress(ActionEvent event) throws Exception {
@@ -30,6 +34,13 @@ public class NewTransactionController {
     }
 
     @FXML
+    protected void onFromListClicked(ActionEvent event){
+        scrollPane.setVisible(true);
+
+
+    }
+
+    @FXML
     public void initialize(){
         CredentialSetup();
     }
@@ -38,8 +49,8 @@ public class NewTransactionController {
         accnumb.textProperty().addListener((obs,old,niu) -> {
             String str = accnumb.getText();
 
-            if(niu.length() > 9) {
-                str = str.substring(0, 9);
+            if(niu.length() > 8) {
+                str = str.substring(0, 8);
                 accnumb.setText(str);
             }
 
@@ -59,6 +70,6 @@ public class NewTransactionController {
 
     @FXML
     protected void exitEvent() {
-        System.out.println("XDDDD");
+        scrollPane.setVisible(false);
     }
 }

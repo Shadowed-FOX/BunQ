@@ -38,11 +38,10 @@ public class Main extends Application {
         // fetchingExample("Dziady", "123dziady");
 
         launch();
-        testWithRecivers();
         HibernateUtil.close();
     }
 
-    public static void testWithRecivers() {
+    /*public static void testWithRecivers() {
         Client test;
         try {
             test = HibernateUtil.getClient(57161548);
@@ -61,5 +60,5 @@ public class Main extends Application {
         for (var i : test.getSavedReceivers()) {
             System.out.println(i.getReceiverId() + " " + i.getReceiverAsClient().getLastname());
         }
-    }
+    }*/
 }
