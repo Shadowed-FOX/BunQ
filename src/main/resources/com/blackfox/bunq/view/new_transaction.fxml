@@ -21,12 +21,12 @@
       <Button layoutX="312.0" layoutY="451.0" mnemonicParsing="false" onAction="#onAcceptPaymentPress" prefHeight="34.0" prefWidth="95.0" styleClass="b2" text="Zatwierdź" />
       <Text layoutX="236.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLN" />
       <Button layoutX="374.0" layoutY="116.0" mnemonicParsing="false" onAction="#onFromListClicked" prefHeight="40.0" prefWidth="54.0" styleClass="b2" text="Z listy" />
-      <CheckBox layoutX="49.0" layoutY="251.0" mnemonicParsing="false" text="Zapisz odbiorcę w kontaktach" />
+      <CheckBox fx:id="check" layoutX="49.0" layoutY="251.0" mnemonicParsing="false" text="Zapisz odbiorcę w kontaktach" />
       <TextField fx:id="name" disable="true" layoutX="49.0" layoutY="202.0" prefHeight="40.0" prefWidth="180.0" />
       <Label layoutX="51.0" layoutY="182.0" text="Imie" />
       <TextField fx:id="surname" disable="true" layoutX="257.0" layoutY="202.0" prefHeight="40.0" prefWidth="180.0" />
       <Label layoutX="257.0" layoutY="182.0" text="Nazwisko" />
-      <Text layoutX="219.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(do błędów)" textAlignment="CENTER" wrappingWidth="281.13671875" />
+      <Text fx:id="errField" layoutX="219.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(do błędów)" textAlignment="CENTER" wrappingWidth="281.13671875" />
       <AnchorPane fx:id="bar" layoutX="170.0" layoutY="150.0" minHeight="0.0" minWidth="0.0" prefHeight="274.0" prefWidth="378.0" visible="false">
          <children>
             <Button layoutX="347.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />

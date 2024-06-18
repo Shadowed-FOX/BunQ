@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -51,11 +52,15 @@ public class SummaryController {
         float sumIncome = sumTransactions(incomeTransactions);
         float sumOutcome = -sumTransactions(outcomeTransactions);
 
+        DecimalFormat df = new DecimalFormat();
+        df.format(sumIncome);
+        df.format(sumOutcome);
+
         setChart(sumIncome, sumOutcome);
         setTransactions(allTransactions);
 
         income.setText("+" + sumIncome + " PLN");
-        outcome.setText(String.valueOf(sumOutcome) + " PLN");
+        outcome.setText(sumOutcome + " PLN");
     }
 
     private void setTransactions(List<Transaction> all) {

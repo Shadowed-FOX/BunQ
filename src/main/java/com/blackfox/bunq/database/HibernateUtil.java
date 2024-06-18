@@ -27,6 +27,7 @@ public class HibernateUtil {
         return activeClient;
     }
 
+
     private static SessionFactory sessionFactory;
 
     private static SessionFactory buildSessionFactory() {

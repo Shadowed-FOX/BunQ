@@ -43,7 +43,7 @@ public class NewTransactionController {
         float Ammount = Float.parseFloat(ammount.getText());
 
         try {
-            if(check.isSelected()) {
+            if(check.isSelected() && HibernateUtil.getClient(Accnumb).isOpen()) {
                 HibernateUtil.getActiveClient().saveReceiver(Accnumb);
             }
             HibernateUtil.getActiveClient().makeTransaction(Ammount, HibernateUtil.getClient(Accnumb), Title);
@@ -53,20 +53,41 @@ public class NewTransactionController {
     }
 
     @FXML
-    protected void onFromListClicked(ActionEvent event) throws IOException {
+    protected void onFromListClicked() throws IOException {
         bar.setVisible(true);
         scrollPane.setVisible(true);
+        contactGenerate();
+    }
+
+    protected void contactGenerate() throws IOException {
         vBox.getChildren().clear();
         List<ClientReceiver> contacts = HibernateUtil.getActiveClient().getSavedReceivers();
 
         for(ClientReceiver receiver : contacts){
+            if(receiver.getReceiverId() == HibernateUtil.getActiveClient().getId()){
+                continue;
+            }
+
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("./view/contact.fxml"));
             Parent child = loader.load();
             ContactController controller = loader.getController();
-            controller.getData(receiver.getReceiverAsClient());
+            controller.setNewTransactionController(this);
+            controller.getData(receiver);
             vBox.getChildren().add(child);
+            paneSetup((AnchorPane) child, receiver);
         }
         scrollPane.setContent(vBox);
+    }
+
+    private void paneSetup(AnchorPane pane, ClientReceiver receiver){
+        pane.setOnMouseClicked(e -> {
+            accnumb.setText(String.valueOf(receiver.getReceiverId()));
+            close();
+        });
+    }
+
+    public void setContactID(int contactID){
+        accnumb.setText(String.valueOf(contactID));
     }
 
     @FXML
@@ -97,9 +118,13 @@ public class NewTransactionController {
         });
     }
 
-    @FXML
-    protected void exitEvent() {
+    protected void close(){
         bar.setVisible(false);
         scrollPane.setVisible(false);
+    }
+
+    @FXML
+    protected void exitEvent() {
+        close();
     }
 }
