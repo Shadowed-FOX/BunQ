@@ -1,5 +1,6 @@
 package com.blackfox.bunq.database;
 
+import jakarta.persistence.CascadeType;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -7,9 +8,13 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.exception.ConstraintViolationException;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.RollbackException;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -26,6 +31,8 @@ public class Client implements Serializable {
     private String lastname;
     private float balance;
 
+    @OneToMany(mappedBy = "client_id", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<ClientReceiver> receivers;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp created_at;
@@ -142,6 +149,31 @@ public class Client implements Serializable {
         session.close();
 
         return list;
+    }
+
+    public void saveReceiver(int receiver_id) throws ReceiverDuplicateException {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var transaction = session.beginTransaction();
+        ClientReceiver new_receiver = new ClientReceiver(this.getId(), receiver_id);
+
+        try {
+            receivers.add(new_receiver);
+
+            session.persist(new_receiver);
+            transaction.commit();
+            session.close();
+
+        } catch (ConstraintViolationException ex) {
+            receivers.removeLast();
+            throw new ReceiverDuplicateException("Client is already saved");
+        } catch (RollbackException ex) {
+            receivers.removeLast();
+            transaction.rollback();
+        }
+    }
+
+    public List<ClientReceiver> getSavedReceivers() {
+        return receivers;
     }
 
     public int getId() {
