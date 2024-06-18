@@ -27,15 +27,15 @@
       <TextField fx:id="surname" disable="true" layoutX="257.0" layoutY="202.0" prefHeight="40.0" prefWidth="180.0" />
       <Label layoutX="257.0" layoutY="182.0" text="Nazwisko" />
       <Text layoutX="219.0" layoutY="523.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(do błędów)" textAlignment="CENTER" wrappingWidth="281.13671875" />
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="151.0" layoutY="143.0" prefHeight="273.0" prefWidth="378.0" vbarPolicy="NEVER" visible="false">
-         <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="274.0" prefWidth="378.0">
-               <children>
-                  <Button layoutX="347.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
-                  <VBox fx:id="vBox" layoutX="11.0" layoutY="28.0" prefHeight="231.0" prefWidth="355.0" />
-               </children>
-            </AnchorPane>
-         </content>
-      </ScrollPane>
+      <AnchorPane fx:id="bar" layoutX="170.0" layoutY="150.0" minHeight="0.0" minWidth="0.0" prefHeight="274.0" prefWidth="378.0" visible="false">
+         <children>
+            <Button layoutX="347.0" mnemonicParsing="false" onAction="#exitEvent" prefHeight="26.0" prefWidth="31.0" text="x" />
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="8.0" layoutY="32.0" prefHeight="228.0" prefWidth="362.0" vbarPolicy="NEVER" visible="false">
+               <content>
+                  <VBox fx:id="vBox" prefHeight="231.0" prefWidth="355.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

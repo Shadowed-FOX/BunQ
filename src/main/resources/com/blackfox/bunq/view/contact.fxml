@@ -4,10 +4,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="360.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.blackfox.bunq.controllers.ContactController">
    <children>
-      <Text layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Imię i nazwisko)" />
-      <Text layoutX="180.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Numer konta)" />
+      <Text fx:id="name" layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Imię i nazwisko)" />
+      <Text fx:id="id" layoutX="180.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(Numer konta)" />
       <Button id="con_delete" layoutX="316.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="44.0" text="Button" />
    </children>
 </AnchorPane>

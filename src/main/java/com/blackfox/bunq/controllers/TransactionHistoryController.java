@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -19,6 +20,8 @@ import java.util.List;
 public class TransactionHistoryController {
     @FXML
     private VBox vBox;
+    @FXML
+    private ScrollPane scrollPane;
     @FXML
     private Text senderID, recieverID, tranTitle, tranDate, tranAmmount, tranID;
     @FXML
@@ -42,6 +45,7 @@ public class TransactionHistoryController {
             } catch (ClientNotFoundException | IOException e) {
                 throw new RuntimeException(e);
             }
+            scrollPane.setContent(vBox);
         }
     }
 
