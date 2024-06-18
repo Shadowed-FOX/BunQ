@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 
 import com.blackfox.bunq.database.*;
@@ -29,7 +28,6 @@ public class Main extends Application {
         stage.show();
     }
 
-
     public static void main(String[] args) {
         Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
         Logger.getLogger("com.mchange").setLevel(Level.WARNING);
@@ -38,6 +36,7 @@ public class Main extends Application {
         // fetchingExample("Dziady", "123dziady");
 
         launch();
+        // testWithRecivers();
         HibernateUtil.close();
     }
 

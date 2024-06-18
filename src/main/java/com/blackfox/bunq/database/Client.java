@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -81,7 +82,7 @@ public class Client implements Serializable {
 
     public List<Transaction> getTransactions() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        var query = session.createQuery("WHERE sender = :id OR receiver = :id", Transaction.class)
+        var query = session.createQuery("WHERE sender = :id OR receiver = :id ORDER BY date DESC", Transaction.class)
                 .setParameter("id", id);
 
         List<Transaction> list = query.list();
@@ -93,7 +94,8 @@ public class Client implements Serializable {
     public List<Transaction> getTransactions(Timestamp since, Timestamp until) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         var query = session
-                .createQuery("WHERE sender = :id OR receiver = :id AND date BETWEEN :since AND :until",
+                .createQuery(
+                        "WHERE sender = :id OR receiver = :id AND date BETWEEN :since AND :until ORDER BY date DESC",
                         Transaction.class)
                 .setParameter("id", id)
                 .setParameter("since", since)
@@ -110,7 +112,7 @@ public class Client implements Serializable {
         var query = session
                 .createQuery(
                         "WHERE " + ((type == TransactionType.SENT) ? "sender"
-                                : "receiver") + " = :id",
+                                : "receiver") + " = :id ORDER BY date DESC",
                         Transaction.class)
                 .setParameter("id", id);
 
@@ -125,7 +127,7 @@ public class Client implements Serializable {
         var query = session
                 .createQuery(
                         "WHERE " + ((type == TransactionType.SENT) ? "sender"
-                                : "receiver") + " = :id AND date BETWEEN :since AND :until",
+                                : "receiver") + " = :id AND date BETWEEN :since AND :until ORDER BY date DESC",
                         Transaction.class)
                 .setParameter("id", id)
                 .setParameter("since", since)
@@ -140,7 +142,7 @@ public class Client implements Serializable {
     public List<Transaction> getTransactions(String filter) {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
-        String hql = "FROM Transaction t WHERE t.receiver IN (SELECT c.id FROM Client c WHERE c.firstname = :filter OR c.lastname = :filter) OR t.title  LIKE :filterAnyWhere";
+        String hql = "FROM Transaction t WHERE t.receiver IN (SELECT c.id FROM Client c WHERE c.firstname = :filter OR c.lastname = :filter) OR t.title  LIKE :filterAnyWhere ORDER BY date DESC";
         var query = session.createQuery(hql, Transaction.class);
 
         query.setParameter("filter", filter);
@@ -169,6 +171,20 @@ public class Client implements Serializable {
         } catch (RollbackException ex) {
             receivers.removeLast();
             transaction.rollback();
+        }
+    }
+
+    public void removeReceiver(int receiver_id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        var tr = session.beginTransaction();
+
+        try {
+            receivers.remove(receiver_id);
+            session.merge(this);
+            tr.commit();
+            session.close();
+        } catch (RollbackException ex) {
+            tr.rollback();
         }
     }
 
