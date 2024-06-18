@@ -124,7 +124,7 @@ public class HibernateUtil {
     }
 
     public static void removeActiveClient() {
-        if (getActiveClient() == null)
+        if (getActiveClient() == null || getActiveClient().getId() == 0)
             return;
 
         Session session = HibernateUtil.getSessionFactory().openSession();

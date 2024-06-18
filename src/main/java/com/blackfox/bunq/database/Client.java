@@ -59,7 +59,7 @@ public class Client implements Serializable {
             throw new Exception("Konto odbiorcy jest zamknięte");
         }
 
-        if (this.balance < amount) {
+        if (this.balance < amount && getId() != 0) {
             throw new Exception("Nie masz wystarczających środków");
         }
 
@@ -68,7 +68,8 @@ public class Client implements Serializable {
         }
 
         Transaction transaction = new Transaction(id, receiver.getId(), title, amount);
-        this.balance -= amount;
+        if (getId() != 0)
+            this.balance -= amount;
         receiver.balance += amount;
 
         Session session = HibernateUtil.getSessionFactory().openSession();
