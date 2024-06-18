@@ -174,12 +174,12 @@ public class Client implements Serializable {
         }
     }
 
-    public void removeReceiver(int receiver_id) {
+    public void removeReceiver(ClientReceiver receiver) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         var tr = session.beginTransaction();
 
         try {
-            receivers.remove(receiver_id);
+            receivers.remove(receiver.getReceiverId());
             session.merge(this);
             tr.commit();
             session.close();
