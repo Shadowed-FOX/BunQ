@@ -8,8 +8,8 @@
    <property name="show_sql">false</property>
    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
    <property name="hibernate.connection.url">jdbc:postgresql://aws-0-eu-central-1.pooler.supabase.com:6543/postgres</property>
-   <property name="hibernate.connection.username">postgres.hyfnkdnvlabeyqcympoe</property>
-   <property name="hibernate.connection.password">d09jLMyXA7SJQLnQ</property>
+   <property name="hibernate.connection.username">postgres.xytuihqlpnxarfibryjy</property>
+   <property name="hibernate.connection.password">blackFOX!@#$%^&*(123456789</property>
 
    <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
   </session-factory>
